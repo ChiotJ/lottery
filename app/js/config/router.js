@@ -9,7 +9,7 @@ routerApp.config(function ($stateProvider, $urlRouterProvider) {
         url:'/index',
         views:{
             '':{
-                templateUrl:'tpls/index.html'
+                templateUrl:'tpls/home.html'
             }
         }
     }) ;
