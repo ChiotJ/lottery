@@ -3,15 +3,40 @@
  */
 'use strict';
 var routerApp = angular.module('routerApp', ['ui.router']);
+
+routerApp.run(['$rootScope', '$state', '$stateParams',
+    function ($rootScope, $state, $stateParams) {
+        $rootScope.$state = $state;
+        $rootScope.$stateParams = $stateParams;
+    }
+]);
+
+
 routerApp.config(function ($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('/index');
-    $stateProvider.state('index', {
-        url:'/index',
-        views:{
-            '':{
-                templateUrl:'tpls/home.html'
+    $urlRouterProvider.otherwise('/home');
+
+    $stateProvider
+        .state('home', {
+            url: '/home',
+            templateUrl: 'tpls/home.html',
+            controller: 'mainController'
+        })
+        .state('about', {
+            url: '/about',
+            templateUrl: 'tpls/about.html',
+            controller: 'aboutController'
+        })
+        .state('contact', {
+            url: '/contact',
+            views: {
+                '': {
+                    templateUrl: 'tpls/contact.html',
+                    controller: 'contactController'
+                }
             }
-        }
-    }) ;
+
+        });
+
+
 
 });

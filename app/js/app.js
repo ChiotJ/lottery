@@ -3,5 +3,7 @@
  */
 'use strict';
 var app = angular.module('app', [
-    'routerApp'
+    'animateApp',
+    'routerApp',
+    "progressApp"
 ]);
