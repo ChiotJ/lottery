@@ -8,8 +8,8 @@
     <script src="lib/angular-1.5.5/angular-animate.min.js"></script>
     <script src="lib/angular-ui-router.min.js"></script>
 
-    <script src="lib/ngprogress.min.js"></script>
-    <link rel="stylesheet" href="lib/ngProgress.css">
+    <script src="lib/nProgress/nprogress.js"></script>
+    <link rel="stylesheet" href="lib/nProgress/nprogress.css">
 
 
     <link rel="stylesheet" href="css/app.css">
@@ -19,21 +19,15 @@
 
 
 
-    <script>
-        $(document).on('page:fetch',   function() { console.log(1);NProgress.start(); });
-        $(document).on('page:change',  function() { console.log(2);NProgress.done(); });
-        $(document).on('page:restore', function() { console.log(3);NProgress.remove(); });
-    </script>
-
-
 </head>
-<body>
+<body ng-controller="BodyController" ng-keydown="keydown($event)">
 
 <header class="header">
     <img src="imgs/logo.png" alt="" class="logo">
 </header>
+<div id="loadProgress" class="loadProgress"></div>
 
-<div ui-view class="page {{ pageClass }}" >
+<div  ui-view class="page {{ pageClass }}" >
 
 </div>
 </body>

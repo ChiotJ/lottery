@@ -4,6 +4,12 @@
 'use strict';
 var app = angular.module('app', [
     'animateApp',
-    'routerApp',
-    "progressApp"
+    'routerApp'
 ]);
+
+
+app.controller("BodyController", ['$scope', '$log', function ($scope, $log) {
+    $scope.keydown = function (event) {
+        $log.debug(event.keyCode)
+    }
+}]);

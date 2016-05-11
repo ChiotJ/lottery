@@ -1,1 +1,0 @@
-var progressApp = angular.module('progressApp', ['ngProgress']);
