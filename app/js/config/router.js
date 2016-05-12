@@ -66,7 +66,8 @@ routerApp.config(function ($stateProvider, $urlRouterProvider) {
         .state('home', {
             url: '/home',
             templateUrl: 'tpls/home.html',
-            controller: 'mainController'
+            controller: 'mainController',
+            controllerAs: 'home'
         })
         .state('about', {
             url: '/about',

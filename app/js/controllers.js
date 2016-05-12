@@ -6,11 +6,27 @@ var app = angular.module("app");
 app.controller("BodyController", ['$scope', '$log', function ($scope, $log) {
     $scope.keydown = function (event) {
         $log.debug(event.keyCode)
+        var key = event.keyCode;
+
+
+        var a = $(".btn ");
+        if (key == 37) {
+            $(a[0]).click();
+            return false;
+        } else if (key == 39) {
+            $(a[1]).click();
+            return false;
+        }
+
     }
 }]);
 
 
-app.controller('mainController', ['$scope', function ($scope) {
+app.controller('mainController', ['$scope', '$state', '$window', function ($scope, $state, $window) {
+    this.back = function () {
+        $window.history.back();
+    };
+    this.backStr = "返回";
     NProgress.done();
 }]);
 
