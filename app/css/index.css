@@ -1,0 +1,47 @@
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+}
+
+body {
+    width: 1280px;
+    height: 720px;
+    position: relative;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    background: url("../imgs/bg.png") 0 0 no-repeat;
+}
+
+.header {
+    width: 100%;
+    height: 50px;
+    overflow: hidden;
+    background-color: #E72432;
+    line-height: 50px;
+}
+
+.header .logo {
+    margin-left: 50px;
+}
+
+
+/* make our pages be full width and full height */
+/* positioned absolutely so that the pages can overlap each other as they enter and leave */
+.page {
+    bottom: 0;
+    padding-top: 200px;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    width: 100%;
+}
+
+.page h1 {
+    font-size: 60px;
+}
+
+.page a {
+    margin-top: 50px;
+}

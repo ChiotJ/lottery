@@ -9,11 +9,11 @@ routerApp.run(['$rootScope', '$state', '$stateParams', '$log',
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
 
-        NProgress.configure({ parent: '#loadProgress' });
+        NProgress.configure({parent: '#loadProgress'});
 
 
         $rootScope.$on('$locationChangeStart', function () {
-            $log.debug("$locationChangeStart");
+            //$log.debug("$locationChangeStart");
         });
 
         /*
@@ -23,36 +23,35 @@ routerApp.run(['$rootScope', '$state', '$stateParams', '$log',
          * */
         $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
             NProgress.start();
-            $log.debug("$stateChangeStart");
-            /*$log.debug('start changed states');
-             $log.debug(arguments);*/
+            // $log.debug('start changed states');
+            // $log.debug('event', event);
+            // $log.debug('toState', toState);
+            // $log.debug('toParams', toParams);
+            // $log.debug('fromState', fromState);
+            // $log.debug('fromParams', fromParams);
 
-            //NProgress.start();
         });
 
         $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
-            //NProgress.done();
-            $log.debug('successfully changed states');
-            /* $log.debug(arguments);
-             $log.debug('event', event);
-             $log.debug('toState', toState);
-             $log.debug('toParams', toParams);
-             $log.debug('fromState', fromState);
-             $log.debug('fromParams', fromParams);*/
+            // $log.debug('successfully changed states');
+            // $log.debug('event', event);
+            // $log.debug('toState', toState);
+            // $log.debug('toParams', toParams);
+            // $log.debug('fromState', fromState);
+            // $log.debug('fromParams', fromParams);
         });
 
         $rootScope.$on('$stateNotFound', function (event, unfoundState, fromState, fromParams) {
-            //$log.error('The request state was not found: ' + unfoundState);
+            // $log.error('The request state was not found: ' + unfoundState);
         });
 
         $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
-            //$log.error('An error occurred while changing states: ' + error);
-
-            /*$log.debug('event', event);
-             $log.debug('toState', toState);
-             $log.debug('toParams', toParams);
-             $log.debug('fromState', fromState);
-             $log.debug('fromParams', fromParams);*/
+            // $log.error('An error occurred while changing states: ' + error);
+            // $log.debug('event', event);
+            // $log.debug('toState', toState);
+            // $log.debug('toParams', toParams);
+            // $log.debug('fromState', fromState);
+            // $log.debug('fromParams', fromParams);
         });
 
 
@@ -72,21 +71,7 @@ routerApp.config(function ($stateProvider, $urlRouterProvider) {
         .state('about', {
             url: '/about',
             templateUrl: 'tpls/about.html',
-            controller: 'aboutController',
-            data: {
-                a: 1
-            },
-            foo: {
-                b: 1
-            },
-            a: {
-                a: 2
-            },
-            resolve: {
-                activities: function () {
-                    return "222";
-                }
-            }
+            controller: 'aboutController'
         })
         .state('contact', {
             url: '/contact',
