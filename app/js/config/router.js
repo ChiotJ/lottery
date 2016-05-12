@@ -11,7 +11,6 @@ routerApp.run(['$rootScope', '$state', '$stateParams', '$log',
 
         NProgress.configure({parent: '#loadProgress'});
 
-
         $rootScope.$on('$locationChangeStart', function () {
             //$log.debug("$locationChangeStart");
         });

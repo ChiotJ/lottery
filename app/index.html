@@ -20,14 +20,14 @@
     <link rel="stylesheet" href="css/page.css">
 
 </head>
-<body ng-controller="BodyController" ng-keydown="keydown($event)">
+<body ng-controller="bodyCtrl" ng-keydown="keydown($event)">
 
 <header class="header">
     <img src="imgs/logo.png" alt="" class="logo">
 </header>
 <div id="loadProgress" class="loadProgress"></div>
 
-<div  ui-view class="page {{ pageClass }}" >
+<div ui-view class="pageBody {{ pageClass }}">
 
 </div>
 </body>

@@ -3,7 +3,7 @@
  */
 'use strict';
 var app = angular.module("app");
-app.controller("BodyController", ['$scope', '$log', function ($scope, $log) {
+app.controller("bodyCtrl", ['$scope', '$log', function ($scope, $log) {
     $scope.keydown = function (event) {
         $log.debug(event.keyCode)
         var key = event.keyCode;
@@ -34,6 +34,6 @@ app.controller('aboutController', ['$scope', '$state', '$log', function ($scope,
     NProgress.done();
 }]);
 
-app.controller('contactController', ['$scope', function ($scope) {
+app.controller('contactController', ['$scope', '$http', function ($scope, $http) {
     NProgress.done();
 }]);
