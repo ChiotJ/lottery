@@ -14,6 +14,7 @@
 
     <script src="js/app.js"></script>
     <script src="js/controllers.js"></script>
+    <script src="js/directives.js"></script>
     <script src="js/config/router.js"></script>
 
     <link rel="stylesheet" href="css/index.css">
@@ -21,13 +22,48 @@
 
 </head>
 <body ng-controller="bodyCtrl" ng-keydown="keydown($event)">
+<div class="index header">
+    <div class="left">
+        <img src="imgs/index/header_left.png" alt="">
+    </div>
+    <div class="middle">提示：未成年人禁止购彩 客服电话：400-669-0981</div>
+    <div class="right">
+        <img src="imgs/index/header_right.png" alt="">
+    </div>
+</div>
 
-<header class="header">
-    <img src="imgs/logo.png" alt="" class="logo">
-</header>
+<div class="index user" ng-controller="userCtrl">
+    <div class="userInfo">
+        <div class="userName">
+            用户名：{{userInfo.userName}}
+        </div>
+        <div class="balance">
+            余额：{{userInfo.balance}}
+        </div>
+    </div>
+
+    <div class="winInfos">
+        <img src="imgs/index/winInfo.png" alt="">
+        <ul>
+            <li ng-repeat="winInfo in winInfos">{{winInfo.text}}</li>
+        </ul>
+    </div>
+
+    <div class="func">
+        <ul>
+            <userInfoFunc userInfoFunc tabindex="-1" >
+            </userInfoFunc>
+            <li userInfoFunc tabindex="-1" ng-repeat="func in funcs" enter="func.clickFun">
+                {{func.text}}
+            </li>
+        </ul>
+    </div>
+</div>
+
 <div id="loadProgress" class="loadProgress"></div>
 
-<div ui-view class="pageBody {{ pageClass }}">
+
+<div ui-view class="page {{ pageClass }}">
 
 </div>
 </body>
