@@ -36,11 +36,23 @@ app.controller('userCtrl', ["$scope", '$log', function ($scope, $log) {
             "clickFun": function () {
                 $log.debug("我的投注")
             }
+        },
+        {
+            "text": "充值",
+            "clickFun": function () {
+                $log.debug("充值")
+            }
+        },
+        {
+            "text": "登录",
+            "clickFun": function () {
+                $log.debug("登录")
+            }
         }
     ];
 
 
-    $scope.funcKeydown = function ($event) {
+    /*$scope.funcKeydown = function ($event) {
         $log.debug($event);
         var key = $event.keyCode;
         if (key == 13) {
@@ -50,7 +62,7 @@ app.controller('userCtrl', ["$scope", '$log', function ($scope, $log) {
             $event.stopPropagation();
             return false;
         }
-    }
+    }*/
 
 }]);
 

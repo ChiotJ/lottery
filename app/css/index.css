@@ -81,21 +81,22 @@ body {
 }
 
 .index.user .winInfos {
-    width: 600px;
+    width: 470px;
     height: 50px;
     position: relative;
     overflow: hidden;
+    margin-left: 150px;
 }
 
 .index.user .winInfos img {
-    margin-top: 7px;
+    margin:7px 5px 0;
+    display: block;
 }
 
 .index.user .winInfos ul {
-    position: absolute;
     width: 2000px;
     top: 0;
-    left: 50px;
+    left: 65px;
 }
 
 .index.user .winInfos ul li {
@@ -106,8 +107,9 @@ body {
 }
 
 .index.user .func {
-    width: 330px;
+    width: 306px;
     height: 50px;
+    margin-left: 20px;
 }
 
 .index.user .func li {
@@ -115,7 +117,7 @@ body {
     width: 100px;
     height: 30px;
     line-height: 30px;
-    margin: 10px;
+    margin: 10px 1px;
     text-align: center;
     background-color: #e72432;
     color: #FFFFFF;

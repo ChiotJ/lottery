@@ -2,17 +2,19 @@
  * Created by jian_ on 2016/5/16.
  */
 var app = angular.module("app");
-app.directive('userinfoFunc', ['$log', function ($log) {
+app.directive('userInfoFunc', ['$log', function ($log) {
     return {
-        restrict: 'AE',
-        scope: {
-            enter: "="
-        },
+        restrict: 'A',
+        scope: {},
         link: function (scope, element, attrs) {
-            $log.debug(scope.enter);
             element.bind("keydown", function ($event) {
-                console.log($event);
-                console.log(scope.enter);
+                var keyCode = $event.keyCode;
+                $log.debug(keyCode);
+                if (keyCode == 13) {
+                    element.click();
+                } else {
+                    $log.debug("der");
+                }
             });
         }
     };

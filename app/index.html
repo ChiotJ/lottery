@@ -51,9 +51,7 @@
 
     <div class="func">
         <ul>
-            <userInfoFunc userInfoFunc tabindex="-1" >
-            </userInfoFunc>
-            <li userInfoFunc tabindex="-1" ng-repeat="func in funcs" enter="func.clickFun">
+            <li user-info-func tabindex="-1" ng-repeat="func in funcs" ng-click="func.clickFun()">
                 {{func.text}}
             </li>
         </ul>
