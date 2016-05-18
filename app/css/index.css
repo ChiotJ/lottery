@@ -81,7 +81,7 @@ body {
 }
 
 .index.user .winInfos {
-    width: 470px;
+    width: 488px;
     height: 50px;
     position: relative;
     overflow: hidden;
@@ -89,27 +89,44 @@ body {
 }
 
 .index.user .winInfos img {
-    margin:7px 5px 0;
+    margin: 7px 5px 0;
     display: block;
 }
 
-.index.user .winInfos ul {
-    width: 2000px;
+.index.user .winInfos .wrapper {
+    position: absolute;
+    width: 423px;
     top: 0;
     left: 65px;
+    overflow: hidden;
+}
+
+.index.user .winInfos ul {
+    float: left;
+    transition: all 1s;
+    position: relative;
+    top: 0;
+    left: 0;
 }
 
 .index.user .winInfos ul li {
     float: left;
-    width: 500px;
+    width: 400px;
     height: 50px;
     line-height: 50px;
+    overflow: hidden;
+    margin-right: 23px;
 }
 
 .index.user .func {
     width: 306px;
     height: 50px;
     margin-left: 20px;
+}
+
+.index.user .func ul {
+    width: 306px;
+    height: 50px;
 }
 
 .index.user .func li {
@@ -132,4 +149,29 @@ body {
     width: 1280px;
     transition: all 1s;
     position: relative;
+}
+
+/*home*/
+.page.pageHome .logo {
+    display: block;
+    margin: 35px auto;
+}
+
+.page.pageHome .menus {
+    width: 855px;
+    height: 350px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.page.pageHome .menus li {
+    width: 257px;
+    height: 147px;
+    margin: 14px;
+    float: left;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.page.pageHome .menus li:focus {
 }

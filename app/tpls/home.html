@@ -1,7 +1,9 @@
-<h1>Angular Animations Shenanigans</h1>
-<h2>{{title}}</h2>
+<img src="imgs/home/logo.png" alt="" class="logo">
 
-<a ui-sref="about" class="btn btn-success btn-lg">About</a>
-<a ui-sref="contact" class="btn btn-danger btn-lg">Contact</a>
-<button ng-click="home.back()">{{home.backStr}}</button>
-
+<div class="menus">
+    <ul>
+        <li tabindex="-1" home-menu-key-listener ng-repeat="menu in menus" ng-click="menu.enter()">
+            <img src="imgs/home/{{menu.id}}.png" alt="">
+        </li>
+    </ul>
+</div>

@@ -3,12 +3,12 @@
  */
 'use strict';
 var app = angular.module("app");
+/*index*/
 app.controller("bodyCtrl", ['$scope', '$log', function ($scope, $log) {
     $scope.keydown = function ($event) {
         var key = $event.keyCode;
-
         if (key == 27) {
-            $log.debug("bodyCtrl");
+            //$log.debug("bodyCtrl");
         } else if (key == 8) {
         }
 
@@ -33,45 +33,68 @@ app.controller('userCtrl', ["$scope", '$log', function ($scope, $log) {
     $scope.funcs = [
         {
             "text": "我的投注",
-            "clickFun": function () {
-                $log.debug("我的投注")
+            "enter": function () {
+                $log.debug("我的投注");
             }
         },
         {
             "text": "充值",
-            "clickFun": function () {
-                $log.debug("充值")
+            "enter": function () {
+                $log.debug("充值");
             }
         },
         {
             "text": "登录",
-            "clickFun": function () {
-                $log.debug("登录")
+            "enter": function () {
+                $log.debug("登录");
+            }
+        }
+    ];
+}]);
+
+
+app.controller('homeCtrl', ['$scope', '$log', '$state', '$window', function ($scope, $log, $state, $window) {
+    $scope.pageClass = "pageHome";
+    $scope.menus = [
+        {
+            "id": "1",
+            "enter": function () {
+                $log.debug("福利彩票");
+
+            }
+        },
+        {
+            "id": "2",
+            "enter": function () {
+                $log.debug("体育彩票");
+            }
+        },
+        {
+            "id": "3",
+            "enter": function () {
+                $log.debug("开奖信息");
+            }
+        },
+        {
+            "id": "4",
+            "enter": function () {
+                $log.debug("活动专区");
+            }
+        },
+        {
+            "id": "5",
+            "enter": function () {
+                $log.debug("彩票讲堂");
+            }
+        },
+        {
+            "id": "6",
+            "enter": function () {
+                $log.debug("我的账户");
             }
         }
     ];
 
-
-    /*$scope.funcKeydown = function ($event) {
-        $log.debug($event);
-        var key = $event.keyCode;
-        if (key == 13) {
-            $(event.target).click();
-        } else if (key == 27) {
-            $log.debug("userCtrl");
-            $event.stopPropagation();
-            return false;
-        }
-    }*/
-
-}]);
-
-
-app.controller('homeCtrl', ['$scope', '$state', '$window', function ($scope, $state, $window) {
-    this.back = function () {
-        $window.history.back();
-    };
-    this.backStr = "返回";
     NProgress.done();
 }]);
 

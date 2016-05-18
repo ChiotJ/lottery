@@ -14,6 +14,7 @@
 
     <script src="js/app.js"></script>
     <script src="js/controllers.js"></script>
+    <script src="js/services.js"></script>
     <script src="js/directives.js"></script>
     <script src="js/config/router.js"></script>
 
@@ -44,14 +45,17 @@
 
     <div class="winInfos">
         <img src="imgs/index/winInfo.png" alt="">
-        <ul>
-            <li ng-repeat="winInfo in winInfos">{{winInfo.text}}</li>
-        </ul>
+        <div class="wrapper">
+            <ul style="width: {{winInfos?winInfos.length*423+'px':0}}">
+                <li index-win-infos ng-repeat="winInfo in winInfos">{{winInfo.text}}</li>
+            </ul>
+        </div>
+
     </div>
 
     <div class="func">
         <ul>
-            <li user-info-func tabindex="-1" ng-repeat="func in funcs" ng-click="func.clickFun()">
+            <li tabindex="-1" index-func-key-listener ng-repeat="func in funcs" ng-click="func.enter()">
                 {{func.text}}
             </li>
         </ul>

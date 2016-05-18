@@ -6,3 +6,7 @@ var app = angular.module('app', [
     'ngAnimate',
     'routerApp'
 ]);
+
+app.config(function ($logProvider) {
+    $logProvider.debugEnabled(true);
+});
