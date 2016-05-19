@@ -167,11 +167,132 @@ body {
 .page.pageHome .menus li {
     width: 257px;
     height: 147px;
-    margin: 14px;
+    margin: 12px;
+    border: 2px solid transparent;
     float: left;
     border-radius: 10px;
     overflow: hidden;
 }
 
 .page.pageHome .menus li:focus {
+    border: 2px solid #FFFFFF;
+    box-shadow: 5px 7px 20px 5px rgba(0, 0, 0, 0.1);
+}
+
+/*welfareList*/
+.page.pageWelfareList .main {
+    width: 1180px;
+    height: 400px;
+    margin: 20px auto;
+    overflow: hidden;
+}
+
+.page.pageWelfareList .main .video {
+    float: left;
+    width: 464px;
+    height: 384px;
+    margin: 8px;
+}
+
+.page.pageWelfareList .main .video video {
+    width: 100%;
+    height: 100%;
+    background: #000000;
+}
+
+.page.pageWelfareList .main .lotteryList {
+    float: left;
+    width: 700px;
+    height: 100%;
+}
+
+.page.pageWelfareList .main .lotteryList li {
+    float: left;
+    width: 330px;
+    margin: 8px;
+    border: 2px solid #EBEAEB;
+    height: 80px;
+    overflow: hidden;
+    border-radius: 2px;
+}
+
+.page.pageWelfareList .main .lotteryList li:focus {
+    border: 2px solid #E93E4A;
+    box-shadow: 5px 7px 20px 5px rgba(0, 0, 0, 0.1);
+}
+
+.page.pageWelfareList .main .lotteryList li .top {
+    width: 100%;
+    height: 50px;
+    background-color: #FFFFFF;
+}
+
+.page.pageWelfareList .main .lotteryList li .top .logo {
+    float: left;
+    width: 76px;
+    height: 50px;
+}
+
+.page.pageWelfareList .main .lotteryList li .top div {
+    float: left;
+    height: 50px;
+}
+
+.page.pageWelfareList .main .lotteryList li .top .notice {
+    width: 140px;
+    height: 40px;
+    line-height: 20px;
+    margin: 5px;
+}
+
+.page.pageWelfareList .main .lotteryList li .top .money {
+    width: 104px;
+    line-height: 50px;
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.page.pageWelfareList .main .lotteryList li .bottom {
+    width: 100%;
+    height: 30px;
+    background-color: #F6F6F6;
+}
+
+.page.pageWelfareList .main .lotteryList li .bottom div {
+    float: left;
+    height: 30px;
+}
+
+.page.pageWelfareList .main .lotteryList li .bottom .notice {
+    width: 160px;
+    margin-left: 81px;
+    line-height: 30px;
+    font-size: 14px;
+}
+
+.page.pageWelfareList .main .lotteryList li .bottom .time {
+    width: 89px;
+}
+
+.page.pageWelfareList .main .lotteryList li .bottom .time div {
+    float: left;
+    height: 20px;
+    margin: 5px 0;
+    line-height: 20px;
+}
+
+.page.pageWelfareList .main .lotteryList li .bottom .time .num {
+    color: #FFFFFF;
+    margin: 5px 0;
+    width: 20px;
+    background-color: #000000;
+    text-indent: 1px;
+    text-align: center;
+}
+
+.page.pageWelfareList .banner{
+    width: 1219px;
+    height: 132px;
+    margin: 0 auto;
 }

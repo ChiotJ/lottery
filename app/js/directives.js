@@ -59,19 +59,27 @@ app.directive('homeMenuKeyListener', ['$log', '$timeout', 'keyListener', functio
         scope: {},
         link: function (scope, element, attrs) {
             if (scope.$parent.$last) {
+                var menus = scope.$parent.menus;
                 keyListener.listKeyListener({
                     element: element.parent(),
                     label: "li",
                     columnNum: 3,
                     focus: function (item) {
-                        var img = $(item).find("img");
-                        var src = img.attr("src").replace("png", "gif");
-                        img.attr("src", src);
+                        var hasGif = menus[$(item).index()].hasGif;
+                        if (hasGif) {
+                            var img = $(item).find("img");
+                            var src = img.attr("src").replace("png", "gif");
+                            img.attr("src", src);
+                        }
+
                     },
                     blur: function (item) {
-                        var img = $(item).find("img");
-                        var src = img.attr("src").replace("gif", "png");
-                        img.attr("src", src);
+                        var hasGif = menus[$(item).index()].hasGif;
+                        if (hasGif) {
+                            var img = $(item).find("img");
+                            var src = img.attr("src").replace("gif", "png");
+                            img.attr("src", src);
+                        }
                     },
                     enter: function (item) {
                         $(item).click();
@@ -82,8 +90,85 @@ app.directive('homeMenuKeyListener', ['$log', '$timeout', 'keyListener', functio
                 });
                 $timeout(function () {
                     $(element.parent().children().first()).focus();
-                });
+                }, 700);
             }
+        }
+
+    };
+}]);
+
+/*welfareList*/
+app.directive('welfareListKeyListener', ['$log', '$timeout', '$interval', 'keyListener', function ($log, $timeout, $interval, keyListener) {
+    return {
+        restrict: 'A',
+        scope: {},
+        link: function (scope, element, attrs) {
+            if (scope.$parent.$last) {
+                keyListener.listKeyListener({
+                    element: element.parent(),
+                    label: "li",
+                    columnNum: 2,
+                    focus: function (item) {
+
+                    },
+                    blur: function (item) {
+                    },
+                    enter: function (item) {
+                        $(item).click();
+                    },
+                    click: function (item) {
+                        return false;
+                    }
+                });
+                $timeout(function () {
+                    $(element.parent().children().first()).focus();
+                }, 700);
+            }
+
+            var isThan1Min = true;
+            $interval(function () {
+                var h = parseInt(element.find(".h").html()), m = parseInt(element.find(".m").html()), s = parseInt(element.find(".s").html());
+                if (--s < 0) {
+                    if (m > 0 || h > 0) {
+                        s = 59;
+                        if (--m < 0) {
+                            m = 59;
+                            if (h > 0) {
+                                h--;
+                            }
+                        }
+                    } else {
+                        s = 0;
+                    }
+                }
+
+                if (h < 1 && m < 1) {
+                    if (isThan1Min) {
+                        isThan1Min = false;
+                        element.find(".num").css("background-color", "#E6262F");
+                    }
+                } else {
+                    if (!isThan1Min) {
+                        isThan1Min = false;
+                        element.find(".num").removeAttr("style");
+                    }
+                }
+
+                if (h < 10) {
+                    h = "0" + h;
+                }
+                if (m < 10) {
+                    m = "0" + m;
+                }
+                if (s < 10) {
+                    s = "0" + s;
+                }
+
+                element.find(".h").html(h);
+                element.find(".m").html(m);
+                element.find(".s").html(s);
+
+            }, 1000);
         }
 
     };

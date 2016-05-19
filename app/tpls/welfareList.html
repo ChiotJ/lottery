@@ -1,0 +1,29 @@
+<div class="main">
+    <div class="video">
+        <video src="http://family.digital-media.com.cn/family/video/introducevideo/introducevideo.mp4" autoplay></video>
+    </div>
+    <div class="lotteryList">
+        <ul>
+            <li welfare-list-key-listener ng-repeat="one in lotteryList" tabindex="-1">
+                <div class="top">
+                    <img class="logo" src="imgs/welfare/{{one.id}}_logo.png" alt="">
+                    <div class="notice">{{one.notice}}</div>
+                    <div class="money">{{one.money}}</div>
+                </div>
+                <div class="bottom">
+                    <div class="notice">距{{one.series}}期投注截止</div>
+                    <div class="time">
+                        <div class="h num">{{one.h}}</div>
+                        <div>:</div>
+                        <div class="m num">{{one.m}}</div>
+                        <div>:</div>
+                        <div class="s num">{{one.s}}</div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="banner">
+    <img src="imgs/welfare/banner.jpg" alt="">
+</div>

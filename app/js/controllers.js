@@ -52,56 +52,137 @@ app.controller('userCtrl', ["$scope", '$log', function ($scope, $log) {
     ];
 }]);
 
-
-app.controller('homeCtrl', ['$scope', '$log', '$state', '$window', function ($scope, $log, $state, $window) {
+/*home*/
+app.controller('homeCtrl', ['$scope', '$log', '$state', function ($scope, $log, $state) {
     $scope.pageClass = "pageHome";
     $scope.menus = [
         {
             "id": "1",
             "enter": function () {
                 $log.debug("福利彩票");
-
-            }
-        },
-        {
-            "id": "2",
-            "enter": function () {
-                $log.debug("体育彩票");
-            }
+                //$log.debug($state)
+                $state.go("welfareList", {});
+            },
+            "hasGif": true
         },
         {
             "id": "3",
             "enter": function () {
                 $log.debug("开奖信息");
-            }
+            },
+            "hasGif": false
         },
         {
             "id": "4",
             "enter": function () {
                 $log.debug("活动专区");
-            }
+            },
+            "hasGif": true
         },
         {
             "id": "5",
             "enter": function () {
                 $log.debug("彩票讲堂");
-            }
+            },
+            "hasGif": true
         },
         {
             "id": "6",
             "enter": function () {
                 $log.debug("我的账户");
-            }
+            },
+            "hasGif": true
+        },
+        {
+            "id": "2",
+            "enter": function () {
+                $log.debug("体育彩票");
+            },
+            "hasGif": false
         }
     ];
 
     NProgress.done();
 }]);
 
-app.controller('aboutController', ['$scope', '$state', '$log', function ($scope, $state, $log) {
-    NProgress.done();
-}]);
+/*welfareList*/
+app.controller('welfareListCtrl', ['$scope', '$log', '$state', function ($scope, $log, $state) {
+    $scope.pageClass = "pageWelfareList";
+    $scope.lotteryList = [
+        {
+            "id": "PK10",
+            "series": "100001",
+            "notice": "每五分钟开一次奖最高奖金",
+            "money": "100万",
+            "h": "10",
+            "m": "00",
+            "s": "03"
+        },
+        {
+            "id": "Kuai3",
+            "series": "100001",
+            "notice": "每五分钟开一次奖最高奖金",
+            "money": "100万",
+            "h": "01",
+            "m": "00",
+            "s": "03"
+        },
+        {
+            "id": "PK10",
+            "series": "100001",
+            "notice": "每五分钟开一次奖最高奖金",
+            "money": "100万",
+            "h": "00",
+            "m": "00",
+            "s": "03"
+        },
+        {
+            "id": "PK10",
+            "series": "100001",
+            "notice": "每五分钟开一次奖最高奖金",
+            "money": "100万",
+            "h": "10",
+            "m": "00",
+            "s": "03"
+        },
+        {
+            "id": "Kuai3",
+            "series": "100001",
+            "notice": "每五分钟开一次奖最高奖金",
+            "money": "100万",
+            "h": "01",
+            "m": "00",
+            "s": "03"
+        },
+        {
+            "id": "PK10",
+            "series": "100001",
+            "notice": "每五分钟开一次奖最高奖金",
+            "money": "100万",
+            "h": "00",
+            "m": "00",
+            "s": "03"
+        },
+        {
+            "id": "Kuai3",
+            "series": "100001",
+            "notice": "每五分钟开一次奖最高奖金",
+            "money": "100万",
+            "h": "01",
+            "m": "00",
+            "s": "03"
+        },
+        {
+            "id": "PK10",
+            "series": "100001",
+            "notice": "每五分钟开一次奖最高奖金",
+            "money": "100万",
+            "h": "00",
+            "m": "00",
+            "s": "03"
+        }
+    ];
 
-app.controller('contactController', ['$scope', '$http', function ($scope, $http) {
+
     NProgress.done();
 }]);

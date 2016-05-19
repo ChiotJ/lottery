@@ -68,21 +68,12 @@ routerApp.config(function ($stateProvider, $urlRouterProvider) {
             controller: 'homeCtrl',
             controllerAs: 'home'
         })
-        .state('about', {
-            url: '/about',
-            templateUrl: 'tpls/about.html',
-            controller: 'aboutController'
+        .state('welfareList', {
+            url: '/welfareList',
+            templateUrl: 'tpls/welfareList.html',
+            controller: 'welfareListCtrl',
+            controllerAs: 'welfareList'
         })
-        .state('contact', {
-            url: '/contact',
-            views: {
-                '': {
-                    templateUrl: 'tpls/contact.html',
-                    controller: 'contactController'
-                }
-            }
-
-        });
 
 
 });

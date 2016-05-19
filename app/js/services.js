@@ -139,84 +139,95 @@ app.factory("keyListener", ['$log', function ($log) {
             this.index[id] = 0;
             this.size[id] = length;
 
+            var leftCtrl = function (item) {
+                var idx = $(item).index();
+                if (idx > 0) {
+                    idx--;
+                } else {
+                    idx = length - 1;
+                }
+                $(children[idx]).attr('tabindex', -1).focus();
+            };
+
             if (typeof options.left !== "function") {
                 if (typeof options.left !== "object") {
-                    options.left = function (item) {
-                        var idx = $(item).index();
-                        $(children[--idx]).attr('tabindex', -1).focus();
-                    }
+                    options.left = leftCtrl;
                 } else {
                     if (typeof options.left.center !== "function") {
-                        options.left.center = function (item) {
-                            var idx = $(item).index();
-                            $(children[--idx]).attr('tabindex', -1).focus();
-                        }
+                        options.left.center = leftCtrl;
                     }
                 }
             }
 
-            if (typeof options.up !== "function") {
-                if (typeof options.up !== "object") {
-                    options.up = function (item) {
-                        var idx = $(item).index();
-                        if (idx > options.columnNum - 1) {
-                            idx -= options.columnNum;
-                            $(children[idx]).attr('tabindex', -1).focus();
-                        }
-                    }
+            var upCtrl = function (item) {
+                var idx = $(item).index();
+                if (idx > options.columnNum - 1) {
+                    idx -= options.columnNum;
                 } else {
-                    if (typeof options.up.center !== "function") {
-                        options.up.center = function (item) {
-                            var idx = $(item).index();
-                            if (idx > options.columnNum - 1) {
-                                idx -= options.columnNum;
-                                $(children[idx]).attr('tabindex', -1).focus();
-                            }
+                    if (idx > ((length - 1) % options.columnNum)) {
+                        idx = length - 1;
+                    } else {
+                        if (length % options.columnNum == 0) {
+                            idx = length - (options.columnNum - idx);
+                        } else {
+                            idx = parseInt(length / options.columnNum) * options.columnNum + idx;
                         }
                     }
                 }
+                $(children[idx]).attr('tabindex', -1).focus();
+            };
+
+            if (typeof options.up !== "function") {
+                if (typeof options.up !== "object") {
+                    options.up = upCtrl;
+                } else {
+                    if (typeof options.up.center !== "function") {
+                        options.up.center = upCtrl;
+                    }
+                }
             }
+
+            var rightCtrl = function (item) {
+                var idx = $(item).index();
+                if (idx < length - 1) {
+                    idx++;
+                } else {
+                    idx = 0;
+                }
+                $(children[idx]).attr('tabindex', -1).focus();
+            };
 
 
             if (typeof options.right !== "function") {
                 if (typeof options.right !== "object") {
-                    options.right = function (item) {
-                        var idx = $(item).index();
-                        if (idx < length - 1) {
-                            $(children[++idx]).attr('tabindex', -1).focus();
-                        }
-                    }
+                    options.right = rightCtrl;
                 } else {
                     if (typeof options.right.center !== "function") {
-                        options.right.center = function (item) {
-                            var idx = $(item).index();
-                            if (idx < length - 1) {
-                                $(children[++idx]).attr('tabindex', -1).focus();
-                            }
-                        }
+                        options.right.center = rightCtrl;
                     }
                 }
             }
 
+            var downCtrl = function (item) {
+                var idx = $(item).index();
+                if (idx < length - options.columnNum) {
+                    idx += options.columnNum;
+                } else {
+                    if (parseInt((length - 1) / options.columnNum) > parseInt(idx / options.columnNum)) {
+                        idx = length - 1;
+                    } else {
+                        idx = idx % options.columnNum;
+                    }
+                }
+                $(children[idx]).attr('tabindex', -1).focus();
+            };
 
             if (typeof options.down !== "function") {
                 if (typeof options.down !== "object") {
-                    options.down = function (item) {
-                        var idx = $(item).index();
-                        if (idx < length - options.columnNum) {
-                            idx += options.columnNum;
-                            $(children[idx]).attr('tabindex', -1).focus();
-                        }
-                    }
+                    options.down = downCtrl;
                 } else {
                     if (typeof options.down.center !== "function") {
-                        options.down.center = function (item) {
-                            var idx = $(item).index();
-                            if (idx < length - options.columnNum) {
-                                idx += options.columnNum;
-                                $(children[idx]).attr('tabindex', -1).focus();
-                            }
-                        }
+                        options.down.center = downCtrl;
                     }
                 }
             }
@@ -237,4 +248,5 @@ app.factory("keyListener", ['$log', function ($log) {
             this.keyListener(options, children);
         }
     };
-}]);
+}])
+;
