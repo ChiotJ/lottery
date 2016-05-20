@@ -3,12 +3,13 @@
  */
 var app = angular.module("app");
 /*index*/
-app.directive('indexFuncKeyListener', ['$log', 'keyListener', function ($log, keyListener) {
+app.directive('indexMenuKeyListener', ['$log', 'keyListener', function ($log, keyListener) {
     return {
         restrict: 'A',
         scope: {},
         link: function (scope, element, attrs) {
             if (scope.$parent.$last) {
+                var menus = scope.$parent.menus;
                 keyListener.listKeyListener({
                     element: element.parent(),
                     label: "li",
@@ -16,10 +17,7 @@ app.directive('indexFuncKeyListener', ['$log', 'keyListener', function ($log, ke
                     focus: function (item) {
                     },
                     enter: function (item) {
-                        $(item).click();
-                    },
-                    click: function (item) {
-                        return false;
+                        menus[$(item).index()].enter();
                     }
                 });
             }
@@ -82,10 +80,7 @@ app.directive('homeMenuKeyListener', ['$log', '$timeout', 'keyListener', functio
                         }
                     },
                     enter: function (item) {
-                        $(item).click();
-                    },
-                    click: function (item) {
-                        return false;
+                        menus[$(item).index()].enter();
                     }
                 });
                 $timeout(function () {
@@ -97,8 +92,8 @@ app.directive('homeMenuKeyListener', ['$log', '$timeout', 'keyListener', functio
     };
 }]);
 
-/*welfareList*/
-app.directive('welfareListKeyListener', ['$log', '$timeout', '$interval', 'keyListener', function ($log, $timeout, $interval, keyListener) {
+/*fuCaiIndex*/
+app.directive('fuCaiIndexListKeyListener', ['$log', '$timeout', '$interval', '$state', 'keyListener', 'timekeeper', function ($log, $timeout, $interval, $state, keyListener, timekeeper) {
     return {
         restrict: 'A',
         scope: {},
@@ -114,61 +109,60 @@ app.directive('welfareListKeyListener', ['$log', '$timeout', '$interval', 'keyLi
                     blur: function (item) {
                     },
                     enter: function (item) {
-                        $(item).click();
-                    },
-                    click: function (item) {
-                        return false;
+                        $state.go("fuCaiKuai3");
+                    }
+                });
+                $timeout(function () {
+                    $(element.parent().children().first()).focus();
+                }, 700);
+
+
+                timekeeper.timekeeper("fuCaiIndexList", element.parent().children(), function (s, m, h, ele) {
+                    if (h < 1 && m < 1) {
+                        ele.find(".num").css("background-color", "#E6262F");
+                    } else {
+                        ele.find(".num").removeAttr("style");
+                    }
+                });
+            }
+
+        }
+
+    };
+}]);
+
+
+/*fuCaiKuai3*/
+app.directive('fuCaiKuai3MenuKeyListener', ['$log', '$timeout', 'keyListener', function ($log, $timeout, keyListener) {
+    return {
+        restrict: 'A',
+        scope: {},
+        link: function (scope, element, attrs) {
+            if (scope.$parent.$last) {
+                var menus = scope.$parent.menus;
+                keyListener.listKeyListener({
+                    element: element.parent(),
+                    label: "li",
+                    columnNum: 5,
+                    enter: function (item) {
+                        //menus[$(item).index()].enter();
                     }
                 });
                 $timeout(function () {
                     $(element.parent().children().first()).focus();
                 }, 700);
             }
+        }
 
-            var isThan1Min = true;
-            $interval(function () {
-                var h = parseInt(element.find(".h").html()), m = parseInt(element.find(".m").html()), s = parseInt(element.find(".s").html());
-                if (--s < 0) {
-                    if (m > 0 || h > 0) {
-                        s = 59;
-                        if (--m < 0) {
-                            m = 59;
-                            if (h > 0) {
-                                h--;
-                            }
-                        }
-                    } else {
-                        s = 0;
-                    }
-                }
+    };
+}]);
 
-                if (h < 1 && m < 1) {
-                    if (isThan1Min) {
-                        isThan1Min = false;
-                        element.find(".num").css("background-color", "#E6262F");
-                    }
-                } else {
-                    if (!isThan1Min) {
-                        isThan1Min = false;
-                        element.find(".num").removeAttr("style");
-                    }
-                }
-
-                if (h < 10) {
-                    h = "0" + h;
-                }
-                if (m < 10) {
-                    m = "0" + m;
-                }
-                if (s < 10) {
-                    s = "0" + s;
-                }
-
-                element.find(".h").html(h);
-                element.find(".m").html(m);
-                element.find(".s").html(s);
-
-            }, 1000);
+app.directive('fuCaiKuai3Timekeeper', ['$log', '$timeout', 'timekeeper', function ($log, $timeout, timekeeper) {
+    return {
+        restrict: 'A',
+        scope: {},
+        link: function (scope, element, attrs) {
+            timekeeper.timekeeper("fuCaiKuai3", element);
         }
 
     };

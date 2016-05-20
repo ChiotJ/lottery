@@ -1,0 +1,39 @@
+<div class="top">
+    <div class="left">
+        <div class="text">
+            上期
+        </div>
+        <div class="craps">
+            <img ng-repeat="c in craps" src="imgs/fucai/kuai3/craps_{{c}}.png" alt="">
+        </div>
+        <div class="notice">
+            {{notice}}
+        </div>
+    </div>
+    <div class="right">
+        <div class="text">
+            本期
+        </div>
+        <div class="time" fu-cai-kuai3-timekeeper>
+            <div class="h num">
+                09
+            </div>
+            <div>
+                :
+            </div>
+            <div class="s num">
+                00
+            </div>
+        </div>
+        <div class="notice">
+            倒计时
+        </div>
+    </div>
+</div>
+<div class="bottom">
+    <ul>
+        <li fu-cai-kuai3-menu-key-listener ng-repeat="menu in menus" tabindex="-1">
+            <img src="imgs/fucai/kuai3/{{menu.id}}.png" alt="">
+        </li>
+    </ul>
+</div>

@@ -118,18 +118,18 @@ body {
     margin-right: 23px;
 }
 
-.index.user .func {
+.index.user .menus {
     width: 306px;
     height: 50px;
     margin-left: 20px;
 }
 
-.index.user .func ul {
+.index.user .menus ul {
     width: 306px;
     height: 50px;
 }
 
-.index.user .func li {
+.index.user .menus li {
     float: left;
     width: 100px;
     height: 30px;
@@ -179,34 +179,34 @@ body {
     box-shadow: 5px 7px 20px 5px rgba(0, 0, 0, 0.1);
 }
 
-/*welfareList*/
-.page.pageWelfareList .main {
+/*fuCaiIndex*/
+.page.pageFuCaiIndex .main {
     width: 1180px;
     height: 400px;
     margin: 20px auto;
     overflow: hidden;
 }
 
-.page.pageWelfareList .main .video {
+.page.pageFuCaiIndex .main .video {
     float: left;
     width: 464px;
     height: 384px;
     margin: 8px;
 }
 
-.page.pageWelfareList .main .video video {
+.page.pageFuCaiIndex .main .video video {
     width: 100%;
     height: 100%;
     background: #000000;
 }
 
-.page.pageWelfareList .main .lotteryList {
+.page.pageFuCaiIndex .main .lotteryList {
     float: left;
     width: 700px;
     height: 100%;
 }
 
-.page.pageWelfareList .main .lotteryList li {
+.page.pageFuCaiIndex .main .lotteryList li {
     float: left;
     width: 330px;
     margin: 8px;
@@ -216,36 +216,36 @@ body {
     border-radius: 2px;
 }
 
-.page.pageWelfareList .main .lotteryList li:focus {
+.page.pageFuCaiIndex .main .lotteryList li:focus {
     border: 2px solid #E93E4A;
     box-shadow: 5px 7px 20px 5px rgba(0, 0, 0, 0.1);
 }
 
-.page.pageWelfareList .main .lotteryList li .top {
+.page.pageFuCaiIndex .main .lotteryList li .top {
     width: 100%;
     height: 50px;
     background-color: #FFFFFF;
 }
 
-.page.pageWelfareList .main .lotteryList li .top .logo {
+.page.pageFuCaiIndex .main .lotteryList li .top .logo {
     float: left;
     width: 76px;
     height: 50px;
 }
 
-.page.pageWelfareList .main .lotteryList li .top div {
+.page.pageFuCaiIndex .main .lotteryList li .top div {
     float: left;
     height: 50px;
 }
 
-.page.pageWelfareList .main .lotteryList li .top .notice {
+.page.pageFuCaiIndex .main .lotteryList li .top .notice {
     width: 140px;
     height: 40px;
     line-height: 20px;
     margin: 5px;
 }
 
-.page.pageWelfareList .main .lotteryList li .top .money {
+.page.pageFuCaiIndex .main .lotteryList li .top .money {
     width: 104px;
     line-height: 50px;
     font-size: 22px;
@@ -253,36 +253,36 @@ body {
     text-align: center;
 }
 
-.page.pageWelfareList .main .lotteryList li .bottom {
+.page.pageFuCaiIndex .main .lotteryList li .bottom {
     width: 100%;
     height: 30px;
     background-color: #F6F6F6;
 }
 
-.page.pageWelfareList .main .lotteryList li .bottom div {
+.page.pageFuCaiIndex .main .lotteryList li .bottom div {
     float: left;
     height: 30px;
 }
 
-.page.pageWelfareList .main .lotteryList li .bottom .notice {
+.page.pageFuCaiIndex .main .lotteryList li .bottom .notice {
     width: 160px;
     margin-left: 81px;
     line-height: 30px;
     font-size: 14px;
 }
 
-.page.pageWelfareList .main .lotteryList li .bottom .time {
+.page.pageFuCaiIndex .main .lotteryList li .bottom .time {
     width: 89px;
 }
 
-.page.pageWelfareList .main .lotteryList li .bottom .time div {
+.page.pageFuCaiIndex .main .lotteryList li .bottom .time div {
     float: left;
     height: 20px;
     margin: 5px 0;
     line-height: 20px;
 }
 
-.page.pageWelfareList .main .lotteryList li .bottom .time .num {
+.page.pageFuCaiIndex .main .lotteryList li .bottom .time .num {
     color: #FFFFFF;
     margin: 5px 0;
     width: 20px;
@@ -291,8 +291,105 @@ body {
     text-align: center;
 }
 
-.page.pageWelfareList .banner{
+.page.pageFuCaiIndex .banner {
     width: 1219px;
     height: 132px;
     margin: 0 auto;
+}
+
+/*fuCaiKuai3*/
+.page.pageFuCaiKuai3 .top {
+    width: 804px;
+    height: 260px;
+    overflow: hidden;
+    margin: 20px auto;
+    background: url("../imgs/fucai/kuai3/bg.png") no-repeat;
+    color: #FFFFFF;
+    font-size: 24px;
+    text-indent: 2px;
+}
+
+.page.pageFuCaiKuai3 .top > div {
+    float: left;
+    width: 402px;
+    margin: 30px 0;
+    height: 200px;
+}
+
+.page.pageFuCaiKuai3 .top .left {
+    width: 402px;
+    margin-top: 30px;
+    height: 200px;
+}
+
+.page.pageFuCaiKuai3 .top .text {
+    width: 402px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+}
+
+.page.pageFuCaiKuai3 .top .left .craps {
+    width: 240px;
+    height: 80px;
+    margin: 0 auto;
+}
+
+.page.pageFuCaiKuai3 .top .left .craps img {
+    width: 58px;
+    height: 58px;
+    margin: 11px 11px;
+    float: left;
+}
+
+.page.pageFuCaiKuai3 .top .right .time {
+    width: 120px;;
+    height: 80px;
+    margin: 0 auto;
+}
+
+.page.pageFuCaiKuai3 .top .right .time div {
+    float: left;
+    height: 50px;
+    width: 20px;
+    line-height: 50px;
+    margin-top: 15px;
+    color: #000000;
+    font-size: 32px;
+    text-indent: 1px;
+    text-align: center;
+}
+
+.page.pageFuCaiKuai3 .top .right .time .num {
+    color: #FFFFFF;
+    width: 50px;
+    background-color: #000000;
+
+}
+
+.page.pageFuCaiKuai3 .top .notice {
+    width: 402px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+}
+
+.page.pageFuCaiKuai3 .bottom {
+    width: 822px;
+    height: 212px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.page.pageFuCaiKuai3 .bottom li {
+    float: left;
+    width: 150px;
+    height: 90px;
+    margin: 6px 5px;
+    border: 2px solid transparent;
+}
+
+.page.pageFuCaiKuai3 .bottom li:focus{
+    border: 2px solid #E72432;
+    box-shadow: 3px 4px 20px 3px rgba(0, 0, 0, 0.1);
 }

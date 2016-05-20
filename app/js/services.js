@@ -248,5 +248,78 @@ app.factory("keyListener", ['$log', function ($log) {
             this.keyListener(options, children);
         }
     };
-}])
-;
+}]);
+
+app.provider('timekeeper', function () {
+    var timeCal = function (element, callback) {
+        var h = parseInt(element.find(".h").html()), m = parseInt(element.find(".m").html()), s = parseInt(element.find(".s").html());
+        if (--s < 0) {
+            if (m > 0 || h > 0) {
+                s = 59;
+                if (--m < 0) {
+                    m = 59;
+                    if (h > 0) {
+                        h--;
+                    }
+                }
+            } else {
+                s = 0;
+            }
+        }
+
+        if (h < 10) {
+            h = "0" + h;
+        }
+        if (m < 10) {
+            m = "0" + m;
+        }
+        if (s < 10) {
+            s = "0" + s;
+        }
+
+        element.find(".h").html(h);
+        element.find(".m").html(m);
+        element.find(".s").html(s);
+
+        if (angular.isFunction(callback)) {
+            callback(s, m, h, element);
+        }
+
+    };
+
+    var items = {};
+
+    this.deleteItem = function (id) {
+        delete items[id];
+    };
+    this.$get = ['$log', '$interval', function ($log, $interval) {
+        return {
+            items: items,
+            timekeeper: function (id, element, callback) {
+                if (items[id]) {
+                    $interval.cancel(items[id].interval);
+                }
+                items[id] = {
+                    element: element,
+                    callback: callback
+                };
+                var interval = $interval(function () {
+                    if (items[id]) {
+                        element = items[id].element;
+                        var i = 0;
+                        while (i < element.length) {
+                            timeCal($(element[i]), items[id].callback);
+                            i++;
+                        }
+                    } else {
+                        $interval.cancel(interval);
+                    }
+                }, 1000);
+                items[id].interval = interval;
+
+            }
+        }
+    }];
+
+
+});

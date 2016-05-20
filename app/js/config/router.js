@@ -2,9 +2,9 @@
  * Created by jian_ on 2016/5/9.
  */
 'use strict';
-var routerApp = angular.module('routerApp', ['ui.router']);
+var app = angular.module('app');
 
-routerApp.run(['$rootScope', '$state', '$stateParams', '$log',
+app.run(['$rootScope', '$state', '$stateParams', '$log',
     function ($rootScope, $state, $stateParams, $log) {
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
@@ -58,7 +58,7 @@ routerApp.run(['$rootScope', '$state', '$stateParams', '$log',
 ]);
 
 
-routerApp.config(function ($stateProvider, $urlRouterProvider) {
+app.config(['$stateProvider', '$urlRouterProvider', 'timekeeperProvider', function ($stateProvider, $urlRouterProvider, timekeeperProvider) {
     $urlRouterProvider.otherwise('/home');
 
     $stateProvider
@@ -68,12 +68,28 @@ routerApp.config(function ($stateProvider, $urlRouterProvider) {
             controller: 'homeCtrl',
             controllerAs: 'home'
         })
-        .state('welfareList', {
-            url: '/welfareList',
-            templateUrl: 'tpls/welfareList.html',
-            controller: 'welfareListCtrl',
-            controllerAs: 'welfareList'
+        .state('fuCaiIndex', {
+            url: '/fuCai/index',
+            templateUrl: 'tpls/fucai/index.html',
+            controller: 'fuCaiIndexCtrl',
+            controllerAs: 'fuCaiIndex',
+            onEnter: function () {
+            },
+            onExit: function () {
+                timekeeperProvider.deleteItem("fuCaiIndexList");
+            }
+        })
+        .state('fuCaiKuai3', {
+            url: '/fuCai/kuai3',
+            templateUrl: 'tpls/fucai/kuai3.html',
+            controller: 'fuCaiKuai3Ctrl',
+            controllerAs: 'fuCaiKuai3',
+            onEnter: function () {
+            },
+            onExit: function () {
+                timekeeperProvider.deleteItem("fuCaiKuai3");
+            }
         })
 
 
-});
+}]);

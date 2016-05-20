@@ -30,7 +30,7 @@ app.controller('userCtrl', ["$scope", '$log', function ($scope, $log) {
         }
     ];
 
-    $scope.funcs = [
+    $scope.menus = [
         {
             "text": "我的投注",
             "enter": function () {
@@ -61,7 +61,7 @@ app.controller('homeCtrl', ['$scope', '$log', '$state', function ($scope, $log, 
             "enter": function () {
                 $log.debug("福利彩票");
                 //$log.debug($state)
-                $state.go("welfareList", {});
+                $state.go("fuCaiIndex", {});
             },
             "hasGif": true
         },
@@ -105,9 +105,9 @@ app.controller('homeCtrl', ['$scope', '$log', '$state', function ($scope, $log, 
     NProgress.done();
 }]);
 
-/*welfareList*/
-app.controller('welfareListCtrl', ['$scope', '$log', '$state', function ($scope, $log, $state) {
-    $scope.pageClass = "pageWelfareList";
+/*fuCaiIndex*/
+app.controller('fuCaiIndexCtrl', ['$scope', '$log', '$state', function ($scope, $log, $state) {
+    $scope.pageClass = "pageFuCaiIndex";
     $scope.lotteryList = [
         {
             "id": "PK10",
@@ -183,6 +183,44 @@ app.controller('welfareListCtrl', ['$scope', '$log', '$state', function ($scope,
         }
     ];
 
+
+    NProgress.done();
+}]);
+
+/*fuCaiKuai3*/
+app.controller('fuCaiKuai3Ctrl', ['$scope', '$log', '$state', function ($scope, $log, $state) {
+    $scope.pageClass = "pageFuCaiKuai3";
+    $scope.notice = "和值：3";
+
+    $scope.craps = [1, 2, 3];
+
+
+    $scope.menus = [
+        {
+            "id": "hezhi"
+        },
+        {
+            "id": "santonghao"
+        },
+        {
+            "id": "sanlianhao"
+        },
+        {
+            "id": "renxuan"
+        },
+        {
+            "id": "jixuan"
+        },
+        {
+            "id": "fenxibiaoge"
+        },
+        {
+            "id": "kaijiangxinxi"
+        },
+        {
+            "id": "wanfashuoming"
+        }
+    ];
 
     NProgress.done();
 }]);
