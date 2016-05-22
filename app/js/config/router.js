@@ -68,28 +68,48 @@ app.config(['$stateProvider', '$urlRouterProvider', 'timekeeperProvider', functi
             controller: 'homeCtrl',
             controllerAs: 'home'
         })
-        .state('fuCaiIndex', {
-            url: '/fuCai/index',
-            templateUrl: 'tpls/fucai/index.html',
+        .state('fuCai', {
+            url: '/fuCai',
+            templateUrl: 'tpls/fuCai/index.html',
             controller: 'fuCaiIndexCtrl',
             controllerAs: 'fuCaiIndex',
             onEnter: function () {
             },
-            onExit: function () {
-                timekeeperProvider.deleteItem("fuCaiIndexList");
-            }
+            onExit: ['timekeeper', function (timekeeper) {
+                timekeeper.deleteItem("fuCaiIndexList");
+            }]
         })
-        .state('fuCaiKuai3', {
-            url: '/fuCai/kuai3',
-            templateUrl: 'tpls/fucai/kuai3.html',
-            controller: 'fuCaiKuai3Ctrl',
-            controllerAs: 'fuCaiKuai3',
+        .state('kuai3', {
+            url: '/kuai3',
+            templateUrl: 'tpls/kuai3/index.html',
+            controller: 'kuai3IndexCtrl',
+            controllerAs: 'kuai3Index',
             onEnter: function () {
             },
-            onExit: function () {
-                timekeeperProvider.deleteItem("fuCaiKuai3");
-            }
+            onExit: ['timekeeper', function (timekeeper) {
+                timekeeper.deleteItem("kuai3");
+            }]
         })
-
+        .state('kuai3Buy', {
+            url: '/kuai3/buy',
+            params: {
+                mode: {
+                    id: "hezhi",
+                    name: "和值"
+                }
+            },
+            templateUrl: 'tpls/kuai3/buy.html',
+            controller: 'kuai3BuyCtrl',
+            controllerAs: 'kuai3Buy',
+            onExit: ['timekeeper', function (timekeeper) {
+                timekeeper.deleteItem("kuai3");
+            }]
+        })
+        .state('kuai3Buy.hezhi', {
+            url: '/kuai3/buy',
+            templateUrl: 'tpls/kuai3/hezhi.html',
+            controller: 'kuai3BuyHeZhiCtrl',
+            controllerAs: 'kuai3BuyHeZhi'
+        })
 
 }]);

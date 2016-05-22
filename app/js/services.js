@@ -1,6 +1,7 @@
 /**
  * Created by jian_ on 2016/5/18.
  */
+'use strict';
 var app = angular.module("app");
 app.factory("keyListener", ['$log', function ($log) {
     function executeFun(fun, $event) {
@@ -34,6 +35,7 @@ app.factory("keyListener", ['$log', function ($log) {
             var element = options.element;
             if (!element || element.length < 1)
                 return false;
+            // $log.debug(element);
             element.bind("keydown", function ($event) {
                 switch ($event && $event.keyCode) {
                     case 8: //backspace
@@ -288,14 +290,16 @@ app.provider('timekeeper', function () {
     };
 
     var items = {};
-
-    this.deleteItem = function (id) {
-        delete items[id];
-    };
     this.$get = ['$log', '$interval', function ($log, $interval) {
         return {
             items: items,
+            deleteItem: function (id) {
+                $log.debug("移除定时器：", id);
+                $interval.cancel(items[id].interval);
+                delete items[id];
+            },
             timekeeper: function (id, element, callback) {
+                $log.debug("加入定时器：", id);
                 if (items[id]) {
                     $interval.cancel(items[id].interval);
                 }

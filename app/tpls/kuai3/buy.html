@@ -1,0 +1,46 @@
+<div class="title">
+    {{mode.name}}
+</div>
+
+<div class="top">
+    <div class="left">
+        <div class="text">
+            上期
+        </div>
+        <div class="craps">
+            <img ng-repeat="c in info.craps" src="imgs/kuai3/craps_{{c}}.png" alt="">
+        </div>
+        <div class="notice">
+            {{info.notice}}
+        </div>
+    </div>
+    <div class="middle">
+    </div>
+    <div class="right">
+        <div class="text">
+            本期
+        </div>
+        <div class="time" kuai3-timekeeper>
+            <div class="h num">
+                {{info.time.m}}
+            </div>
+            <div>
+                :
+            </div>
+            <div class="s num">
+                {{info.time.s}}
+            </div>
+        </div>
+        <div class="notice">
+            倒计时
+        </div>
+    </div>
+</div>
+<div class="middle {{mode.id}}" ui-view>
+
+
+</div>
+<div class="bottom">
+    <div class="submit">提交</div>
+    <div class="notice">提示：按“左右”选号，按“确定”提交</div>
+</div>

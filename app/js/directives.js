@@ -1,6 +1,7 @@
 /**
  * Created by jian_ on 2016/5/16.
  */
+'use strict';
 var app = angular.module("app");
 /*index*/
 app.directive('indexMenuKeyListener', ['$log', 'keyListener', function ($log, keyListener) {
@@ -109,7 +110,7 @@ app.directive('fuCaiIndexListKeyListener', ['$log', '$timeout', '$interval', '$s
                     blur: function (item) {
                     },
                     enter: function (item) {
-                        $state.go("fuCaiKuai3");
+                        $state.go("kuai3");
                     }
                 });
                 $timeout(function () {
@@ -132,8 +133,8 @@ app.directive('fuCaiIndexListKeyListener', ['$log', '$timeout', '$interval', '$s
 }]);
 
 
-/*fuCaiKuai3*/
-app.directive('fuCaiKuai3MenuKeyListener', ['$log', '$timeout', 'keyListener', function ($log, $timeout, keyListener) {
+/*kuai3Index*/
+app.directive('kuai3IndexMenuKeyListener', ['$log', '$timeout', '$state', 'keyListener', function ($log, $timeout, $state, keyListener) {
     return {
         restrict: 'A',
         scope: {},
@@ -145,7 +146,9 @@ app.directive('fuCaiKuai3MenuKeyListener', ['$log', '$timeout', 'keyListener', f
                     label: "li",
                     columnNum: 5,
                     enter: function (item) {
-                        //menus[$(item).index()].enter();
+                        var mode = menus[$(item).index()];
+
+                        $state.go("kuai3Buy." + mode.id, {mode: mode});
                     }
                 });
                 $timeout(function () {
@@ -157,13 +160,78 @@ app.directive('fuCaiKuai3MenuKeyListener', ['$log', '$timeout', 'keyListener', f
     };
 }]);
 
-app.directive('fuCaiKuai3Timekeeper', ['$log', '$timeout', 'timekeeper', function ($log, $timeout, timekeeper) {
+app.directive('kuai3Timekeeper', ['$log', '$timeout', 'timekeeper', function ($log, $timeout, timekeeper) {
     return {
         restrict: 'A',
         scope: {},
         link: function (scope, element, attrs) {
-            timekeeper.timekeeper("fuCaiKuai3", element);
+            timekeeper.timekeeper("kuai3", element);
         }
 
+    };
+}]);
+
+
+/*kuai3hezhi*/
+app.directive('kuai3HeZhiRandomKeyListener', ['$log', '$state', 'keyListener', function ($log, $state, keyListener) {
+    return {
+        restrict: 'A',
+        scope: {},
+        link: function (scope, element, attrs) {
+            keyListener.keyListener({
+                element: element,
+                left: function (item) {
+                    $(element.parent().find(".choice").find("li")[13]).focus();
+                    return false;
+                },
+                right: function (item) {
+                    $(element.parent().find(".choice").find("li")[0]).focus();
+                    return false;
+                },
+                enter: function (item) {
+                }
+            });
+        }
+    };
+}]);
+
+app.directive('kuai3HeZhiChoiceKeyListener', ['$log', '$timeout', '$state', 'keyListener', function ($log, $timeout, $state, keyListener) {
+    return {
+        restrict: 'A',
+        scope: {},
+        link: function (scope, element, attrs) {
+            if (scope.$parent.$last) {
+                var menus = scope.$parent.menus;
+                keyListener.listKeyListener({
+                    element: element.parent(),
+                    id: "kuai3HeZhiChoice",
+                    label: "li",
+                    columnNum: 14,
+                    left: {
+                        before: function (item) {
+                            var index = $(item).index();
+                            if (index == 0) {
+                                element.parent().parent().parent().find(".random").focus();
+                                return false;
+                            }
+                        }
+                    },
+                    right: {
+                        before: function (item) {
+                            var index = $(item).index();
+                            if (index == 13) {
+                                element.parent().parent().parent().find(".random").focus();
+                                return false;
+                            }
+                        }
+                    },
+                    enter: function (item) {
+                    }
+                });
+                $timeout(function () {
+                    $(element.parent().children().first()).focus();
+                }, 700);
+            }
+        }
     };
 }]);
