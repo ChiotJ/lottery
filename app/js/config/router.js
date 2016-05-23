@@ -117,5 +117,23 @@ app.config(['$stateProvider', '$urlRouterProvider', 'timekeeperProvider', functi
             controller: 'kuai3BuySanTongHaoCtrl',
             controllerAs: 'kuai3BuySanTongHao'
         })
+        .state('kuai3Buy.sanlianhao', {
+            url: '/kuai3/buy/sanlianhao',
+            templateUrl: 'tpls/kuai3/sanlianhao.html',
+            controller: 'kuai3BuySanLianHaoCtrl',
+            controllerAs: 'kuai3BuySanLianHao'
+        })
+        .state('kuai3Buy.renxuan', {
+            url: '/kuai3/buy/renxuan',
+            templateUrl: 'tpls/kuai3/renxuan.html',
+            controller: 'kuai3BuyRenXuanCtrl',
+            controllerAs: 'kuai3BuyRenXuan'
+        })
+        .state('kuai3Buy.jixuan', {
+            url: '/kuai3/buy/jixuan',
+            templateUrl: 'tpls/kuai3/jixuan.html',
+            controller: 'kuai3BuyJiXuanCtrl',
+            controllerAs: 'kuai3BuyJiXuan'
+        })
 
 }]);

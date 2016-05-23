@@ -199,7 +199,6 @@ app.directive('kuai3HeZhiChoiceKeyListener', ['$log', '$timeout', '$state', 'key
         scope: {},
         link: function (scope, element, attrs) {
             if (scope.$parent.$last) {
-                var menus = scope.$parent.menus;
                 keyListener.listKeyListener({
                     element: element.parent(),
                     id: "kuai3HeZhiChoice",
@@ -218,13 +217,12 @@ app.directive('kuai3HeZhiChoiceKeyListener', ['$log', '$timeout', '$state', 'key
 
 
 /*kuai3santonghao*/
-    app.directive('kuai3SanTongHaoChoiceKeyListener', ['$log', '$timeout', '$state', 'keyListener', function ($log, $timeout, $state, keyListener) {
+app.directive('kuai3SanTongHaoChoiceKeyListener', ['$log', '$timeout', '$state', 'keyListener', function ($log, $timeout, $state, keyListener) {
     return {
         restrict: 'A',
         scope: {},
         link: function (scope, element, attrs) {
             if (scope.$parent.$last) {
-                var menus = scope.$parent.menus;
                 keyListener.listKeyListener({
                     element: element.parent(),
                     id: "kuai3SanTongHao",
@@ -237,6 +235,24 @@ app.directive('kuai3HeZhiChoiceKeyListener', ['$log', '$timeout', '$state', 'key
                     $(element.parent().children()[1]).focus();
                 }, 700);
             }
+        }
+    };
+}]);
+
+/*kuai3sanlianhao*/
+app.directive('kuai3SanLianHaoChoiceKeyListener', ['$log', '$timeout', '$state', 'keyListener', function ($log, $timeout, $state, keyListener) {
+    return {
+        restrict: 'A',
+        scope: {},
+        link: function (scope, element, attrs) {
+            keyListener.keyListener({
+                element: element.parent(),
+                enter: function (item) {
+                }
+            });
+            $timeout(function () {
+                element.focus();
+            }, 700);
         }
     };
 }]);

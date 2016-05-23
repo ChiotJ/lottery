@@ -496,7 +496,6 @@ body {
 .pageKuai3Buy > .middle {
     width: 806px;
     margin: 30px auto;
-    background-color: #EDEDED;
 }
 
 .pageKuai3Buy > .bottom {
@@ -505,7 +504,7 @@ body {
     margin: 10px auto 0;
     position: absolute;
     bottom: 100px;
-    left: 262px;
+    left: 237px;
 }
 
 .pageKuai3Buy > .bottom .submit {
@@ -532,6 +531,7 @@ body {
     width: 804px;
     height: 90px;
     border: 1px solid #DBDBDB;
+    background-color: #EDEDED;
 }
 
 .pageKuai3Buy > .middle .hezhi div {
@@ -585,6 +585,7 @@ body {
     width: 804px;
     height: 110px;
     border: 1px solid #DBDBDB;
+    background-color: #EDEDED;
 }
 
 .pageKuai3Buy > .middle .santonghao div {
@@ -658,7 +659,59 @@ body {
     color: #828282;
 }
 
+.pageKuai3Buy > .middle .sanlianhao {
+    width: 256px;
+    height: 110px;
+    margin: 0 auto;
+    background-color: #EDEDED;
+    border: 1px solid #DBDBDB;
+}
 
+.pageKuai3Buy > .middle .common {
+    width: 256px;
+    height: 110px;
+    text-align: center;
+    font-size: 20px;
+    float: left;
+}
+
+.pageKuai3Buy > .middle .common:focus {
+    background-color: #E72432;
+    color: #FFFFFF;
+    box-shadow: 5px 7px 20px 5px rgba(0, 0, 0, 0.1);
+}
+
+.pageKuai3Buy > .middle .common:focus .notice, .pageKuai3Buy > .middle .common:focus .money {
+    color: #FFFFFF;
+}
+
+.pageKuai3Buy > .middle .common .title {
+    width: 256px;
+    height: 30px;
+    line-height: 30px;
+    margin-top: 10px;
+}
+
+.pageKuai3Buy > .middle .common .notice {
+    width: 256px;
+    height: 30px;
+    line-height: 30px;
+    color: #828282;
+}
+
+.pageKuai3Buy > .middle .common .money {
+    width: 256px;
+    height: 30px;
+    line-height: 30px;
+    color: #828282;
+}
+
+.pageKuai3Buy > .middle .renxuan {
+    width: 804px;
+    height: 110px;
+    border: 1px solid #DBDBDB;
+    background-color: #EDEDED;
+}
 
 
 

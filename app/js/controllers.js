@@ -299,3 +299,18 @@ app.controller('kuai3BuySanTongHaoCtrl', ['$scope', '$log', function ($scope, $l
         }
     ]
 }]);
+
+/*kuai3Buy.sanlianhao*/
+app.controller('kuai3BuySanLianHaoCtrl', ['$scope', '$log', function ($scope, $log) {
+
+}]);
+
+/*kuai3Buy.renxuan*/
+app.controller('kuai3BuyRenXuanCtrl', ['$scope', '$log', function ($scope, $log) {
+
+}]);
+
+/*kuai3Buy.jixuan*/
+app.controller('kuai3BuyJiXuanCtrl', ['$scope', '$log', function ($scope, $log) {
+
+}]);
