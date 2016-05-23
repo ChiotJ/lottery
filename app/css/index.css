@@ -392,14 +392,18 @@ body {
 }
 
 .pageKuai3Index .bottom li:focus {
-    border: 2px solid #E72432;
+    border: 2px solid #FFFFFF;
     box-shadow: 3px 4px 20px 3px rgba(0, 0, 0, 0.1);
 }
 
 /*kuai3Buy*/
+.pageKuai3Buy {
+    color: #1f1f1f;
+}
+
 .pageKuai3Buy .title {
     height: 40px;
-    margin: 10px auto;
+    margin: 20px auto;
     line-height: 40px;
     width: 500px;
     text-align: center;
@@ -429,9 +433,9 @@ body {
 
 .pageKuai3Buy .top .middle {
     width: 4px;
-    border-left: 1px dashed #CDCDCD;
+    border-left: 1px dashed #c0bfc0;
     height: 95px;
-    margin: 10px 0;
+    margin: 15px 0;
 }
 
 .pageKuai3Buy .top .text {
@@ -439,7 +443,7 @@ body {
     height: 105px;
     line-height: 58px;
     text-align: center;
-    color: #929292;
+    color: #828282;
     margin-top: 20px;
 }
 
@@ -521,7 +525,7 @@ body {
     line-height: 50px;
     text-align: center;
     margin: 10px auto;
-    color: #E72432;
+    color: #e72432;
 }
 
 .pageKuai3Buy > .middle .hezhi {
@@ -539,9 +543,10 @@ body {
     width: 67px;
     height: 90px;
     line-height: 90px;
+    font-size: 25px;
 }
 
-.pageKuai3Buy > .middle .random:focus{
+.pageKuai3Buy > .middle .random:focus {
     background-color: #E72432;
     color: #FFFFFF;
 }
@@ -558,7 +563,7 @@ body {
     height: 90px;
 }
 
-.pageKuai3Buy > .middle .choice li:focus .num{
+.pageKuai3Buy > .middle .choice li:focus .num {
     background-color: #E72432;
     color: #FFFFFF;
 }
@@ -577,4 +582,5 @@ body {
     width: 48px;
     border-top: 1px solid #DBDBDB;
     border-left: 1px solid #DBDBDB;
+    font-size: 19px;
 }

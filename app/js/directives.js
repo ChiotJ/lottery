@@ -145,10 +145,30 @@ app.directive('kuai3IndexMenuKeyListener', ['$log', '$timeout', '$state', 'keyLi
                     element: element.parent(),
                     label: "li",
                     columnNum: 5,
+                    focus: function (item) {
+                        var hasGif = menus[$(item).index()].hasGif;
+                        if (hasGif) {
+                            var img = $(item).find("img");
+                            var src = img.attr("src").replace("png", "gif");
+                            img.attr("src", src);
+                        }
+
+                    },
+                    blur: function (item) {
+                        var hasGif = menus[$(item).index()].hasGif;
+                        if (hasGif) {
+                            var img = $(item).find("img");
+                            var src = img.attr("src").replace("gif", "png");
+                            img.attr("src", src);
+                        }
+                    },
                     enter: function (item) {
                         var mode = menus[$(item).index()];
 
-                        $state.go("kuai3Buy." + mode.id, {mode: mode});
+                        if (mode.state) {
+                            $state.go(mode.state, {mode: mode});
+                        }
+
                     }
                 });
                 $timeout(function () {

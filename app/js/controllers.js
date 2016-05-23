@@ -142,28 +142,49 @@ app.controller('kuai3IndexCtrl', ['$scope', '$log', '$state', function ($scope, 
     $scope.menus = [
         {
             "id": "hezhi",
-            "name": "和值"
+            "name": "和值",
+            "hasGif": true,
+            "state": "kuai3Buy.hezhi"
+
         },
         {
-            "id": "santonghao"
+            "id": "santonghao",
+            "name": "三同号",
+            "hasGif": true,
+            "state": "kuai3Buy.santonghao"
         },
         {
-            "id": "sanlianhao"
+            "id": "sanlianhao",
+            "name": "三连号",
+            "hasGif": true,
+            "state": "kuai3Buy.sanlianhao"
         },
         {
-            "id": "renxuan"
+            "id": "renxuan",
+            "name": "任选",
+            "hasGif": true,
+            "state": "kuai3Buy.renxuan"
         },
         {
-            "id": "jixuan"
+            "id": "jixuan",
+            "name": "机选",
+            "hasGif": true,
+            "state": "kuai3Buy.jixuan"
         },
         {
-            "id": "fenxibiaoge"
+            "id": "fenxibiaoge",
+            "name": "分析表格",
+            "hasGif": false
         },
         {
-            "id": "kaijiangxinxi"
+            "id": "kaijiangxinxi",
+            "name": "开奖信息",
+            "hasGif": false
         },
         {
-            "id": "wanfashuoming"
+            "id": "wanfashuoming",
+            "name": "玩法说明",
+            "hasGif": false
         }
     ];
 
