@@ -1,0 +1,19 @@
+<div class="santonghao">
+    <ul>
+        <li kuai3-san-tong-hao-choice-key-listener tabindex="-1">
+            <div class="title">
+                三同号通选
+            </div>
+            <div class="notice">
+                （全豹子号）奖金40元
+            </div>
+        </li>
+
+        <li kuai3-san-tong-hao-choice-key-listener tabindex="-1" ng-repeat="s in santonghao">
+            <div class="craps">
+                <img ng-repeat="c in s.craps track by $index" src="imgs/kuai3/craps_min_{{c}}.png" alt="">
+            </div>
+            <div class="money">{{s.money}}</div>
+        </li>
+    </ul>
+</div>

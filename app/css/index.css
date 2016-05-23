@@ -401,7 +401,7 @@ body {
     color: #1f1f1f;
 }
 
-.pageKuai3Buy .title {
+.pageKuai3Buy > .title {
     height: 40px;
     margin: 20px auto;
     line-height: 40px;
@@ -411,8 +411,8 @@ body {
 }
 
 .pageKuai3Buy > .top {
-    width: 755px;
-    height: 125px;
+    width: 806px;
+    height: 130px;
     overflow: hidden;
     margin: 20px auto;
     background-color: #EDEDED;
@@ -427,12 +427,12 @@ body {
 
 .pageKuai3Buy .top > div {
     float: left;
-    width: 375px;
-    height: 125px;
+    width: 400px;
+    height: 130px;
 }
 
 .pageKuai3Buy .top .middle {
-    width: 4px;
+    width: 5px;
     border-left: 1px dashed #c0bfc0;
     height: 95px;
     margin: 15px 0;
@@ -440,7 +440,7 @@ body {
 
 .pageKuai3Buy .top .text {
     width: 110px;
-    height: 105px;
+    height: 110px;
     line-height: 58px;
     text-align: center;
     color: #828282;
@@ -494,13 +494,13 @@ body {
 }
 
 .pageKuai3Buy > .middle {
-    width: 755px;
+    width: 806px;
     margin: 30px auto;
     background-color: #EDEDED;
 }
 
 .pageKuai3Buy > .bottom {
-    width: 756px;
+    width: 806px;
     height: 100px;
     margin: 10px auto 0;
     position: absolute;
@@ -529,7 +529,7 @@ body {
 }
 
 .pageKuai3Buy > .middle .hezhi {
-    width: 753px;
+    width: 804px;
     height: 90px;
     border: 1px solid #DBDBDB;
 }
@@ -539,48 +539,128 @@ body {
     text-align: center;
 }
 
-.pageKuai3Buy > .middle .random {
-    width: 67px;
+.pageKuai3Buy > .middle .hezhi li {
+    float: left;
+    width: 52px;
+    height: 90px;
+    text-align: center;
+}
+
+.pageKuai3Buy > .middle .hezhi li:focus .num {
+    background-color: #E72432;
+    color: #FFFFFF;
+}
+
+.pageKuai3Buy > .middle .hezhi li:first-child {
+    width: 76px;
     height: 90px;
     line-height: 90px;
     font-size: 25px;
+    border: none;
 }
 
-.pageKuai3Buy > .middle .random:focus {
+.pageKuai3Buy > .middle .hezhi li:first-child:focus {
     background-color: #E72432;
     color: #FFFFFF;
 }
 
-.pageKuai3Buy > .middle .choice {
-    width: 686px;
-    height: 90px;
-    line-height: 90px;
-}
-
-.pageKuai3Buy > .middle .choice li {
-    float: left;
-    width: 49px;
-    height: 90px;
-}
-
-.pageKuai3Buy > .middle .choice li:focus .num {
-    background-color: #E72432;
-    color: #FFFFFF;
-}
-
-.pageKuai3Buy > .middle .choice li .num {
-    width: 48px;
+.pageKuai3Buy > .middle .hezhi li .num {
+    width: 51px;
     height: 55px;
     line-height: 55px;
     border-left: 1px solid #DBDBDB;
     font-size: 24px;
 }
 
-.pageKuai3Buy > .middle .choice li .money {
+.pageKuai3Buy > .middle .hezhi li .money {
     height: 34px;
     line-height: 34px;
-    width: 48px;
+    width: 51px;
     border-top: 1px solid #DBDBDB;
     border-left: 1px solid #DBDBDB;
     font-size: 19px;
 }
+
+.pageKuai3Buy > .middle .santonghao {
+    width: 804px;
+    height: 110px;
+    border: 1px solid #DBDBDB;
+}
+
+.pageKuai3Buy > .middle .santonghao div {
+    float: left;
+    text-align: center;
+}
+
+.pageKuai3Buy > .middle .santonghao li {
+    width: 110px;
+    height: 110px;
+    border-left: 1px solid #DBDBDB;
+    float: left;
+}
+
+.pageKuai3Buy > .middle .santonghao li:focus {
+    background-color: #E72432;
+}
+
+.pageKuai3Buy > .middle .santonghao li:focus .money {
+    color: #FFFFFF;
+}
+
+.pageKuai3Buy > .middle .santonghao li:first-child {
+    width: 138px;
+    height: 110px;
+    border: none;
+}
+
+.pageKuai3Buy > .middle .santonghao li:first-child:focus {
+    color: #FFFFFF;
+}
+
+.pageKuai3Buy > .middle .santonghao li:first-child:focus .notice {
+    color: #FFFFFF;
+}
+
+.pageKuai3Buy > .middle .santonghao li:first-child .title {
+    width: 138px;
+    height: 35px;
+    line-height: 35px;
+    margin-top: 15px;
+    text-align: center;
+    font-size: 20px;
+    float: none;
+}
+
+.pageKuai3Buy > .middle .santonghao li:first-child .notice {
+    width: 115px;
+    height: 60px;
+    line-height: 20px;
+    margin: 0 auto;
+    float: none;
+    font-size: 19px;
+    color: #828282;
+}
+
+.pageKuai3Buy > .middle .santonghao li .craps {
+    width: 110px;
+    height: 33px;
+    margin: 30px 0 5px;
+}
+
+.pageKuai3Buy > .middle .santonghao li .craps img {
+    margin-left: 2px;
+}
+
+.pageKuai3Buy > .middle .santonghao li .money {
+    width: 110px;
+    height: 30px;
+    line-height: 30px;
+    color: #828282;
+}
+
+
+
+
+
+
+

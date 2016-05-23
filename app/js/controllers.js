@@ -269,3 +269,33 @@ app.controller('kuai3BuyHeZhiCtrl', ['$scope', '$log', function ($scope, $log) {
         }
     ]
 }]);
+
+/*kuai3Buy.santonghao*/
+app.controller('kuai3BuySanTongHaoCtrl', ['$scope', '$log', function ($scope, $log) {
+    $scope.santonghao = [
+        {
+            "craps": [1, 1, 1],
+            "money": "奖金240元"
+        },
+        {
+            "craps": [2, 2, 2],
+            "money": "奖金240元"
+        },
+        {
+            "craps": [3, 3, 3],
+            "money": "奖金240元"
+        },
+        {
+            "craps": [4, 4, 4],
+            "money": "奖金240元"
+        },
+        {
+            "craps": [5, 5, 5],
+            "money": "奖金240元"
+        },
+        {
+            "craps": [6, 6, 6],
+            "money": "奖金240元"
+        }
+    ]
+}]);

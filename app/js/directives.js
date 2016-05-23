@@ -193,28 +193,6 @@ app.directive('kuai3Timekeeper', ['$log', '$timeout', 'timekeeper', function ($l
 
 
 /*kuai3hezhi*/
-app.directive('kuai3HeZhiRandomKeyListener', ['$log', '$state', 'keyListener', function ($log, $state, keyListener) {
-    return {
-        restrict: 'A',
-        scope: {},
-        link: function (scope, element, attrs) {
-            keyListener.keyListener({
-                element: element,
-                left: function (item) {
-                    $(element.parent().find(".choice").find("li")[13]).focus();
-                    return false;
-                },
-                right: function (item) {
-                    $(element.parent().find(".choice").find("li")[0]).focus();
-                    return false;
-                },
-                enter: function (item) {
-                }
-            });
-        }
-    };
-}]);
-
 app.directive('kuai3HeZhiChoiceKeyListener', ['$log', '$timeout', '$state', 'keyListener', function ($log, $timeout, $state, keyListener) {
     return {
         restrict: 'A',
@@ -226,30 +204,37 @@ app.directive('kuai3HeZhiChoiceKeyListener', ['$log', '$timeout', '$state', 'key
                     element: element.parent(),
                     id: "kuai3HeZhiChoice",
                     label: "li",
-                    columnNum: 14,
-                    left: {
-                        before: function (item) {
-                            var index = $(item).index();
-                            if (index == 0) {
-                                element.parent().parent().parent().find(".random").focus();
-                                return false;
-                            }
-                        }
-                    },
-                    right: {
-                        before: function (item) {
-                            var index = $(item).index();
-                            if (index == 13) {
-                                element.parent().parent().parent().find(".random").focus();
-                                return false;
-                            }
-                        }
-                    },
+                    columnNum: 15,
                     enter: function (item) {
                     }
                 });
                 $timeout(function () {
                     $(element.parent().children().first()).focus();
+                }, 700);
+            }
+        }
+    };
+}]);
+
+
+/*kuai3santonghao*/
+    app.directive('kuai3SanTongHaoChoiceKeyListener', ['$log', '$timeout', '$state', 'keyListener', function ($log, $timeout, $state, keyListener) {
+    return {
+        restrict: 'A',
+        scope: {},
+        link: function (scope, element, attrs) {
+            if (scope.$parent.$last) {
+                var menus = scope.$parent.menus;
+                keyListener.listKeyListener({
+                    element: element.parent(),
+                    id: "kuai3SanTongHao",
+                    label: "li",
+                    columnNum: 7,
+                    enter: function (item) {
+                    }
+                });
+                $timeout(function () {
+                    $(element.parent().children()[1]).focus();
                 }, 700);
             }
         }

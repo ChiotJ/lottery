@@ -106,10 +106,16 @@ app.config(['$stateProvider', '$urlRouterProvider', 'timekeeperProvider', functi
             }]
         })
         .state('kuai3Buy.hezhi', {
-            url: '/kuai3/buy',
+            url: '/kuai3/buy/hezhi',
             templateUrl: 'tpls/kuai3/hezhi.html',
             controller: 'kuai3BuyHeZhiCtrl',
             controllerAs: 'kuai3BuyHeZhi'
+        })
+        .state('kuai3Buy.santonghao', {
+            url: '/kuai3/buy/santonghao',
+            templateUrl: 'tpls/kuai3/santonghao.html',
+            controller: 'kuai3BuySanTongHaoCtrl',
+            controllerAs: 'kuai3BuySanTongHao'
         })
 
 }]);
