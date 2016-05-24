@@ -723,10 +723,22 @@ body {
 }
 
 .pageKuai3Buy > .middle .renxuan .random .craps {
-    width: 84px;
-    height: 20px;
+    width: 101px;
+    height: 28px;
     background: url("../imgs/kuai3/craps_jixuan.png") no-repeat;
     margin: 30px auto 20px;
+}
+
+.pageKuai3Buy > .middle .renxuan .random:focus {
+    background-color: #E72432;
+}
+
+.pageKuai3Buy > .middle .renxuan .random:focus .craps {
+    background: url("../imgs/kuai3/craps_jixuan_focus.png") no-repeat;
+}
+
+.pageKuai3Buy > .middle .renxuan .random:focus .title {
+    color: #FFFFFF;
 }
 
 .pageKuai3Buy > .middle .renxuan .random .title {
