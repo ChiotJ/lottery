@@ -68,6 +68,12 @@ app.config(['$stateProvider', '$urlRouterProvider', 'timekeeperProvider', functi
             controller: 'homeCtrl',
             controllerAs: 'home'
         })
+        .state('login', {
+            url: '/login',
+            templateUrl: 'tpls/login.html',
+            controller: 'loginCtrl',
+            controllerAs: 'login'
+        })
         .state('fuCai', {
             url: '/fuCai',
             templateUrl: 'tpls/fuCai/index.html',
@@ -134,6 +140,16 @@ app.config(['$stateProvider', '$urlRouterProvider', 'timekeeperProvider', functi
             templateUrl: 'tpls/kuai3/jixuan.html',
             controller: 'kuai3BuyJiXuanCtrl',
             controllerAs: 'kuai3BuyJiXuan'
+        })
+        .state('order_confirm', {
+            url: '/order/confirm',
+            params: {
+                bettingWay: "自选 三不同号",
+                craps: "1,2,3"
+            },
+            templateUrl: 'tpls/kuai3/order_confirm.html',
+            controller: 'kuai3OrderConfirmCtrl',
+            controllerAs: 'kuai3OrderConfirm'
         })
 
 }]);

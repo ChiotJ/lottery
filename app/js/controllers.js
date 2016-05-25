@@ -107,6 +107,14 @@ app.controller('homeCtrl', ['$scope', '$log', '$state', function ($scope, $log, 
     NProgress.done();
 }]);
 
+
+/*login*/
+app.controller('loginCtrl', ['$scope', '$log', '$state', function ($scope, $log, $state) {
+    $scope.pageClass = "pageLogin";
+
+    NProgress.done();
+}]);
+
 /*fuCaiIndex*/
 app.controller('fuCaiIndexCtrl', ['$scope', '$log', '$state', function ($scope, $log, $state) {
     $scope.pageClass = "pageFuCaiIndex";
@@ -114,14 +122,13 @@ app.controller('fuCaiIndexCtrl', ['$scope', '$log', '$state', function ($scope, 
         {
             "id": "Kuai3",
             "series": "000001",
-            "notice": "每五分钟开一次奖最高奖金",
-            "money": "100万",
+            "notice": "每10分钟开一次奖最高奖金",
+            "money": "240元",
             "h": "00",
             "m": "10",
             "s": "00"
         }
     ];
-
 
     NProgress.done();
 }]);
@@ -313,4 +320,21 @@ app.controller('kuai3BuyRenXuanCtrl', ['$scope', '$log', function ($scope, $log)
 /*kuai3Buy.jixuan*/
 app.controller('kuai3BuyJiXuanCtrl', ['$scope', '$log', function ($scope, $log) {
 
+}]);
+
+/*kuai3OrderConfirm*/
+app.controller('kuai3OrderConfirmCtrl', ['$scope', '$stateParams', '$log', function ($scope, $stateParams, $log) {
+    $scope.pageClass = "pageKuai3OrderConfirm";
+    $scope.info = {
+        notice: "和值：3",
+        craps: [1, 2, 3],
+        time: {
+            m: "09",
+            s: "59"
+        }
+    };
+
+    $scope.bettingWay = $stateParams.bettingWay;
+    $scope.craps = $stateParams.craps;
+    NProgress.done();
 }]);

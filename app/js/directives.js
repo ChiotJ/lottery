@@ -248,6 +248,7 @@ app.directive('kuai3SanLianHaoChoiceKeyListener', ['$log', '$timeout', '$state',
             keyListener.keyListener({
                 element: element.parent(),
                 enter: function (item) {
+                    $state.go('order_confirm')
                 }
             });
             $timeout(function () {
