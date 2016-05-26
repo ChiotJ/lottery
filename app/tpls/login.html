@@ -17,17 +17,17 @@
         <div class="loginInfo">
             <label>用户名称</label>
             <div>
-                <input type="text" placeholder="请输入账号/手机号">
+                <input ng-model="userName" type="text" placeholder="请输入账号/手机号">
             </div>
         </div>
         <div class="loginInfo">
             <label>登录密码</label>
             <div>
-                <input type="password" placeholder="请输入密码">
+                <input ng-model="password" type="password" placeholder="请输入密码">
             </div>
 
         </div>
-        <div class="submit">
+        <div login-key-listener tabindex="-1" class="submit" userName="userName" action="userLogin(userName,password)">
             登录
         </div>
     </div>

@@ -93,6 +93,29 @@ app.directive('homeMenuKeyListener', ['$log', '$timeout', 'keyListener', functio
     };
 }]);
 
+
+/*login*/
+app.directive('loginKeyListener', ['$log', '$timeout', '$state', 'keyListener', function ($log, $timeout, $state, keyListener) {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attrs) {
+            keyListener.keyListener({
+                element: element,
+                enter: function (item) {
+                    $log.debug(scope.userName);
+                    $log.debug(scope.password);
+                    //scope.action();
+                }
+            });
+            /*
+             $timeout(function () {
+             element.focus();
+             }, 700);
+             */
+        }
+    };
+}]);
+
 /*fuCaiIndex*/
 app.directive('fuCaiIndexListKeyListener', ['$log', '$timeout', '$interval', '$state', 'keyListener', 'timekeeper', function ($log, $timeout, $interval, $state, keyListener, timekeeper) {
     return {

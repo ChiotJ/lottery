@@ -72,7 +72,8 @@ body {
 .index.user .userInfo {
     height: 50px;
     line-height: 50px;
-
+    width: 250px;
+    font-size: 18px;
 }
 
 .index.user .userInfo div {
@@ -85,7 +86,7 @@ body {
     height: 50px;
     position: relative;
     overflow: hidden;
-    margin-left: 150px;
+    margin-left: 116px;
 }
 
 .index.user .winInfos img {
@@ -271,14 +272,20 @@ body {
     display: block;
 }
 
-.pageLogin .right .submit{
+.pageLogin .right .submit {
     width: 210px;
     height: 50px;
-    background-color: #E72432;
+    background-color: #EDEDED;
     line-height: 50px;
     text-align: center;
-    margin:30px auto 0;
+    margin: 30px auto 0;
     font-size: 20px;
+    border: 1px solid #DBDBDB;
+    color: #1f1f1f;
+}
+
+.pageLogin .right .submit:focus {
+    background-color: #E72432;
     color: #FFFFFF;
 }
 
@@ -1203,7 +1210,7 @@ body {
     font-size: 30px;
 }
 
-.pageKuai3OrderConfirm .middle .button {
+.pageKuai3OrderConfirm .middle .submit {
     width: 264px;
     height: 88px;
     border: 1px solid #DBDBDB;
@@ -1213,13 +1220,13 @@ body {
     font-size: 26px;
 }
 
-.pageKuai3OrderConfirm .middle .button:focus {
+.pageKuai3OrderConfirm .middle .submit:focus {
     background-color: #E72432;
     color: #FFFFFF;
     box-shadow: 5px 7px 20px 5px rgba(0, 0, 0, 0.1);
 }
 
-.pageKuai3OrderConfirm .submit {
+.pageKuai3OrderConfirm .bottom {
     width: 804px;
     height: 40px;
     line-height: 40px;

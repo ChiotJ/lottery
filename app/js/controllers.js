@@ -4,17 +4,15 @@
 'use strict';
 var app = angular.module("app");
 /*index*/
-app.controller("bodyCtrl", ['$scope', '$log', 'timekeeper', function ($scope, $log, timekeeper) {
+app.controller("bodyCtrl", ['$scope', '$log', function ($scope, $log) {
     $scope.keydown = function ($event) {
         var key = $event.keyCode;
         if (key == 27) {
             //$log.debug("bodyCtrl");
         } else if (key == 8) {
-        } else if (key == 71) {
-            $log.debug(timekeeper.items);
         }
 
-    }
+    };
 }]);
 
 app.controller('userCtrl', ["$scope", '$log', function ($scope, $log) {
@@ -52,6 +50,9 @@ app.controller('userCtrl', ["$scope", '$log', function ($scope, $log) {
             }
         }
     ];
+
+
+
 }]);
 
 /*home*/
@@ -111,6 +112,9 @@ app.controller('homeCtrl', ['$scope', '$log', '$state', function ($scope, $log, 
 /*login*/
 app.controller('loginCtrl', ['$scope', '$log', '$state', function ($scope, $log, $state) {
     $scope.pageClass = "pageLogin";
+
+    $scope.userName = "";
+    $scope.password = "";
 
     NProgress.done();
 }]);

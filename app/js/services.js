@@ -324,6 +324,49 @@ app.provider('timekeeper', function () {
             }
         }
     }];
-
-
 });
+
+app.factory("userService", ['cardId', 'dataRequest', function (cardId, dataRequest) {
+    return {
+        cardId: cardId,
+        userId: "",
+        token: "",
+        login: function (userName, password) {
+            $log.debug(userName, password, callback);
+            $scope.isShowUserInfo = true;
+            dataRequest.login({
+                phone: userName,
+                password: password
+            }).success(function (data) {
+                $log.debug(data)
+
+            }).error(function (error) {
+                $log.error(error)
+            });
+        }
+    }
+}]);
+
+app.factory("dataRequest", ['$log', '$http', 'apiUrl', 'cardId', function ($log, $http, apiUrl, cardId) {
+    return {
+        login: function (parameter) {
+            return $http.get(apiUrl.api_family + "user/login", {
+                params: parameter
+            });
+        },
+        modifyBettingPassword: function (parameter, config) {
+
+            var parameter = JSON.stringify({
+                "oldBettingPassword": "16082420",
+                "bettingPassword": "888888",
+                "repeatBettingPassword": "888888"
+            });
+
+            $http.post(apiUrl.api_lottery + "modifyBettingPassword", parameter, {}).success(function () {
+                $log.debug("123");
+            }).error(function (data) {
+                $log.debug("failure message:" + JSON.stringify({data: data}));
+            });
+        }
+    }
+}]);
