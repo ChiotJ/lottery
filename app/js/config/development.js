@@ -8,4 +8,5 @@ app.constant("apiUrl", {
     "api_lottery": "http://10.191.255.121:18880/tvLottery/"
 });
 
-app.constant("cardId", GHSMLib.cardId);
+// app.constant("cardId", GHSMLib.cardId);
+app.constant("cardId","");

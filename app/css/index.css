@@ -141,7 +141,7 @@ body {
     color: #FFFFFF;
 }
 
-.index.user .func li:focus {
+.index.user .menus li:focus {
     background-color: #890a14;
 }
 

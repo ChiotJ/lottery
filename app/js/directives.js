@@ -13,9 +13,17 @@ app.directive('indexMenuKeyListener', ['$log', 'keyListener', function ($log, ke
                 var menus = scope.$parent.menus;
                 keyListener.listKeyListener({
                     element: element.parent(),
+                    id: 'indexMenu',
                     label: "li",
                     columnNum: 3,
-                    focus: function (item) {
+                    down: function () {
+                        if ($(".pageHome").length > 0) {
+                            keyListener.focus('homeMenu');
+                        } else if ($(".pageLogin").length > 0) {
+                            $($(".pageLogin").find('.keyListener')[0]).focus();
+                        }
+
+                        return false;
                     },
                     enter: function (item) {
                         menus[$(item).index()].enter();
@@ -61,8 +69,18 @@ app.directive('homeMenuKeyListener', ['$log', '$timeout', 'keyListener', functio
                 var menus = scope.$parent.menus;
                 keyListener.listKeyListener({
                     element: element.parent(),
+                    id: 'homeMenu',
                     label: "li",
                     columnNum: 3,
+                    up: {
+                        before: function (item) {
+                            var index = $(item).index();
+                            if (index < 3) {
+                                keyListener.focus('indexMenu');
+                                return false;
+                            }
+                        }
+                    },
                     focus: function (item) {
                         var hasGif = menus[$(item).index()].hasGif;
                         if (hasGif) {
@@ -95,23 +113,55 @@ app.directive('homeMenuKeyListener', ['$log', '$timeout', 'keyListener', functio
 
 
 /*login*/
-app.directive('loginKeyListener', ['$log', '$timeout', '$state', 'keyListener', function ($log, $timeout, $state, keyListener) {
+app.directive('loginKeyListener', ['$log', '$timeout', '$state', 'keyListener', 'userService', function ($log, $timeout, $state, keyListener, userService) {
     return {
         restrict: 'A',
         link: function (scope, element, attrs) {
             keyListener.keyListener({
                 element: element,
+                id: 'login',
+                up: function (item) {
+                    var index = parseInt($(item).attr('idx')) - 1;
+                    if (index >= 0) {
+                        $(element.find('.keyListener')[index]).focus();
+                    } else {
+                        keyListener.focus('indexMenu');
+                    }
+                    return false;
+                },
+                down: function (item) {
+                    var index = parseInt($(item).attr('idx')) + 1;
+                    if (index < 3) {
+                        $(element.find('.keyListener')[index]).focus();
+                    }
+                    return false;
+                },
                 enter: function (item) {
-                    $log.debug(scope.userName);
-                    $log.debug(scope.password);
-                    //scope.action();
+                    var index = parseInt($(item).attr('idx'));
+                    if (index == 2) {
+                        $log.debug(scope.credentials);
+                        userService.login(scope.credentials).success(function (data) {
+                            $log.debug(data)
+                            if (data && data.success) {
+                                var result = data.result;
+                                scope.setCurrentUser({
+                                    userName: result.nickName,
+                                    balance: 0,
+                                    isShowUserInfo: true
+                                });
+                            }
+
+
+                        }).error(function (error) {
+                            $log.error(error)
+                        });
+                    }
+                    return false;
                 }
             });
-            /*
-             $timeout(function () {
-             element.focus();
-             }, 700);
-             */
+            $timeout(function () {
+                $(element.find(".keyListener")[0]).focus();
+            }, 700);
         }
     };
 }]);

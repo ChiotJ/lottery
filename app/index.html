@@ -8,7 +8,7 @@
     <script src="lib/angular-1.5.5/angular-animate.min.js"></script>
     <script src="lib/angular-ui-router.min.js"></script>
 
-    <script id="GHSMLib" src="http://172.16.188.26/web/GHSMLib/GHSMLib.js" type="text/javascript"></script>
+    <!--<script id="GHSMLib" src="http://172.16.188.26/web/GHSMLib/GHSMLib.js" type="text/javascript"></script>-->
 
     <script src="lib/nProgress/nprogress.js"></script>
     <link rel="stylesheet" href="lib/nProgress/nprogress.css">
@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="css/page.css">
 
 </head>
-<body ng-controller="bodyCtrl as body" ng-keydown="keydown($event)">
+<body ng-controller="ApplicationController" ng-keydown="keydown($event)">
 <div class="index header">
     <div class="left">
         <img src="imgs/index/header_left.png" alt="">
@@ -38,11 +38,11 @@
 
 <div class="index user" ng-controller="userCtrl">
     <div class="userInfo" >
-        <div class="userName" ng-show="{{isShowUserInfo}}">
-            用户名：{{userInfo.userName}}
+        <div class="userName" ng-show="currentUser.isShowUserInfo">
+            用户名：{{currentUser.userName}}
         </div>
-        <div class="balance" ng-show="{{isShowUserInfo}}">
-            余额：{{userInfo.balance}}
+        <div class="balance" ng-show="currentUser.isShowUserInfo">
+            余额：{{currentUser.balance}}
         </div>
     </div>
 

@@ -30,12 +30,34 @@ app.factory("keyListener", ['$log', function ($log) {
     return {
         index: {},
         size: {},
+        element: {},
+        focus: function (id, index) {
+            if (typeof id === "string" && this.element[id]) {
+                var element = this.element[id];
+                if (element.length > 1) {
+                    if (typeof index === "number") {
+                        $(element[index]).focus();
+                    } else {
+                        $(element[this.index[id]]).focus();
+                    }
+                } else {
+
+                    $(element).focus();
+                }
+
+            }
+        },
         /*普通按键监听*/
         keyListener: function (options, children) {
             var element = options.element;
             if (!element || element.length < 1)
                 return false;
             // $log.debug(element);
+            var id = options.id;
+            if (id && !children) {
+                this.element[id] = element;
+            }
+
             element.bind("keydown", function ($event) {
                 switch ($event && $event.keyCode) {
                     case 8: //backspace
@@ -133,13 +155,15 @@ app.factory("keyListener", ['$log', function ($log) {
         },
         /*列表按键监听*/
         listKeyListener: function (options) {
-            var element = options.element;
-            if (!element || element.length < 1)
-                return false;
-            element = element[0];
-            var self = this, id = element.id, children = options.element.children(), length = children.length;
-            this.index[id] = 0;
-            this.size[id] = length;
+            var self = this, element = options.element, id = options.id, label = options.label, columnNum = options.columnNum,
+                children = label ? element.find(label) : element.children(),
+                length = children.length;
+            if (id) {
+                this.index[id] = 0;
+                this.size[id] = length;
+                this.element[id] = children;
+            }
+
 
             var leftCtrl = function (item) {
                 var idx = $(item).index();
@@ -163,16 +187,16 @@ app.factory("keyListener", ['$log', function ($log) {
 
             var upCtrl = function (item) {
                 var idx = $(item).index();
-                if (idx > options.columnNum - 1) {
-                    idx -= options.columnNum;
+                if (idx > columnNum - 1) {
+                    idx -= columnNum;
                 } else {
-                    if (idx > ((length - 1) % options.columnNum)) {
+                    if (idx > ((length - 1) % columnNum)) {
                         idx = length - 1;
                     } else {
-                        if (length % options.columnNum == 0) {
-                            idx = length - (options.columnNum - idx);
+                        if (length % columnNum == 0) {
+                            idx = length - (columnNum - idx);
                         } else {
-                            idx = parseInt(length / options.columnNum) * options.columnNum + idx;
+                            idx = parseInt(length / columnNum) * columnNum + idx;
                         }
                     }
                 }
@@ -212,13 +236,13 @@ app.factory("keyListener", ['$log', function ($log) {
 
             var downCtrl = function (item) {
                 var idx = $(item).index();
-                if (idx < length - options.columnNum) {
-                    idx += options.columnNum;
+                if (idx < length - columnNum) {
+                    idx += columnNum;
                 } else {
-                    if (parseInt((length - 1) / options.columnNum) > parseInt(idx / options.columnNum)) {
+                    if (parseInt((length - 1) / columnNum) > parseInt(idx / columnNum)) {
                         idx = length - 1;
                     } else {
-                        idx = idx % options.columnNum;
+                        idx = idx % columnNum;
                     }
                 }
                 $(children[idx]).attr('tabindex', -1).focus();
@@ -326,23 +350,18 @@ app.provider('timekeeper', function () {
     }];
 });
 
-app.factory("userService", ['cardId', 'dataRequest', function (cardId, dataRequest) {
+app.factory("userService", ['$log', 'cardId', 'dataRequest', function ($log, cardId, dataRequest) {
     return {
         cardId: cardId,
         userId: "",
         token: "",
-        login: function (userName, password) {
-            $log.debug(userName, password, callback);
+        login: function (credentials) {
+            $log.debug(credentials);
             $scope.isShowUserInfo = true;
-            dataRequest.login({
-                phone: userName,
-                password: password
-            }).success(function (data) {
-                $log.debug(data)
-
-            }).error(function (error) {
-                $log.error(error)
-            });
+            return dataRequest.login({
+                phone: credentials.username,
+                password: credentials.password
+            })
         }
     }
 }]);

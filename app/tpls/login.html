@@ -10,24 +10,26 @@
             扫码可登录可注册
         </div>
     </div>
-    <div class="right">
+    <div login-key-listener class="right">
         <div class="title">
             账号登录
         </div>
         <div class="loginInfo">
             <label>用户名称</label>
             <div>
-                <input ng-model="userName" type="text" placeholder="请输入账号/手机号">
+                <input class="keyListener" idx="0" ng-focus="inputFocus($event)" ng-blur="inputBlur($event)"
+                       ng-model="credentials.username" type="text" placeholder="请输入账号/手机号">
             </div>
         </div>
         <div class="loginInfo">
             <label>登录密码</label>
             <div>
-                <input ng-model="password" type="password" placeholder="请输入密码">
+                <input class="keyListener" idx="1" ng-focus="inputFocus($event)" ng-blur="inputBlur($event)"
+                       ng-model="credentials.password" type="password" placeholder="请输入密码">
             </div>
 
         </div>
-        <div login-key-listener tabindex="-1" class="submit" userName="userName" action="userLogin(userName,password)">
+        <div tabindex="-1" class="submit keyListener" idx="2">
             登录
         </div>
     </div>

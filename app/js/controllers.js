@@ -4,7 +4,7 @@
 'use strict';
 var app = angular.module("app");
 /*index*/
-app.controller("bodyCtrl", ['$scope', '$log', function ($scope, $log) {
+app.controller("ApplicationController", ['$scope', '$log', function ($scope, $log) {
     $scope.keydown = function ($event) {
         var key = $event.keyCode;
         if (key == 27) {
@@ -13,14 +13,20 @@ app.controller("bodyCtrl", ['$scope', '$log', function ($scope, $log) {
         }
 
     };
-}]);
 
-app.controller('userCtrl', ["$scope", '$log', function ($scope, $log) {
-    $scope.userInfo = {
-        userName: "翦英硕",
-        balance: 50
+    $scope.currentUser = {
+        userName: null,
+        balance: 0,
+        isShowUserInfo: false
     };
 
+    $scope.setCurrentUser = function (user) {
+        $scope.currentUser = user;
+    };
+
+}]);
+
+app.controller('userCtrl', ["$scope", '$state', '$log', function ($scope, $state, $log) {
     $scope.winInfos = [
         {
             "text": "恭喜用户222222中2014055期双色球6000元奖金"
@@ -47,10 +53,10 @@ app.controller('userCtrl', ["$scope", '$log', function ($scope, $log) {
             "text": "登录",
             "enter": function () {
                 $log.debug("登录");
+                $state.go("login");
             }
         }
     ];
-
 
 
 }]);
@@ -113,8 +119,18 @@ app.controller('homeCtrl', ['$scope', '$log', '$state', function ($scope, $log, 
 app.controller('loginCtrl', ['$scope', '$log', '$state', function ($scope, $log, $state) {
     $scope.pageClass = "pageLogin";
 
-    $scope.userName = "";
-    $scope.password = "";
+    $scope.credentials = {
+        username: "",
+        password: ""
+    }
+
+    $scope.inputFocus = function ($event) {
+        $($event.target).parent().css("border", "1px solid #E72432");
+    };
+
+    $scope.inputBlur = function ($event) {
+        $($event.target).parent().removeAttr("style");
+    };
 
     NProgress.done();
 }]);
