@@ -350,22 +350,6 @@ app.provider('timekeeper', function () {
     }];
 });
 
-app.factory("userService", ['$log', 'cardId', 'dataRequest', function ($log, cardId, dataRequest) {
-    return {
-        cardId: cardId,
-        userId: "",
-        token: "",
-        login: function (credentials) {
-            $log.debug(credentials);
-            $scope.isShowUserInfo = true;
-            return dataRequest.login({
-                phone: credentials.username,
-                password: credentials.password
-            })
-        }
-    }
-}]);
-
 app.factory("dataRequest", ['$log', '$http', 'apiUrl', 'cardId', function ($log, $http, apiUrl, cardId) {
     return {
         login: function (parameter) {
@@ -386,6 +370,31 @@ app.factory("dataRequest", ['$log', '$http', 'apiUrl', 'cardId', function ($log,
             }).error(function (data) {
                 $log.debug("failure message:" + JSON.stringify({data: data}));
             });
+        }
+    }
+}]);
+
+
+app.factory("userService", ['$log', 'cardId', 'dataRequest', function ($log, cardId, dataRequest) {
+    return {
+        cardId: cardId,
+        userId: "",
+        token: "",
+        login: function (credentials) {
+            //$log.debug(credentials);
+            $scope.isShowUserInfo = true;
+            return dataRequest.login({
+                phone: credentials.username,
+                password: credentials.password
+            })
+        }
+    }
+}]);
+
+app.factory('kuai3Service', ['dataRequest',function (dataRequest) {
+    return {
+        getKuai3Info: function () {
+
         }
     }
 }]);

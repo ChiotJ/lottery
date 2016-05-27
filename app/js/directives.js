@@ -139,19 +139,16 @@ app.directive('loginKeyListener', ['$log', '$timeout', '$state', 'keyListener', 
                 enter: function (item) {
                     var index = parseInt($(item).attr('idx'));
                     if (index == 2) {
-                        $log.debug(scope.credentials);
+                        //$log.debug(scope.credentials);
                         userService.login(scope.credentials).success(function (data) {
-                            $log.debug(data)
+                            //$log.debug(data)
                             if (data && data.success) {
                                 var result = data.result;
-                                scope.setCurrentUser({
-                                    userName: result.nickName,
-                                    balance: 0,
-                                    isShowUserInfo: true
+                                scope.currentUser.setCurrentUser({
+                                    username: result.nickName,
+                                    balance: 0
                                 });
                             }
-
-
                         }).error(function (error) {
                             $log.error(error)
                         });

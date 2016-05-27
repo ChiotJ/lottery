@@ -79,6 +79,11 @@ app.config(['$stateProvider', '$urlRouterProvider', 'timekeeperProvider', functi
             templateUrl: 'tpls/fuCai/index.html',
             controller: 'fuCaiIndexCtrl',
             controllerAs: 'fuCaiIndex',
+            resolve: {
+                kuai3: function () {
+                    
+                }
+            },
             onEnter: function () {
             },
             onExit: ['timekeeper', function (timekeeper) {

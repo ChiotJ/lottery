@@ -15,14 +15,25 @@ app.controller("ApplicationController", ['$scope', '$log', function ($scope, $lo
     };
 
     $scope.currentUser = {
-        userName: null,
+        username: null,
         balance: 0,
-        isShowUserInfo: false
+        isShowUserInfo: false,
+        setCurrentUser: function (user) {
+            user.username != null && (this.username = user.username, this.isShowUserInfo = true);
+            this.balance = user.balance || 0;
+        }
     };
 
-    $scope.setCurrentUser = function (user) {
-        $scope.currentUser = user;
-    };
+    $scope.isBlackBlindsShow = true;
+
+    $scope.appNotice = {
+        isAppNoticsShow: true,
+        title: "提示",
+        content: "登录成功",
+        bottom: "3秒后自动跳转,或按确定跳转",
+        middleClass: "notice",
+        bottomClass: "time"
+    }
 
 }]);
 
@@ -122,7 +133,7 @@ app.controller('loginCtrl', ['$scope', '$log', '$state', function ($scope, $log,
     $scope.credentials = {
         username: "",
         password: ""
-    }
+    };
 
     $scope.inputFocus = function ($event) {
         $($event.target).parent().css("border", "1px solid #E72432");

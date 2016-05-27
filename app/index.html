@@ -37,9 +37,9 @@
 </div>
 
 <div class="index user" ng-controller="userCtrl">
-    <div class="userInfo" >
+    <div class="userInfo">
         <div class="userName" ng-show="currentUser.isShowUserInfo">
-            用户名：{{currentUser.userName}}
+            用户名：{{currentUser.username}}
         </div>
         <div class="balance" ng-show="currentUser.isShowUserInfo">
             余额：{{currentUser.balance}}
@@ -68,8 +68,23 @@
 <div id="loadProgress" class="loadProgress"></div>
 
 
-<div ui-view class="page {{ pageClass }}">
+<div ui-view class="page {{ pageClass }}"></div>
 
+<div class="index blackBlinds" ng-show="isBlackBlindsShow"></div>
+<div tabindex="-1" class="index appNotice" ng-show="appNotice.isAppNoticsShow">
+    <div class="top">
+        {{appNotice.title}}
+    </div>
+    <div class="middle">
+        <div ng-class="appNotice.middleClass">
+            {{appNotice.content}}
+        </div>
+    </div>
+    <div class="bottom">
+        <div ng-class="appNotice.bottomClass">
+            {{appNotice.bottom}}
+        </div>
+    </div>
 </div>
 </body>
 </html>
