@@ -382,7 +382,6 @@ app.factory("userService", ['$log', 'cardId', 'dataRequest', function ($log, car
         token: "",
         login: function (credentials) {
             //$log.debug(credentials);
-            $scope.isShowUserInfo = true;
             return dataRequest.login({
                 phone: credentials.username,
                 password: credentials.password

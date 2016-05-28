@@ -41816,7 +41816,7 @@ angular.scenario.dsl('select', function() {
           option = select.find('option').filter(function() {
             return _jQuery(this).text() === value;
           });
-          if (!option.length) {
+          if (!option.config) {
             option = select.find('option:contains("' + value + '")');
           }
           if (option.length) {

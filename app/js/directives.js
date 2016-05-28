@@ -59,6 +59,24 @@ app.directive('indexWinInfos', ['$log', '$interval', function ($log, $interval) 
     };
 }]);
 
+app.directive('appNotice', ['$log', 'keyListener', function ($log, keyListener) {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attrs) {
+            keyListener.keyListener({
+                element: element,
+                id: 'appNotice',
+                enter: function (item) {
+                    var enter = scope.appNotice.enter;
+                    if (enter) {
+                        return enter();
+                    }
+                }
+            });
+        }
+    };
+}]);
+
 /*home*/
 app.directive('homeMenuKeyListener', ['$log', '$timeout', 'keyListener', function ($log, $timeout, keyListener) {
     return {
@@ -113,7 +131,7 @@ app.directive('homeMenuKeyListener', ['$log', '$timeout', 'keyListener', functio
 
 
 /*login*/
-app.directive('loginKeyListener', ['$log', '$timeout', '$state', 'keyListener', 'userService', function ($log, $timeout, $state, keyListener, userService) {
+app.directive('loginKeyListener', ['$log', '$timeout', '$state', '$location', 'keyListener', 'userService', function ($log, $timeout, $state, $location, keyListener, userService) {
     return {
         restrict: 'A',
         link: function (scope, element, attrs) {
@@ -147,6 +165,18 @@ app.directive('loginKeyListener', ['$log', '$timeout', '$state', 'keyListener', 
                                 scope.currentUser.setCurrentUser({
                                     username: result.nickName,
                                     balance: 0
+                                });
+                                scope.appNotice.showNotice({
+                                    title: "提示",
+                                    content: "登录成功",
+                                    bottom: "3秒后自动跳转,或按“确定”跳转",
+                                    time: 3000,
+                                    callback: function () {
+                                        history.back();
+                                    },
+                                    enter: function () {
+                                        history.back();
+                                    }
                                 });
                             }
                         }).error(function (error) {

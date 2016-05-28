@@ -18,6 +18,7 @@
     <script src="js/controllers.js"></script>
     <script src="js/services.js"></script>
     <script src="js/directives.js"></script>
+    <script src="js/filter.js"></script>
     <script src="js/config/router.js"></script>
     <script src="js/config/development.js"></script>
 
@@ -49,7 +50,7 @@
     <div class="winInfos">
         <img src="imgs/index/winInfo.png" alt="">
         <div class="wrapper">
-            <ul style="width: {{winInfos?winInfos.length*423+'px':0}}">
+            <ul style="width: {{winInfos | winInfos}}">
                 <li index-win-infos ng-repeat="winInfo in winInfos">{{winInfo.text}}</li>
             </ul>
         </div>
@@ -71,7 +72,7 @@
 <div ui-view class="page {{ pageClass }}"></div>
 
 <div class="index blackBlinds" ng-show="isBlackBlindsShow"></div>
-<div tabindex="-1" class="index appNotice" ng-show="appNotice.isAppNoticsShow">
+<div app-notice tabindex="-1" class="index appNotice" ng-show="appNotice.isAppNoticsShow">
     <div class="top">
         {{appNotice.title}}
     </div>
