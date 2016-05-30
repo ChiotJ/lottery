@@ -72,13 +72,14 @@ body {
 .index.user .userInfo {
     height: 50px;
     line-height: 50px;
-    width: 250px;
+    width: 330px;
     font-size: 18px;
 }
 
 .index.user .userInfo div {
     margin-right: 20px;
     float: left;
+    max-width: 165px;
 }
 
 .index.user .winInfos {
@@ -86,7 +87,7 @@ body {
     height: 50px;
     position: relative;
     overflow: hidden;
-    margin-left: 116px;
+    margin-left: 36px;
 }
 
 .index.user .winInfos img {

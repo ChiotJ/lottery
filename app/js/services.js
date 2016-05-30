@@ -353,8 +353,15 @@ app.provider('timekeeper', function () {
 app.factory("dataRequest", ['$log', '$http', 'apiUrl', 'cardId', function ($log, $http, apiUrl, cardId) {
     return {
         login: function (parameter) {
-            return $http.get(apiUrl.api_family + "user/login", {
+            return $http.post(apiUrl.api_lottery + "login", null, {
                 params: parameter
+            });
+        },
+        getAccountInfo: function (token) {
+            return $http.get(apiUrl.api_lottery + "getAccountInfo", {
+                headers: {
+                    'x-auth-token': token
+                }
             });
         },
         modifyBettingPassword: function (parameter, config) {
@@ -364,6 +371,7 @@ app.factory("dataRequest", ['$log', '$http', 'apiUrl', 'cardId', function ($log,
                 "bettingPassword": "888888",
                 "repeatBettingPassword": "888888"
             });
+
 
             $http.post(apiUrl.api_lottery + "modifyBettingPassword", parameter, {}).success(function () {
                 $log.debug("123");
@@ -375,22 +383,59 @@ app.factory("dataRequest", ['$log', '$http', 'apiUrl', 'cardId', function ($log,
 }]);
 
 
-app.factory("userService", ['$log', 'cardId', 'dataRequest', function ($log, cardId, dataRequest) {
+app.factory("userService", ['$q', '$log', 'cardId', 'dataRequest', function ($q, $log, cardId, dataRequest) {
     return {
         cardId: cardId,
         userId: "",
+        name: "",
+        balance: function () {
+            return this.rechargeBalance + this.rechargeBalance + "元";
+        },
+        rechargeBalance: 0,
+        winnerPaid: 0,
         token: "",
         login: function (credentials) {
             //$log.debug(credentials);
-            return dataRequest.login({
-                phone: credentials.username,
+
+            var deferred = $q.defer();
+            var promise = deferred.promise;
+
+
+            var self = this;
+            dataRequest.login({
+                username: credentials.username,
                 password: credentials.password
-            })
+            }).success(function (data, status, headers) {
+                //$log.debug("login-success", data, status, headers("x-auth-token"))
+
+                self.userId = data.id;
+                self.name = data.name;
+                self.token = headers("x-auth-token");
+
+                dataRequest.getAccountInfo(self.token).success(function (data) {
+                    //$log.debug("getAccountInfo-success", data)
+                    if (data && data.success) {
+                        self.rechargeBalance = data.result.rechargeBalance;
+                        self.winnerPaid = data.result.winnerPaid;
+                    }
+
+                    deferred.resolve();
+                }).error(function (error) {
+                    //$log.error('getAccountInfo-error', error)
+                    deferred.reject(error);
+                });
+
+            }).error(function (error) {
+                //$log.error('login-error', error)
+                deferred.reject(error);
+            });
+
+            return promise;
         }
     }
 }]);
 
-app.factory('kuai3Service', ['dataRequest',function (dataRequest) {
+app.factory('kuai3Service', ['dataRequest', function (dataRequest) {
     return {
         getKuai3Info: function () {
 

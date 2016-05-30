@@ -158,30 +158,26 @@ app.directive('loginKeyListener', ['$log', '$timeout', '$state', '$location', 'k
                     var index = parseInt($(item).attr('idx'));
                     if (index == 2) {
                         //$log.debug(scope.credentials);
-                        userService.login(scope.credentials).success(function (data) {
-                            //$log.debug(data)
-                            if (data && data.success) {
-                                var result = data.result;
-                                scope.currentUser.setCurrentUser({
-                                    username: result.nickName,
-                                    balance: 0
-                                });
-                                scope.appNotice.showNotice({
-                                    title: "提示",
-                                    content: "登录成功",
-                                    bottom: "3秒后自动跳转,或按“确定”跳转",
-                                    time: 3000,
-                                    callback: function () {
-                                        history.back();
-                                    },
-                                    enter: function () {
-                                        history.back();
-                                    }
-                                });
-                            }
-                        }).error(function (error) {
-                            $log.error(error)
-                        });
+                        var a = userService.login(scope.credentials).then(function success() {
+                            scope.currentUser.setCurrentUser({
+                                username: userService.name,
+                                balance: userService.balance()
+                            });
+                            scope.appNotice.showNotice({
+                                title: "提示",
+                                content: "登录成功",
+                                bottom: "3秒后自动跳转,或按“确定”跳转",
+                                time: 3000,
+                                callback: function () {
+                                    history.back();
+                                },
+                                enter: function () {
+                                    history.back();
+                                }
+                            });
+                        }, function error(error) {
+                            $log.error('login-error', error);
+                        })
                     }
                     return false;
                 }

@@ -5,8 +5,7 @@ var app = angular.module("app");
 
 app.constant("apiUrl", {
     "api_family": "http://family.digital-media.com.cn/family/",
-    "api_lottery": "http://10.191.255.121:18880/tvLottery/"
+    "api_lottery": "http://localhost/tvLottery/"
 });
 
-// app.constant("cardId", GHSMLib.cardId);
-app.constant("cardId","");
+app.constant("cardId", GHSMLib.cardId);
