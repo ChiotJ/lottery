@@ -21,6 +21,10 @@ app.directive('indexMenuKeyListener', ['$log', 'keyListener', function ($log, ke
                             keyListener.focus('homeMenu');
                         } else if ($(".pageLogin").length > 0) {
                             $($(".pageLogin").find('.keyListener')[0]).focus();
+                        } else if ($(".pageFuCaiIndex").length > 0) {
+                            keyListener.focus('fuCaiIndex');
+                        } else if ($(".pageKuai3Index").length > 0) {
+                            keyListener.focus('kuai3Index');
                         }
 
                         return false;
@@ -199,11 +203,16 @@ app.directive('fuCaiIndexListKeyListener', ['$log', '$timeout', '$interval', '$s
                 keyListener.listKeyListener({
                     element: element.parent(),
                     label: "li",
+                    id: "fuCaiIndex",
                     columnNum: 2,
-                    focus: function (item) {
-
-                    },
-                    blur: function (item) {
+                    up: {
+                        before: function (item) {
+                            var index = $(item).index();
+                            if (index < 2) {
+                                keyListener.focus('indexMenu');
+                                return false;
+                            }
+                        }
                     },
                     enter: function (item) {
                         $state.go("kuai3");
@@ -240,7 +249,17 @@ app.directive('kuai3IndexMenuKeyListener', ['$log', '$timeout', '$state', 'keyLi
                 keyListener.listKeyListener({
                     element: element.parent(),
                     label: "li",
+                    id:"kuai3Index",
                     columnNum: 5,
+                    up: {
+                        before: function (item) {
+                            var index = $(item).index();
+                            if (index < 5) {
+                                keyListener.focus('indexMenu');
+                                return false;
+                            }
+                        }
+                    },
                     focus: function (item) {
                         var hasGif = menus[$(item).index()].hasGif;
                         if (hasGif) {

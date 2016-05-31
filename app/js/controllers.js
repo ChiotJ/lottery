@@ -29,10 +29,10 @@ app.controller("ApplicationController", ['$scope', '$timeout', '$log', function 
     $scope.appNotice = {
         isAppNoticsShow: false,
         title: "提示",
-        content: "登录成功",
-        bottom: "3秒后自动跳转,或按“确定”跳转",
+        content: "",
+        bottom: "",
         middleClass: "notice",
-        bottomClass: "time",
+        bottomClass: "button",
         enter: null,
         showNotice: function (config) {
             $log.debug("showNotice", config);

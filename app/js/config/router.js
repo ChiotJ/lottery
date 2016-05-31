@@ -2,9 +2,9 @@
  * Created by jian_ on 2016/5/9.
  */
 'use strict';
-var app = angular.module('app');
+var routerApp = angular.module('routerApp', ['ui.router']);
 
-app.run(['$rootScope', '$state', '$stateParams', '$log',
+routerApp.run(['$rootScope', '$state', '$stateParams', '$log',
     function ($rootScope, $state, $stateParams, $log) {
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
@@ -58,7 +58,7 @@ app.run(['$rootScope', '$state', '$stateParams', '$log',
 ]);
 
 
-app.config(['$stateProvider', '$urlRouterProvider', 'timekeeperProvider', function ($stateProvider, $urlRouterProvider, timekeeperProvider) {
+routerApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/home');
 
     $stateProvider
@@ -81,7 +81,7 @@ app.config(['$stateProvider', '$urlRouterProvider', 'timekeeperProvider', functi
             controllerAs: 'fuCaiIndex',
             resolve: {
                 kuai3: function () {
-                    
+
                 }
             },
             onEnter: function () {
