@@ -1,0 +1,97 @@
+.pageKuai3Index .top {
+    width: 804px;
+    height: 260px;
+    overflow: hidden;
+    margin: 20px auto;
+    background-color: #E72432;
+    color: #FFFFFF;
+    font-size: 24px;
+    text-indent: 2px;
+}
+
+.pageKuai3Index .top > div {
+    float: left;
+    width: 401px;
+    margin: 30px 0;
+    height: 200px;
+}
+
+.pageKuai3Index .top .middle {
+    width: 1px;
+    border-left: 1px dashed #292929;
+    opacity: 0.3;
+    height: 170px;
+    margin: 45px 0;
+}
+
+.pageKuai3Index .top .text {
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+}
+
+.pageKuai3Index .top .notice {
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+}
+
+.pageKuai3Index .top .left .craps {
+    width: 240px;
+    height: 80px;
+    margin: 0 auto;
+}
+
+.pageKuai3Index .top .left .craps img {
+    width: 58px;
+    height: 58px;
+    margin: 11px 11px;
+    float: left;
+}
+
+.pageKuai3Index .top .right .time {
+    width: 120px;;
+    height: 80px;
+    margin: 0 auto;
+}
+
+.pageKuai3Index .top .right .time div {
+    float: left;
+    height: 50px;
+    width: 20px;
+    line-height: 50px;
+    margin-top: 15px;
+    color: #000000;
+    font-size: 32px;
+    text-indent: 1px;
+    text-align: center;
+}
+
+.pageKuai3Index .top .right .time .num {
+    color: #FFFFFF;
+    width: 50px;
+    background-color: #000000;
+
+}
+
+.pageKuai3Index .bottom {
+    width: 822px;
+    height: 212px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.pageKuai3Index .bottom li {
+    float: left;
+    width: 150px;
+    height: 90px;
+    margin: 6px 5px;
+    border: 2px solid transparent;
+}
+
+.pageKuai3Index .bottom li:focus {
+    border: 2px solid #FFFFFF;
+    box-shadow: 3px 4px 20px 3px rgba(0, 0, 0, 0.1);
+}

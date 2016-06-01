@@ -81,13 +81,17 @@ routerApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvid
         })
         .state('fuCai', {
             url: '/fuCai',
-            templateUrl: 'tpls/fuCai/index.html',
+            templateUrl: 'views/fucai/index/index.html',
             controller: 'fuCaiIndexCtrl',
             controllerAs: 'fuCaiIndex',
             resolve: {
-                kuai3: function () {
-
-                }
+                deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([{
+                        files: [
+                            'views/fucai/index/index.js',
+                            'views/fucai/index/index.css']
+                    }]);
+                }]
             },
             onEnter: function () {
             },
@@ -97,9 +101,18 @@ routerApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvid
         })
         .state('kuai3', {
             url: '/kuai3',
-            templateUrl: 'tpls/kuai3/index.html',
+            templateUrl: 'views/kuai3/index/index.html',
             controller: 'kuai3IndexCtrl',
             controllerAs: 'kuai3Index',
+            resolve: {
+                deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([{
+                        files: [
+                            'views/kuai3/index/index.js',
+                            'views/kuai3/index/index.css']
+                    }]);
+                }]
+            },
             onEnter: function () {
             },
             onExit: ['timekeeper', function (timekeeper) {
@@ -157,11 +170,11 @@ routerApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvid
                 bettingWay: "自选 三连号通选",
                 craps: "123,234,345,456"
             },
-            templateUrl: 'tpls/kuai3/order_confirm.html',
+            templateUrl: 'views/kuai3/order_confirm/order_confirm.html',
             controller: 'kuai3OrderConfirmCtrl',
             controllerAs: 'kuai3OrderConfirm',
             resolve: {
-                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                deps: ['$ocLazyLoad', function ($ocLazyLoad) {
                     return $ocLazyLoad.load([{
                         files: [
                             'views/kuai3/order_confirm/order_confirm.js',

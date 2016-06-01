@@ -190,107 +190,7 @@ app.directive('loginKeyListener', ['$log', '$timeout', '$state', '$location', 'k
     };
 }]);
 
-/*fuCaiIndex*/
-app.directive('fuCaiIndexListKeyListener', ['$log', '$timeout', '$interval', '$state', 'keyListener', 'timekeeper', function ($log, $timeout, $interval, $state, keyListener, timekeeper) {
-    return {
-        restrict: 'A',
-        scope: {},
-        link: function (scope, element, attrs) {
-            if (scope.$parent.$last) {
-                keyListener.listKeyListener({
-                    element: element.parent(),
-                    label: "li",
-                    id: "fuCaiIndex",
-                    columnNum: 2,
-                    up: {
-                        before: function (item) {
-                            var index = $(item).index();
-                            if (index < 2) {
-                                keyListener.focus('indexMenu');
-                                return false;
-                            }
-                        }
-                    },
-                    enter: function (item) {
-                        $state.go("kuai3");
-                    }
-                });
-                $timeout(function () {
-                    $(element.parent().children().first()).focus();
-                }, 700);
 
-
-                timekeeper.timekeeper("fuCaiIndexList", element.parent().children(), function (s, m, h, ele) {
-                    if (h < 1 && m < 1) {
-                        ele.find(".num").css("background-color", "#E6262F");
-                    } else {
-                        ele.find(".num").removeAttr("style");
-                    }
-                });
-            }
-
-        }
-
-    };
-}]);
-
-
-/*kuai3Index*/
-app.directive('kuai3IndexMenuKeyListener', ['$log', '$timeout', '$state', 'keyListener', function ($log, $timeout, $state, keyListener) {
-    return {
-        restrict: 'A',
-        scope: {},
-        link: function (scope, element, attrs) {
-            if (scope.$parent.$last) {
-                var menus = scope.$parent.menus;
-                keyListener.listKeyListener({
-                    element: element.parent(),
-                    label: "li",
-                    id: "kuai3Index",
-                    columnNum: 5,
-                    up: {
-                        before: function (item) {
-                            var index = $(item).index();
-                            if (index < 5) {
-                                keyListener.focus('indexMenu');
-                                return false;
-                            }
-                        }
-                    },
-                    focus: function (item) {
-                        var hasGif = menus[$(item).index()].hasGif;
-                        if (hasGif) {
-                            var img = $(item).find("img");
-                            var src = img.attr("src").replace("png", "gif");
-                            img.attr("src", src);
-                        }
-
-                    },
-                    blur: function (item) {
-                        var hasGif = menus[$(item).index()].hasGif;
-                        if (hasGif) {
-                            var img = $(item).find("img");
-                            var src = img.attr("src").replace("gif", "png");
-                            img.attr("src", src);
-                        }
-                    },
-                    enter: function (item) {
-                        var mode = menus[$(item).index()];
-
-                        if (mode.state) {
-                            $state.go(mode.state, {mode: mode});
-                        }
-
-                    }
-                });
-                $timeout(function () {
-                    $(element.parent().children().first()).focus();
-                }, 700);
-            }
-        }
-
-    };
-}]);
 
 app.directive('kuai3Timekeeper', ['$log', '$timeout', 'timekeeper', function ($log, $timeout, timekeeper) {
     return {
@@ -362,38 +262,6 @@ app.directive('kuai3SanLianHaoChoiceKeyListener', ['$log', '$timeout', '$state',
                 element: element.parent(),
                 enter: function (item) {
                     $state.go('order_confirm')
-                }
-            });
-            $timeout(function () {
-                element.focus();
-            }, 700);
-        }
-    };
-}]);
-
-
-/*order_confirm*/
-app.directive('kuai3OrderConfirmKeyListener', ['$log', '$timeout', '$state', 'keyListener', 'kuai3Service', function ($log, $timeout, $state, keyListener, kuai3Service) {
-    return {
-        restrict: 'A',
-        link: function (scope, element, attrs) {
-            keyListener.keyListener({
-                element: element,
-                up: function (item) {
-                    scope.addMultiple();
-                },
-                down: function (item) {
-                    scope.reduceMultiple();
-                },
-                enter: function (item) {
-                    kuai3Service.betting()
-                        .success(function (data) {
-                            $log.debug(data);
-                            scope.currentUser.updateCurrentUser();
-                        })
-                        .error(function (err) {
-
-                        });
                 }
             });
             $timeout(function () {
