@@ -11,13 +11,13 @@
                     <div class="money">{{one.money}}</div>
                 </div>
                 <div class="bottom">
-                    <div class="notice">距{{one.series}}期投注截止</div>
+                    <div class="notice">距{{one.current.period}}期投注截止</div>
                     <div class="time">
-                        <div class="h num">{{one.h}}</div>
+                        <div class="h num">{{one.current.remainingTime.h}}</div>
                         <div>:</div>
-                        <div class="m num">{{one.m}}</div>
+                        <div class="m num">{{one.current.remainingTime.m}}</div>
                         <div>:</div>
-                        <div class="s num">{{one.s}}</div>
+                        <div class="s num">{{one.current.remainingTime.s}}</div>
                     </div>
                 </div>
             </li>

@@ -1,9 +1,6 @@
-/**
- * Created by jian_ on 2016/5/18.
- */
 'use strict';
-var app = angular.module("app");
-app.factory("keyListener", ['$log', function ($log) {
+var serviceApp = angular.module("serviceApp", []);
+serviceApp.factory("keyListener", ['$log', function ($log) {
     function executeFun(fun, $event) {
         var item = $event.target;
         var order = ["before", "center", "after"];
@@ -276,7 +273,7 @@ app.factory("keyListener", ['$log', function ($log) {
     };
 }]);
 
-app.provider('timekeeper', function () {
+serviceApp.provider('timekeeper', function () {
     var timeCal = function (element, callback) {
         var h = parseInt(element.find(".h").html()), m = parseInt(element.find(".m").html()), s = parseInt(element.find(".s").html());
         if (--s < 0) {
@@ -308,7 +305,7 @@ app.provider('timekeeper', function () {
         element.find(".s").html(s);
 
         if (angular.isFunction(callback)) {
-            callback(s, m, h, element);
+            callback(s, m, h, element, element.index());
         }
 
     };
@@ -318,12 +315,12 @@ app.provider('timekeeper', function () {
         return {
             items: items,
             deleteItem: function (id) {
-                $log.debug("移除定时器：", id);
+                // $log.debug("移除定时器：", id);
                 $interval.cancel(items[id].interval);
                 delete items[id];
             },
             timekeeper: function (id, element, callback) {
-                $log.debug("加入定时器：", id);
+                // $log.debug("加入定时器：", id);
                 if (items[id]) {
                     $interval.cancel(items[id].interval);
                 }
@@ -350,7 +347,7 @@ app.provider('timekeeper', function () {
     }];
 });
 
-app.factory("dataRequest", ['$log', '$http', 'apiUrl', 'cardId', function ($log, $http, apiUrl, cardId) {
+serviceApp.factory("dataRequest", ['$log', '$http', 'apiUrl', 'cardId', function ($log, $http, apiUrl, cardId) {
     return {
         login: function (parameter) {
             return $http.post(apiUrl.api_lottery + "login", null, {
@@ -361,6 +358,20 @@ app.factory("dataRequest", ['$log', '$http', 'apiUrl', 'cardId', function ($log,
             return $http.get(apiUrl.api_lottery + "getAccountInfo", {
                 headers: {
                     'x-auth-token': token
+                }
+            });
+        },
+        getPrePeriodWins: function (name) {
+            return $http.get(apiUrl.api_lottery + "getPrePeriodWins", {
+                params: {
+                    name: name
+                }
+            });
+        },
+        period: function (name) {
+            return $http.get(apiUrl.api_lottery + "period", {
+                params: {
+                    name: name
                 }
             });
         },
@@ -383,13 +394,13 @@ app.factory("dataRequest", ['$log', '$http', 'apiUrl', 'cardId', function ($log,
 }]);
 
 
-app.factory("userService", ['$q', '$log', 'cardId', 'dataRequest', function ($q, $log, cardId, dataRequest) {
+serviceApp.factory("userService", ['$q', '$log', 'cardId', 'dataRequest', function ($q, $log, cardId, dataRequest) {
     return {
         cardId: cardId,
         userId: "",
         name: "",
         balance: function () {
-            return this.rechargeBalance + this.rechargeBalance + "元";
+            return (this.rechargeBalance * 100 + this.winnerPaid * 100) / 100 + "元";
         },
         rechargeBalance: 0,
         winnerPaid: 0,
@@ -407,7 +418,6 @@ app.factory("userService", ['$q', '$log', 'cardId', 'dataRequest', function ($q,
                 password: credentials.password
             }).success(function (data, status, headers) {
                 //$log.debug("login-success", data, status, headers("x-auth-token"))
-
                 self.userId = data.id;
                 self.name = data.name;
                 self.token = headers("x-auth-token");
@@ -431,14 +441,22 @@ app.factory("userService", ['$q', '$log', 'cardId', 'dataRequest', function ($q,
             });
 
             return promise;
+        },
+        updateUser: function () {
+            var self = this;
+            return dataRequest.getAccountInfo(self.token).success(function (data) {
+                //$log.debug("getAccountInfo-success", data)
+                if (data && data.success) {
+                    self.rechargeBalance = data.result.rechargeBalance;
+                    self.winnerPaid = data.result.winnerPaid;
+
+                    self.name = data.result.lotteryPlayer.name;
+                }
+
+            }).error(function (error) {
+                //$log.error('getAccountInfo-error', error)
+            });
         }
     }
 }]);
 
-app.factory('kuai3Service', ['dataRequest', function (dataRequest) {
-    return {
-        getKuai3Info: function () {
-
-        }
-    }
-}]);

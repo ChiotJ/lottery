@@ -163,10 +163,7 @@ app.directive('loginKeyListener', ['$log', '$timeout', '$state', '$location', 'k
                     if (index == 2) {
                         //$log.debug(scope.credentials);
                         var a = userService.login(scope.credentials).then(function success() {
-                            scope.currentUser.setCurrentUser({
-                                username: userService.name,
-                                balance: userService.balance()
-                            });
+                            scope.currentUser.setCurrentUser();
                             scope.appNotice.showNotice({
                                 title: "提示",
                                 content: "登录成功",
@@ -249,7 +246,7 @@ app.directive('kuai3IndexMenuKeyListener', ['$log', '$timeout', '$state', 'keyLi
                 keyListener.listKeyListener({
                     element: element.parent(),
                     label: "li",
-                    id:"kuai3Index",
+                    id: "kuai3Index",
                     columnNum: 5,
                     up: {
                         before: function (item) {
@@ -320,6 +317,7 @@ app.directive('kuai3HeZhiChoiceKeyListener', ['$log', '$timeout', '$state', 'key
                     label: "li",
                     columnNum: 15,
                     enter: function (item) {
+                        var index = $(item).index();
                     }
                 });
                 $timeout(function () {
@@ -364,6 +362,38 @@ app.directive('kuai3SanLianHaoChoiceKeyListener', ['$log', '$timeout', '$state',
                 element: element.parent(),
                 enter: function (item) {
                     $state.go('order_confirm')
+                }
+            });
+            $timeout(function () {
+                element.focus();
+            }, 700);
+        }
+    };
+}]);
+
+
+/*order_confirm*/
+app.directive('kuai3OrderConfirmKeyListener', ['$log', '$timeout', '$state', 'keyListener', 'kuai3Service', function ($log, $timeout, $state, keyListener, kuai3Service) {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attrs) {
+            keyListener.keyListener({
+                element: element,
+                up: function (item) {
+                    scope.addMultiple();
+                },
+                down: function (item) {
+                    scope.reduceMultiple();
+                },
+                enter: function (item) {
+                    kuai3Service.betting()
+                        .success(function (data) {
+                            $log.debug(data);
+                            scope.currentUser.updateCurrentUser();
+                        })
+                        .error(function (err) {
+
+                        });
                 }
             });
             $timeout(function () {

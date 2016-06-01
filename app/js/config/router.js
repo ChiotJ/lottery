@@ -149,8 +149,8 @@ routerApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvid
         .state('order_confirm', {
             url: '/order/confirm',
             params: {
-                bettingWay: "自选 三不同号",
-                craps: "1,2,3"
+                bettingWay: "自选 三连号通选",
+                craps: "123,234,345,456"
             },
             templateUrl: 'tpls/kuai3/order_confirm.html',
             controller: 'kuai3OrderConfirmCtrl',

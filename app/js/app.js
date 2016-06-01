@@ -4,7 +4,9 @@
 'use strict';
 var app = angular.module('app', [
     'ngAnimate',
-    'routerApp'
+    'routerApp',
+    'lotteryApp',
+    'serviceApp'
 ]);
 
 app.config(['$logProvider', function ($logProvider) {

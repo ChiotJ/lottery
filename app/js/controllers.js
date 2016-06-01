@@ -4,7 +4,7 @@
 'use strict';
 var app = angular.module("app");
 /*index*/
-app.controller("ApplicationController", ['$scope', '$timeout', '$log', function ($scope, $timeout, $log) {
+app.controller("ApplicationController", ['$scope', '$timeout', '$log', 'userService', function ($scope, $timeout, $log, userService) {
     $scope.keydown = function ($event) {
         var key = $event.keyCode;
         if (key == 27) {
@@ -18,9 +18,15 @@ app.controller("ApplicationController", ['$scope', '$timeout', '$log', function 
         username: null,
         balance: 0,
         isShowUserInfo: false,
-        setCurrentUser: function (user) {
-            user.username != null && (this.username = user.username, this.isShowUserInfo = true);
-            this.balance = user.balance || 0;
+        setCurrentUser: function () {
+            userService.name != null && (this.username = userService.name, this.isShowUserInfo = true);
+            this.balance = userService.balance() || 0;
+        },
+        updateCurrentUser: function () {
+            var self = this;
+            userService.updateUser().then(function () {
+                self.setCurrentUser();
+            })
         }
     };
 
@@ -181,17 +187,33 @@ app.controller('loginCtrl', ['$scope', '$log', '$state', function ($scope, $log,
 }]);
 
 /*fuCaiIndex*/
-app.controller('fuCaiIndexCtrl', ['$scope', '$log', '$state', function ($scope, $log, $state) {
+app.controller('fuCaiIndexCtrl', ['$scope', '$log', '$state', 'kuai3Service', function ($scope, $log, $state, kuai3Service) {
     $scope.pageClass = "pageFuCaiIndex";
     $scope.lotteryList = [
         {
-            "id": "Kuai3",
-            "series": "000001",
-            "notice": "每10分钟开一次奖最高奖金",
-            "money": "240元",
-            "h": "00",
-            "m": "10",
-            "s": "00"
+            id: "Kuai3",
+            notice: kuai3Service.notice,
+            money: kuai3Service.maxMoney,
+            current: kuai3Service.current,
+            last: kuai3Service.last
+        },
+        {
+            id: "Kuai3",
+            notice: kuai3Service.notice,
+            money: kuai3Service.maxMoney,
+            current: {
+                period: '22222',
+                remainingTime: {
+                    h: '00',
+                    m: '01',
+                    s: '02'
+                }
+            },
+            last: {
+                period: '',
+                craps: [],
+                sum: 0
+            }
         }
     ];
 
@@ -199,16 +221,13 @@ app.controller('fuCaiIndexCtrl', ['$scope', '$log', '$state', function ($scope, 
 }]);
 
 /*kuai3Index*/
-app.controller('kuai3IndexCtrl', ['$scope', '$log', '$state', function ($scope, $log, $state) {
+app.controller('kuai3IndexCtrl', ['$scope', '$log', '$state', 'kuai3Service', function ($scope, $log, $state, kuai3Service) {
     $scope.pageClass = "pageKuai3Index";
 
     $scope.info = {
-        notice: "和值：3",
-        craps: [1, 2, 3],
-        time: {
-            m: "09",
-            s: "59"
-        }
+        notice: "和值：" + kuai3Service.last.sum,
+        craps: kuai3Service.last.craps,
+        time: kuai3Service.current.remainingTime
     };
 
     $scope.menus = [
@@ -264,19 +283,17 @@ app.controller('kuai3IndexCtrl', ['$scope', '$log', '$state', function ($scope, 
 }]);
 
 /*kuai3Buy*/
-app.controller('kuai3BuyCtrl', ['$scope', '$log', '$state', '$stateParams', function ($scope, $log, $state, $stateParams) {
+app.controller('kuai3BuyCtrl', ['$scope', '$log', '$state', '$stateParams', 'kuai3Service', function ($scope, $log, $state, $stateParams, kuai3Service) {
     $scope.pageClass = "pageKuai3Buy";
 
     $scope.mode = $stateParams.mode;
 
     $scope.info = {
-        notice: "和值：3",
-        craps: [1, 2, 3],
-        time: {
-            m: "09",
-            s: "59"
-        }
+        notice: "和值：" + kuai3Service.last.sum,
+        craps: kuai3Service.last.craps,
+        time: kuai3Service.current.remainingTime
     };
+
     NProgress.done();
 }]);
 
@@ -388,18 +405,33 @@ app.controller('kuai3BuyJiXuanCtrl', ['$scope', '$log', function ($scope, $log) 
 }]);
 
 /*kuai3OrderConfirm*/
-app.controller('kuai3OrderConfirmCtrl', ['$scope', '$stateParams', '$log', function ($scope, $stateParams, $log) {
+app.controller('kuai3OrderConfirmCtrl', ['$scope', '$stateParams', '$log', 'kuai3Service', function ($scope, $stateParams, $log, kuai3Service) {
     $scope.pageClass = "pageKuai3OrderConfirm";
     $scope.info = {
-        notice: "和值：3",
-        craps: [1, 2, 3],
-        time: {
-            m: "09",
-            s: "59"
-        }
+        notice: "和值：" + kuai3Service.last.sum,
+        craps: kuai3Service.last.craps,
+        time: kuai3Service.current.remainingTime
     };
 
     $scope.bettingWay = $stateParams.bettingWay;
     $scope.craps = $stateParams.craps;
+
+    $scope.multiple = 1;
+
+    $scope.addMultiple = function () {
+        if ($scope.multiple == 99) {
+            return;
+        }
+        $scope.multiple++;
+    };
+
+    $scope.reduceMultiple = function () {
+        if ($scope.multiple == 1) {
+            return;
+        }
+
+        $scope.multiple--;
+    };
+
     NProgress.done();
 }]);
