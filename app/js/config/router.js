@@ -2,7 +2,7 @@
  * Created by jian_ on 2016/5/9.
  */
 'use strict';
-var routerApp = angular.module('routerApp', ['ui.router']);
+var routerApp = angular.module('routerApp', ['ui.router', 'oc.lazyLoad']);
 
 routerApp.run(['$rootScope', '$state', '$stateParams', '$log',
     function ($rootScope, $state, $stateParams, $log) {
@@ -57,6 +57,11 @@ routerApp.run(['$rootScope', '$state', '$stateParams', '$log',
     }
 ]);
 
+routerApp.config(['$ocLazyLoadProvider', function ($ocLazyLoadProvider) {
+    $ocLazyLoadProvider.config({
+        debug: false
+    });
+}]);
 
 routerApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/home');
@@ -154,7 +159,16 @@ routerApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvid
             },
             templateUrl: 'tpls/kuai3/order_confirm.html',
             controller: 'kuai3OrderConfirmCtrl',
-            controllerAs: 'kuai3OrderConfirm'
+            controllerAs: 'kuai3OrderConfirm',
+            resolve: {
+                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([{
+                        files: [
+                            'views/kuai3/order_confirm/order_confirm.js',
+                            'views/kuai3/order_confirm/order_confirm.css']
+                    }]);
+                }]
+            }
         })
 
 }]);

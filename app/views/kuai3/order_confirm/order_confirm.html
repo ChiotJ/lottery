@@ -1,0 +1,62 @@
+<div class="title">
+    确认投注
+</div>
+
+<div class="top">
+    <div class="left">
+        <div class="text">
+            本期
+        </div>
+        <div class="time" kuai3-timekeeper>
+            <div class="h num">
+                {{info.time.m}}
+            </div>
+            <div>
+                :
+            </div>
+            <div class="s num">
+                {{info.time.s}}
+            </div>
+        </div>
+        <div class="notice">
+            倒计时
+        </div>
+    </div>
+    <div class="right">
+        <div class="bettingWay">
+            <div class="title">
+                投注方式
+            </div>
+            <div class="content">
+                {{bettingWay}}
+            </div>
+        </div>
+        <div class="craps">
+            <div class="title">
+                投注号码
+            </div>
+            <div class="content">
+                {{craps}}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="middle">
+    <div class="multiple">
+        <div>倍数</div>
+        <div></div>
+        <div>{{multiple}}</div>
+        <div></div>
+    </div>
+    <div class="money">
+        {{multiple*2}}元
+    </div>
+
+    <div kuai3-order-confirm-key-listener tabindex="-1" class="submit">
+        投注
+    </div>
+</div>
+
+<div class="bottom">
+    提示：按“上下”增减倍数，按“确定”投注
+</div>
