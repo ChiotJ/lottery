@@ -40,6 +40,7 @@ app.controller("ApplicationController", ['$scope', '$timeout', '$log', 'userServ
         middleClass: "notice",
         bottomClass: "button",
         enter: null,
+        timeOut: null,
         showNotice: function (config) {
             $log.debug("showNotice", config);
             $scope.isBlackBlindsShow = true;
@@ -52,9 +53,8 @@ app.controller("ApplicationController", ['$scope', '$timeout', '$log', 'userServ
             this.middleClass = config.middleClass || 'notice';
             this.bottomClass = config.bottomClass || 'time';
 
-            this.enter = config.enter;
             if (config.time) {
-                $timeout(function () {
+                this.timeOut = $timeout(function () {
                     $scope.isBlackBlindsShow = false;
                     self.isAppNoticsShow = false;
                     if (config.callback) {
@@ -65,15 +65,27 @@ app.controller("ApplicationController", ['$scope', '$timeout', '$log', 'userServ
             this.enter = function () {
                 $scope.isBlackBlindsShow = false;
                 self.isAppNoticsShow = false;
+                if (self.timeOut)
+                    $timeout.cancel(self.timeOut);
 
                 if (config.enter) {
                     config.enter();
                 }
-            }
+            };
 
-
+            $log.debug($("#app-notice"));
+            $timeout(function () {
+                $("#app-notice").focus();
+            })
         }
-    }
+    };
+
+
+    $scope.isShowIndexMenu = true;
+
+    $scope.$on('isShowIndexMenu', function (event, flag) {
+        $scope.isShowIndexMenu = flag;
+    });
 
 }]);
 
@@ -104,7 +116,8 @@ app.controller('userCtrl', ["$scope", '$state', '$log', function ($scope, $state
             "text": "登录",
             "enter": function () {
                 $log.debug("登录");
-                $state.go("login");
+                if ($(".pageLogin").length < 1)
+                    $state.go("login");
             }
         }
     ];

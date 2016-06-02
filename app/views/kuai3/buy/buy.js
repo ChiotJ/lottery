@@ -11,5 +11,8 @@ angular.module('kuai3')
             time: kuai3Service.current.remainingTime
         };
 
+
+        $scope.$emit('isShowIndexMenu', false);
+
         NProgress.done();
     }]);

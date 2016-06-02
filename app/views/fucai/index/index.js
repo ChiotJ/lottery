@@ -9,24 +9,6 @@ angular.module('fucai')
                 money: kuai3Service.maxMoney,
                 current: kuai3Service.current,
                 last: kuai3Service.last
-            },
-            {
-                id: "Kuai3",
-                notice: kuai3Service.notice,
-                money: kuai3Service.maxMoney,
-                current: {
-                    period: '22222',
-                    remainingTime: {
-                        h: '00',
-                        m: '01',
-                        s: '02'
-                    }
-                },
-                last: {
-                    period: '',
-                    craps: [],
-                    sum: 0
-                }
             }
         ];
 

@@ -40,6 +40,9 @@ angular.module('app')
                         }
                         return false;
                     },
+                    click: function () {
+                        return false;
+                    },
                     enter: function (item) {
                         var index = parseInt($(item).attr('idx'));
                         if (index == 2) {
@@ -59,10 +62,31 @@ angular.module('app')
                                     }
                                 });
                             }, function error(error) {
-                                $log.error('login-error', error);
+                                $log.error('login-error', error)
+                                if (error.status == 401) {
+                                    scope.appNotice.showNotice({
+                                        title: "提示",
+                                        content: "用户名或密码错误",
+                                        bottom: "3秒后自动消失,或按“确定”重新输入",
+                                        time: 3000,
+                                        callback: function () {
+                                            $(element.find(".keyListener")[0]).focus();
+                                        },
+                                        enter: function () {
+                                            $(element.find(".keyListener")[0]).focus();
+                                        }
+                                    });
+                                }
                             })
                         }
                         return false;
+                    },
+                    back: function (item) {
+                        var index = parseInt($(item).attr('idx'));
+                        if ((index == 1 || index == 0) && $(item).val().length == 0) {
+                            history.back();
+                            return false;
+                        }
                     }
                 });
                 $timeout(function () {

@@ -63,7 +63,7 @@
 
     </div>
 
-    <div class="menus">
+    <div class="menus" ng-show="isShowIndexMenu">
         <ul>
             <li tabindex="-1" index-menu-key-listener ng-repeat="menu in menus">
                 {{menu.text}}
@@ -78,7 +78,7 @@
 <div ui-view class="page {{ pageClass }}"></div>
 
 <div class="index blackBlinds" ng-show="isBlackBlindsShow"></div>
-<div app-notice tabindex="-1" class="index appNotice" ng-show="appNotice.isAppNoticsShow">
+<div id="app-notice" app-notice tabindex="-1" class="index appNotice" ng-show="appNotice.isAppNoticsShow">
     <div class="top">
         {{appNotice.title}}
     </div>
