@@ -74,13 +74,13 @@ fuCaiService.factory('kuai3Service', ['$log', '$http', 'dataRequest', 'apiUrl', 
         betting: function () {
             return $http.post(apiUrl.api_lottery + 'betting', {
                 "name": "Qck3",
-                "amount": 4,
+                "amount": 2,
                 "tickets": [{
                     "method": 1,
                     "multiple": 2,
                     "betType": 4,
                     "nos": [1, 5, 6],
-                    "amount": 4
+                    "amount": 2
                 }]
             }, {
                 headers: {

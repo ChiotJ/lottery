@@ -1,0 +1,53 @@
+.pageKuai3Buy > .middle .hezhi {
+    width: 804px;
+    height: 90px;
+    border: 1px solid #DBDBDB;
+    background-color: #EDEDED;
+}
+
+.pageKuai3Buy > .middle .hezhi div {
+    float: left;
+    text-align: center;
+}
+
+.pageKuai3Buy > .middle .hezhi li {
+    float: left;
+    width: 52px;
+    height: 90px;
+    text-align: center;
+}
+
+.pageKuai3Buy > .middle .hezhi li:focus .num {
+    background-color: #E72432;
+    color: #FFFFFF;
+}
+
+.pageKuai3Buy > .middle .hezhi li:first-child {
+    width: 76px;
+    height: 90px;
+    line-height: 90px;
+    font-size: 25px;
+    border: none;
+}
+
+.pageKuai3Buy > .middle .hezhi li:first-child:focus {
+    background-color: #E72432;
+    color: #FFFFFF;
+}
+
+.pageKuai3Buy > .middle .hezhi li .num {
+    width: 51px;
+    height: 55px;
+    line-height: 55px;
+    border-left: 1px solid #DBDBDB;
+    font-size: 24px;
+}
+
+.pageKuai3Buy > .middle .hezhi li .money {
+    height: 34px;
+    line-height: 34px;
+    width: 51px;
+    border-top: 1px solid #DBDBDB;
+    border-left: 1px solid #DBDBDB;
+    font-size: 19px;
+}

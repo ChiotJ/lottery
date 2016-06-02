@@ -114,4 +114,14 @@ angular.module('kuai3')
             }
 
         };
+    }])
+    .directive('kuai3Timekeeper', ['$log', '$timeout', 'timekeeper', function ($log, $timeout, timekeeper) {
+        return {
+            restrict: 'A',
+            scope: {},
+            link: function (scope, element, attrs) {
+                timekeeper.timekeeper("kuai3", element);
+            }
+
+        };
     }]);

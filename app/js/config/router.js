@@ -69,15 +69,33 @@ routerApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvid
     $stateProvider
         .state('home', {
             url: '/home',
-            templateUrl: 'tpls/home.html',
+            templateUrl: 'views/home/home.html',
             controller: 'homeCtrl',
-            controllerAs: 'home'
+            controllerAs: 'home',
+            resolve: {
+                deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([{
+                        files: [
+                            'views/home/home.js',
+                            'views/home/home.css']
+                    }]);
+                }]
+            }
         })
         .state('login', {
             url: '/login',
-            templateUrl: 'tpls/login.html',
+            templateUrl: 'views/user/login/login.html',
             controller: 'loginCtrl',
-            controllerAs: 'login'
+            controllerAs: 'login',
+            resolve: {
+                deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([{
+                        files: [
+                            'views/user/login/login.js',
+                            'views/user/login/login.css']
+                    }]);
+                }]
+            }
         })
         .state('fuCai', {
             url: '/fuCai',
@@ -109,7 +127,8 @@ routerApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvid
                     return $ocLazyLoad.load([{
                         files: [
                             'views/kuai3/index/index.js',
-                            'views/kuai3/index/index.css']
+                            'views/kuai3/index/index.css'
+                        ]
                     }]);
                 }]
             },
@@ -127,42 +146,102 @@ routerApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvid
                     name: "和值"
                 }
             },
-            templateUrl: 'tpls/kuai3/buy.html',
+            templateUrl: 'views/kuai3/buy/buy.html',
             controller: 'kuai3BuyCtrl',
             controllerAs: 'kuai3Buy',
+            resolve: {
+                deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([{
+                        files: [
+                            'views/kuai3/buy/buy.js',
+                            'views/kuai3/buy/buy.css'
+                        ]
+                    }]);
+                }]
+            },
             onExit: ['timekeeper', function (timekeeper) {
                 timekeeper.deleteItem("kuai3");
             }]
         })
         .state('kuai3Buy.hezhi', {
             url: '/kuai3/buy/hezhi',
-            templateUrl: 'tpls/kuai3/hezhi.html',
+            templateUrl: 'views/kuai3/buy/hezhi/hezhi.html',
             controller: 'kuai3BuyHeZhiCtrl',
-            controllerAs: 'kuai3BuyHeZhi'
+            controllerAs: 'kuai3BuyHeZhi',
+            resolve: {
+                deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([{
+                        files: [
+                            'views/kuai3/buy/hezhi/hezhi.js',
+                            'views/kuai3/buy/hezhi/hezhi.css'
+                        ]
+                    }]);
+                }]
+            }
         })
         .state('kuai3Buy.santonghao', {
             url: '/kuai3/buy/santonghao',
-            templateUrl: 'tpls/kuai3/santonghao.html',
+            templateUrl: 'views/kuai3/buy/santonghao/santonghao.html',
             controller: 'kuai3BuySanTongHaoCtrl',
-            controllerAs: 'kuai3BuySanTongHao'
+            controllerAs: 'kuai3BuySanTongHao',
+            resolve: {
+                deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([{
+                        files: [
+                            'views/kuai3/buy/santonghao/santonghao.js',
+                            'views/kuai3/buy/santonghao/santonghao.css'
+                        ]
+                    }]);
+                }]
+            }
         })
         .state('kuai3Buy.sanlianhao', {
             url: '/kuai3/buy/sanlianhao',
-            templateUrl: 'tpls/kuai3/sanlianhao.html',
+            templateUrl: 'views/kuai3/buy/sanlianhao/sanlianhao.html',
             controller: 'kuai3BuySanLianHaoCtrl',
-            controllerAs: 'kuai3BuySanLianHao'
+            controllerAs: 'kuai3BuySanLianHao',
+            resolve: {
+                deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([{
+                        files: [
+                            'views/kuai3/buy/sanlianhao/sanlianhao.js',
+                            'views/kuai3/buy/sanlianhao/sanlianhao.css'
+                        ]
+                    }]);
+                }]
+            }
         })
         .state('kuai3Buy.renxuan', {
             url: '/kuai3/buy/renxuan',
-            templateUrl: 'tpls/kuai3/renxuan.html',
+            templateUrl: 'views/kuai3/buy/renxuan/renxuan.html',
             controller: 'kuai3BuyRenXuanCtrl',
-            controllerAs: 'kuai3BuyRenXuan'
+            controllerAs: 'kuai3BuyRenXuan',
+            resolve: {
+                deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([{
+                        files: [
+                            'views/kuai3/buy/renxuan/renxuan.js',
+                            'views/kuai3/buy/renxuan/renxuan.css'
+                        ]
+                    }]);
+                }]
+            }
         })
         .state('kuai3Buy.jixuan', {
             url: '/kuai3/buy/jixuan',
-            templateUrl: 'tpls/kuai3/jixuan.html',
+            templateUrl: 'views/kuai3/buy/jixuan/jixuan.html',
             controller: 'kuai3BuyJiXuanCtrl',
-            controllerAs: 'kuai3BuyJiXuan'
+            controllerAs: 'kuai3BuyJiXuan',
+            resolve: {
+                deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([{
+                        files: [
+                            'views/kuai3/buy/jixuan/jixuan.js',
+                            'views/kuai3/buy/jixuan/jixuan.css'
+                        ]
+                    }]);
+                }]
+            }
         })
         .state('order_confirm', {
             url: '/order/confirm',
@@ -178,7 +257,8 @@ routerApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvid
                     return $ocLazyLoad.load([{
                         files: [
                             'views/kuai3/order_confirm/order_confirm.js',
-                            'views/kuai3/order_confirm/order_confirm.css']
+                            'views/kuai3/order_confirm/order_confirm.css'
+                        ]
                     }]);
                 }]
             }

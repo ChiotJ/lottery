@@ -1,0 +1,107 @@
+.pageLogin .main {
+    width: 700px;
+    height: 290px;
+    margin: 100px auto;
+}
+
+.pageLogin .main > div {
+    border: 1px solid #DBDBDB;
+    background-color: #FFFFFF;
+}
+
+.pageLogin .left {
+    float: left;
+    width: 306px;
+    height: 288px;
+    color: #1f1f1f;
+}
+
+.pageLogin .left .title {
+    height: 50px;
+    line-height: 50px;
+    font-size: 22px;
+    width: 266px;
+    margin: 10px 20px;
+    text-align: center;
+}
+
+.pageLogin .left .qrcode {
+    width: 140px;
+    height: 140px;
+}
+
+.pageLogin .left .notice {
+    width: 306px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+}
+
+.pageLogin .right {
+    float: right;
+    width: 376px;
+    height: 288px;
+}
+
+.pageLogin .right .title {
+    height: 50px;
+    line-height: 50px;
+    font-size: 22px;
+    width: 336px;
+    margin: 10px 20px;
+    text-align: center;
+}
+
+.pageLogin .right .loginInfo {
+    width: 336px;
+    height: 50px;
+    margin: 10px 20px;
+}
+
+.pageLogin .right .loginInfo label {
+    float: left;
+    width: 100px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    font-size: 19px;
+    color: #898586;
+}
+
+.pageLogin .right .loginInfo > div {
+    float: left;
+    border: 1px solid #DBDBDB;
+    height: 44px;
+    line-height: 44px;
+    width: 230px;
+    background-color: #FBFBFB;
+    margin-top: 2px;
+}
+
+.pageLogin .right .loginInfo > div input {
+    border: none;
+    background-color: #FBFBFB;
+    height: 44px;
+    line-height: 44px;
+    font-size: 19px;
+    width: 200px;
+    margin: 0 auto;
+    display: block;
+}
+
+.pageLogin .right .submit {
+    width: 210px;
+    height: 50px;
+    background-color: #EDEDED;
+    line-height: 50px;
+    text-align: center;
+    margin: 30px auto 0;
+    font-size: 20px;
+    border: 1px solid #DBDBDB;
+    color: #1f1f1f;
+}
+
+.pageLogin .right .submit:focus {
+    background-color: #E72432;
+    color: #FFFFFF;
+}

@@ -1,0 +1,72 @@
+.pageKuai3Buy > .middle .renxuan {
+    width: 804px;
+    height: 131px;
+}
+
+.pageKuai3Buy > .middle .renxuan > div {
+    float: left;
+    background-color: #EDEDED;
+    overflow: hidden;
+}
+
+.pageKuai3Buy > .middle .renxuan .random {
+    width: 201px;
+    height: 100%;
+}
+
+.pageKuai3Buy > .middle .renxuan .random .craps {
+    width: 101px;
+    height: 28px;
+    background: url("../imgs/kuai3/craps_random_renxuan.png") no-repeat;
+    margin: 30px auto 20px;
+}
+
+.pageKuai3Buy > .middle .renxuan .random:focus {
+    background-color: #E72432;
+}
+
+.pageKuai3Buy > .middle .renxuan .random:focus .craps {
+    background: url("../imgs/kuai3/craps_random_renxuan_focus.png") no-repeat;
+}
+
+.pageKuai3Buy > .middle .renxuan .random:focus .title {
+    color: #FFFFFF;
+}
+
+.pageKuai3Buy > .middle .renxuan .random .title {
+    width: 201px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 26px;
+    text-align: center;
+}
+
+.pageKuai3Buy > .middle .renxuan .choice {
+    width: 189px;
+    height: 130px;
+    margin-left: 11px;
+    border: 1px solid #D1D1D1;
+    border-left: none;
+}
+
+.pageKuai3Buy > .middle .renxuan .choice .title {
+    width: 188px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    font-size: 19px;
+    border-left: 1px solid #D1D1D1
+}
+
+.pageKuai3Buy > .middle .renxuan .choice li {
+    float: left;
+    width: 62px;
+    height: 44px;
+    border-top: 1px solid #D1D1D1;
+    border-left: 1px solid #D1D1D1;
+}
+
+.pageKuai3Buy > .middle .renxuan .choice li img {
+    margin-left: 15px;
+    margin-top: 6px;
+}
