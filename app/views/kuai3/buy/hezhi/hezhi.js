@@ -1,6 +1,6 @@
 'use strict';
 angular.module('kuai3')
-    .controller('kuai3BuyHeZhiCtrl', ['$scope', '$log', function ($scope, $log) {
+    .controller('kuai3BuyHeZhiCtrl', ['$scope', '$state', '$log', function ($scope, $state, $log) {
         $scope.hezhi = [
             {
                 "num": "4",
@@ -58,7 +58,28 @@ angular.module('kuai3')
                 "num": "17",
                 "money": "80元"
             }
-        ]
+        ];
+
+
+        $scope.kuai3HeZhiBetting = function (idx) {
+            var craps, method = 1;
+            $log.debug(idx);
+
+            if (parseInt(idx) == 0) {
+                idx = parseInt(Math.random() * 14);
+                method = 2;
+            } else {
+                idx--;
+                method = 1;
+            }
+            craps = [parseInt($scope.hezhi[idx].num)];
+            $state.go("order_confirm", {
+                method: method,
+                betType: 8,
+                craps: craps
+            });
+        };
+
     }])
     .directive('kuai3HeZhiChoiceKeyListener', ['$log', '$timeout', '$state', 'keyListener', function ($log, $timeout, $state, keyListener) {
         return {
@@ -73,6 +94,11 @@ angular.module('kuai3')
                         columnNum: 15,
                         enter: function (item) {
                             var index = $(item).index();
+                            scope.$parent.kuai3HeZhiBetting(index);
+                            $log.debug('kuai3HeZhiChoiceKeyListener', index);
+                        },
+                        back: function (item) {
+                            scope.$emit('isShowIndexMenu', true);
                         }
                     });
                     $timeout(function () {

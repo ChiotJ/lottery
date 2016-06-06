@@ -28,7 +28,7 @@
                 投注方式
             </div>
             <div class="content">
-                {{bettingWay}}
+                {{bettingStr}}
             </div>
         </div>
         <div class="craps">
@@ -36,7 +36,7 @@
                 投注号码
             </div>
             <div class="content">
-                {{craps}}
+                {{crapsStr}}
             </div>
         </div>
     </div>
@@ -45,11 +45,11 @@
     <div class="multiple">
         <div>倍数</div>
         <div></div>
-        <div>{{multiple}}</div>
+        <div>{{betting.multiple}}</div>
         <div></div>
     </div>
     <div class="money">
-        {{multiple*2}}元
+        {{betting.multiple*2}}元
     </div>
 
     <div kuai3-order-confirm-key-listener tabindex="-1" class="submit">

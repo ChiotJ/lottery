@@ -71,16 +71,17 @@ fuCaiService.factory('kuai3Service', ['$log', '$http', 'dataRequest', 'apiUrl', 
 
                 });
         },
-        betting: function () {
+        betting: function (betting) {
             return $http.post(apiUrl.api_lottery + 'betting', {
                 "name": "Qck3",
-                "amount": 2,
+                "boards": 1,
+                "amount": 2 * betting.multiple,
                 "tickets": [{
-                    "method": 1,
-                    "multiple": 2,
-                    "betType": 4,
-                    "nos": [1, 5, 6],
-                    "amount": 2
+                    "method": betting.method,
+                    "multiple": betting.multiple,
+                    "betType": betting.betType,
+                    "nos": betting.craps,
+                    "amount": 2 * betting.multiple
                 }]
             }, {
                 headers: {

@@ -75,6 +75,9 @@ app.directive('appNotice', ['$log', 'keyListener', function ($log, keyListener) 
                     if (enter) {
                         return enter();
                     }
+                },
+                back: function (item) {
+                    return false;
                 }
             });
         }

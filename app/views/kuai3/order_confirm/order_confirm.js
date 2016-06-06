@@ -8,24 +8,44 @@ angular.module('kuai3')
             time: kuai3Service.current.remainingTime
         };
 
-        $scope.bettingWay = $stateParams.bettingWay;
-        $scope.craps = $stateParams.craps;
+        $scope.betting = {
+            multiple: 1,
+            betType: $stateParams.betType,
+            method: $stateParams.method,
+            craps: $stateParams.craps
+        };
 
-        $scope.multiple = 1;
+        var bettingStr = "";
+        if ($scope.betting.method == 1) {
+            bettingStr = "自选 ";
+        } else {
+            bettingStr = "机选 ";
+        }
+
+        $log.debug($scope.betting);
+        switch ($scope.betting.betType) {
+            case 8:
+                bettingStr += "和值";
+                break;
+        }
+
+        $scope.bettingStr = bettingStr;
+        $scope.crapsStr = $scope.betting.craps.join(",");
+
 
         $scope.addMultiple = function () {
-            if ($scope.multiple == 99) {
+            if ($scope.betting.multiple == 99) {
                 return;
             }
-            $scope.multiple++;
+            $scope.betting.multiple++;
         };
 
         $scope.reduceMultiple = function () {
-            if ($scope.multiple == 1) {
+            if ($scope.betting.multiple == 1) {
                 return;
             }
 
-            $scope.multiple--;
+            $scope.betting.multiple--;
         };
 
         NProgress.done();
@@ -43,7 +63,7 @@ angular.module('kuai3')
                         scope.reduceMultiple();
                     },
                     enter: function (item) {
-                        kuai3Service.betting()
+                        kuai3Service.betting(scope.betting)
                             .success(function (data) {
                                 $log.debug(data);
                                 scope.currentUser.updateCurrentUser();
