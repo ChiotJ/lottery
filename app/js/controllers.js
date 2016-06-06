@@ -139,7 +139,7 @@ app.controller("ApplicationController", ['$scope', '$timeout', '$state', '$log',
 
 }]);
 
-app.controller('userCtrl', ["$scope", '$state', '$log', function ($scope, $state, $log) {
+app.controller('userCtrl', ["$scope", '$state', '$log', 'userService', function ($scope, $state, $log, userService) {
     $scope.winInfos = [
         {
             "text": "恭喜用户222222中2014055期双色球6000元奖金"
@@ -154,6 +154,12 @@ app.controller('userCtrl', ["$scope", '$state', '$log', function ($scope, $state
             "text": "我的投注",
             "enter": function () {
                 $log.debug("我的投注");
+                if (userService.userId) {
+                    if ($(".pageMyBetting").length < 1)
+                        $state.go("myBetting");
+                } else {
+                    $scope.$emit('notLogin');
+                }
             }
         },
         {

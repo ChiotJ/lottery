@@ -361,7 +361,7 @@ serviceApp.factory("dataRequest", ['$log', '$http', 'apiUrl', 'cardId', function
                 }
             });
         },
-        getMyOrder: function (token, pageNum, pagzSize) {
+        getMyBetting: function (token, pageNum, pagzSize) {
             return $http.get(apiUrl.api_lottery + "myOrder", {
                 headers: {
                     'x-auth-token': token
@@ -471,8 +471,8 @@ serviceApp.factory("userService", ['$q', '$log', 'cardId', 'dataRequest', functi
                 //$log.error('getAccountInfo-error', error)
             });
         },
-        getMyOrder: function () {
-            return dataRequest.getMyOrder(this.token, 0, 10);
+        getMyBetting: function () {
+            return dataRequest.getMyBetting(this.token, 0, 10);
         }
     }
 }]);

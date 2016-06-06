@@ -97,6 +97,21 @@ routerApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvid
                 }]
             }
         })
+        .state('myBetting', {
+            url: '/myBetting',
+            templateUrl: 'views/user/myBetting/myBetting.html',
+            controller: 'myBettingCtrl',
+            controllerAs: 'myBetting',
+            resolve: {
+                deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([{
+                        files: [
+                            'views/user/myBetting/myBetting.js',
+                            'views/user/myBetting/myBetting.css']
+                    }]);
+                }]
+            }
+        })
         .state('fuCai', {
             url: '/fuCai',
             templateUrl: 'views/fucai/index/index.html',
