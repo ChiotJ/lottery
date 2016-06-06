@@ -8,6 +8,7 @@ angular.module('kuai3')
 
         $scope.renxuanRandom = function () {
             var num = parseInt(Math.random() * 2) + 2, i = 0;
+            $scope.craps = [];
             while (i < num) {
                 $scope.craps[i] = parseInt(Math.random() * 6) + 1;
                 i++;

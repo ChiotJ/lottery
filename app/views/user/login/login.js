@@ -47,6 +47,10 @@ angular.module('app')
                         var index = parseInt($(item).attr('idx'));
                         if (index == 2) {
                             //$log.debug(scope.credentials);
+                            scope.credentials = {
+                                username: "root",
+                                password: "root"
+                            };
                             var a = userService.login(scope.credentials).then(function success() {
                                 scope.currentUser.setCurrentUser();
                                 scope.$emit('showNotice', {
