@@ -4,7 +4,7 @@
 'use strict';
 var app = angular.module("app");
 /*index*/
-app.controller("ApplicationController", ['$scope', '$timeout', '$log', 'userService', function ($scope, $timeout, $log, userService) {
+app.controller("ApplicationController", ['$scope', '$timeout', '$state', '$log', 'userService', function ($scope, $timeout, $state, $log, userService) {
     $scope.keydown = function ($event) {
         var key = $event.keyCode;
         if (key == 27) {
@@ -42,7 +42,7 @@ app.controller("ApplicationController", ['$scope', '$timeout', '$log', 'userServ
         enter: null,
         timeOut: null,
         showNotice: function (config) {
-            $log.debug("showNotice", config);
+            //$log.debug("showNotice", config);
             $scope.isBlackBlindsShow = true;
 
             var self = this;
@@ -63,28 +63,78 @@ app.controller("ApplicationController", ['$scope', '$timeout', '$log', 'userServ
                 }, config.time);
             }
             this.enter = function () {
-                $scope.isBlackBlindsShow = false;
-                self.isAppNoticsShow = false;
-                if (self.timeOut)
-                    $timeout.cancel(self.timeOut);
 
-                if (config.enter) {
-                    config.enter();
+                if (typeof config.enter === 'function') {
+                    $scope.isBlackBlindsShow = false;
+                    self.isAppNoticsShow = false;
+                    if (self.timeOut)
+                        $timeout.cancel(self.timeOut);
+
+                    return config.enter();
+                } else {
+                    return false;
                 }
+
             };
 
-            $log.debug($("#app-notice"));
+            this.back = function () {
+                if (typeof config.back === 'function') {
+                    $scope.isBlackBlindsShow = false;
+                    self.isAppNoticsShow = false;
+                    if (self.timeOut)
+                        $timeout.cancel(self.timeOut);
+
+                    return config.back();
+                } else {
+                    return false;
+                }
+
+            };
+
             $timeout(function () {
                 $("#app-notice").focus();
             })
+        },
+        hideNotice: function (callback) {
+            $scope.isBlackBlindsShow = false;
+            this.isAppNoticsShow = false;
+            if (this.timeOut)
+                $timeout.cancel(this.timeOut);
+
+            if (typeof callback === "function") {
+                callback();
+            }
         }
     };
+
+
+    $scope.$on('showNotice', function (event, config) {
+        $scope.appNotice.showNotice(config);
+    });
+
+    $scope.$on('hideNotice', function (event, callback) {
+        $scope.appNotice.hideNotice(callback);
+    });
 
 
     $scope.isShowIndexMenu = true;
 
     $scope.$on('isShowIndexMenu', function (event, flag) {
         $scope.isShowIndexMenu = flag;
+    });
+
+    $scope.$on('notLogin', function (event, back) {
+        var config = {
+            title: "提示",
+            content: "您还未登录哦",
+            bottom: "去登陆",
+            bottomClass: "button",
+            enter: function () {
+                $state.go("login");
+            },
+            back: back
+        };
+        $scope.appNotice.showNotice(config);
     });
 
 }]);

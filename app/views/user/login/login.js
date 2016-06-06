@@ -49,7 +49,7 @@ angular.module('app')
                             //$log.debug(scope.credentials);
                             var a = userService.login(scope.credentials).then(function success() {
                                 scope.currentUser.setCurrentUser();
-                                scope.appNotice.showNotice({
+                                scope.$emit('showNotice', {
                                     title: "提示",
                                     content: "登录成功",
                                     bottom: "3秒后自动跳转,或按“确定”跳转",
@@ -61,10 +61,11 @@ angular.module('app')
                                         history.back();
                                     }
                                 });
+
                             }, function error(error) {
                                 $log.error('login-error', error)
                                 if (error.status == 401) {
-                                    scope.appNotice.showNotice({
+                                    scope.$emit('showNotice', {
                                         title: "提示",
                                         content: "用户名或密码错误",
                                         bottom: "3秒后自动消失,或按“确定”重新输入",

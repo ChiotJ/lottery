@@ -63,7 +63,6 @@ angular.module('kuai3')
 
         $scope.kuai3HeZhiBetting = function (idx) {
             var craps, method = 1;
-            $log.debug(idx);
 
             if (parseInt(idx) == 0) {
                 idx = parseInt(Math.random() * 14);
@@ -81,7 +80,7 @@ angular.module('kuai3')
         };
 
     }])
-    .directive('kuai3HeZhiChoiceKeyListener', ['$log', '$timeout', '$state', 'keyListener', function ($log, $timeout, $state, keyListener) {
+    .directive('kuai3HeZhiChoiceKeyListener', ['$log', '$timeout', '$state', 'keyListener', 'userService', function ($log, $timeout, $state, keyListener, userService) {
         return {
             restrict: 'A',
             scope: {},
@@ -94,8 +93,12 @@ angular.module('kuai3')
                         columnNum: 15,
                         enter: function (item) {
                             var index = $(item).index();
-                            scope.$parent.kuai3HeZhiBetting(index);
-                            $log.debug('kuai3HeZhiChoiceKeyListener', index);
+                            if (userService.userId) {
+                                scope.$parent.kuai3HeZhiBetting(index);
+                            } else {
+                                scope.$emit('notLogin');
+                            }
+
                         },
                         back: function (item) {
                             scope.$emit('isShowIndexMenu', true);

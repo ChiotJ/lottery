@@ -71,13 +71,10 @@ app.directive('appNotice', ['$log', 'keyListener', function ($log, keyListener) 
                 element: element,
                 id: 'appNotice',
                 enter: function (item) {
-                    var enter = scope.appNotice.enter;
-                    if (enter) {
-                        return enter();
-                    }
+                    return scope.appNotice.enter();
                 },
                 back: function (item) {
-                    return false;
+                    return scope.appNotice.back();
                 }
             });
         }

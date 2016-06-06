@@ -47,7 +47,7 @@ angular.module('kuai3')
 
             $scope.betting.multiple--;
         };
-
+        
         NProgress.done();
     }])
     .directive('kuai3OrderConfirmKeyListener', ['$log', '$timeout', '$state', 'keyListener', 'kuai3Service', function ($log, $timeout, $state, keyListener, kuai3Service) {
@@ -63,6 +63,8 @@ angular.module('kuai3')
                         scope.reduceMultiple();
                     },
                     enter: function (item) {
+                        
+                        
                         kuai3Service.betting(scope.betting)
                             .success(function (data) {
                                 $log.debug(data);
