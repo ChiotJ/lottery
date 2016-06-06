@@ -361,6 +361,18 @@ serviceApp.factory("dataRequest", ['$log', '$http', 'apiUrl', 'cardId', function
                 }
             });
         },
+        getMyOrder: function (token, pageNum, pagzSize) {
+            return $http.get(apiUrl.api_lottery + "myOrder", {
+                headers: {
+                    'x-auth-token': token
+                },
+                params: {
+                    'name': 'Qck3',
+                    'pageNumber': pageNum,
+                    'pagzSize': pagzSize
+                }
+            });
+        },
         getPrePeriodWins: function (name) {
             return $http.get(apiUrl.api_lottery + "getPrePeriodWins", {
                 params: {
@@ -434,7 +446,9 @@ serviceApp.factory("userService", ['$q', '$log', 'cardId', 'dataRequest', functi
                     //$log.error('getAccountInfo-error', error)
                     deferred.reject(error);
                 });
-
+                self.getMyOrder().success(function (data) {
+                    $log.debug(data);
+                })
             }).error(function (error) {
                 //$log.error('login-error', error)
                 deferred.reject(error);
@@ -456,6 +470,9 @@ serviceApp.factory("userService", ['$q', '$log', 'cardId', 'dataRequest', functi
             }).error(function (error) {
                 //$log.error('getAccountInfo-error', error)
             });
+        },
+        getMyOrder: function () {
+            return dataRequest.getMyOrder(this.token, 0, 10);
         }
     }
 }]);
