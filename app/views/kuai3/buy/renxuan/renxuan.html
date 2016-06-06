@@ -1,5 +1,5 @@
 <div class="renxuan">
-    <div tabindex="-1" class="random">
+    <div tabindex="-1" class="random" kuai3-ren-xuan-random-key-listener>
         <div class="craps"></div>
         <div class="title">任选机选</div>
     </div>
@@ -8,8 +8,10 @@
             第一个号
         </div>
         <ul>
-            <li ng-repeat="i in [1,2,3,4,5,6]">
-                <img src="imgs/kuai3/craps_min_{{i}}.png" alt="">
+            <li ng-repeat="i in [1,2,3,4,5,6]" kuai3-ren-xuan-one-choice-key-listener tabindex="-1">
+                <div>
+                    <img src="imgs/kuai3/craps_min_{{i}}.png" alt="">
+                </div>
             </li>
         </ul>
 
@@ -19,8 +21,10 @@
             第二个号
         </div>
         <ul>
-            <li ng-repeat="i in [1,2,3,4,5,6]">
-                <img src="imgs/kuai3/craps_min_{{i}}.png" alt="">
+            <li ng-repeat="i in [1,2,3,4,5,6]" kuai3-ren-xuan-two-choice-key-listener tabindex="-1">
+                <div>
+                    <img src="imgs/kuai3/craps_min_{{i}}.png" alt="">
+                </div>
             </li>
         </ul>
     </div>
@@ -29,9 +33,14 @@
             第三个号
         </div>
         <ul>
-            <li ng-repeat="i in [1,2,3,4,5,6]">
-                <img src="imgs/kuai3/craps_min_{{i}}.png" alt="">
+            <li ng-repeat="i in [1,2,3,4,5,6]" kuai3-ren-xuan-three-choice-key-listener tabindex="-1">
+                <div>
+                    <img src="imgs/kuai3/craps_min_{{i}}.png" alt="">
+                </div>
             </li>
         </ul>
     </div>
+
+
+    <div class="button" kuai3-ren-xuan-enter-key-listener tabindex="-1"></div>
 </div>

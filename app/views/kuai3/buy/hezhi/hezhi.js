@@ -61,7 +61,7 @@ angular.module('kuai3')
         ];
 
 
-        $scope.kuai3HeZhiBetting = function (idx) {
+        $scope.betting = function (idx) {
             var craps, method = 1;
 
             if (parseInt(idx) == 0) {
@@ -94,7 +94,7 @@ angular.module('kuai3')
                         enter: function (item) {
                             var index = $(item).index();
                             if (userService.userId) {
-                                scope.$parent.kuai3HeZhiBetting(index);
+                                scope.$parent.betting(index);
                             } else {
                                 scope.$emit('notLogin');
                             }

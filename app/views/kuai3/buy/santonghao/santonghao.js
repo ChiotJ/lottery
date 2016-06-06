@@ -1,6 +1,6 @@
 'use strict';
 angular.module('kuai3')
-    .controller('kuai3BuySanTongHaoCtrl', ['$scope', '$log', function ($scope, $log) {
+    .controller('kuai3BuySanTongHaoCtrl', ['$scope', '$state', '$log', function ($scope, $state, $log) {
         $scope.santonghao = [
             {
                 "craps": [1, 1, 1],
@@ -26,9 +26,28 @@ angular.module('kuai3')
                 "craps": [6, 6, 6],
                 "money": "奖金240元"
             }
-        ]
+        ];
+
+        $scope.betting = function (idx) {
+            var craps, betType, method = 1;
+
+            if (parseInt(idx) == 0) {
+                betType = 6;
+                craps = [0, 0, 0];
+            } else {
+                idx--;
+                betType = 5;
+                craps = $scope.santonghao[idx].craps;
+            }
+
+            $state.go("order_confirm", {
+                method: method,
+                betType: betType,
+                craps: craps
+            });
+        };
     }])
-    .directive('kuai3SanTongHaoChoiceKeyListener', ['$log', '$timeout', '$state', 'keyListener', function ($log, $timeout, $state, keyListener) {
+    .directive('kuai3SanTongHaoChoiceKeyListener', ['$log', '$timeout', '$state', 'keyListener', 'userService', function ($log, $timeout, $state, keyListener, userService) {
         return {
             restrict: 'A',
             scope: {},
@@ -40,6 +59,15 @@ angular.module('kuai3')
                         label: "li",
                         columnNum: 7,
                         enter: function (item) {
+                            var index = $(item).index();
+                            if (userService.userId) {
+                                scope.$parent.betting(index);
+                            } else {
+                                scope.$emit('notLogin');
+                            }
+                        },
+                        back: function (item) {
+                            scope.$emit('isShowIndexMenu', true);
                         }
                     });
                     $timeout(function () {

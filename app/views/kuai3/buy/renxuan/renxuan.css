@@ -1,6 +1,6 @@
 .pageKuai3Buy > .middle .renxuan {
     width: 804px;
-    height: 131px;
+    height: 355px;
 }
 
 .pageKuai3Buy > .middle .renxuan > div {
@@ -11,13 +11,13 @@
 
 .pageKuai3Buy > .middle .renxuan .random {
     width: 201px;
-    height: 100%;
+    height: 131px;
 }
 
 .pageKuai3Buy > .middle .renxuan .random .craps {
     width: 101px;
     height: 28px;
-    background: url("../imgs/kuai3/craps_random_renxuan.png") no-repeat;
+    background: url("../../../../imgs/kuai3/craps_random_renxuan.png") no-repeat;
     margin: 30px auto 20px;
 }
 
@@ -26,7 +26,7 @@
 }
 
 .pageKuai3Buy > .middle .renxuan .random:focus .craps {
-    background: url("../imgs/kuai3/craps_random_renxuan_focus.png") no-repeat;
+    background: url("../../../../imgs/kuai3/craps_random_renxuan_focus.png") no-repeat;
 }
 
 .pageKuai3Buy > .middle .renxuan .random:focus .title {
@@ -66,7 +66,32 @@
     border-left: 1px solid #D1D1D1;
 }
 
+.pageKuai3Buy > .middle .renxuan .choice li div {
+    border: 1px solid transparent;
+    width: 60px;
+    height: 42px;
+}
+
+.pageKuai3Buy > .middle .renxuan .choice li div.choose {
+    background-color: #E72432;
+}
+
+.pageKuai3Buy > .middle .renxuan .choice li:focus div {
+    border: 1px solid #E72432;
+}
+
 .pageKuai3Buy > .middle .renxuan .choice li img {
-    margin-left: 15px;
-    margin-top: 6px;
+    margin-left: 14px;
+    margin-top: 5px;
+}
+
+.pageKuai3Buy > .middle .renxuan .button {
+    width: 252px;
+    height: 63px;
+    margin: 112px 275px 0;
+    border: 2px solid transparent;
+}
+
+.pageKuai3Buy > .middle .renxuan .button:focus {
+    border: 2px solid #E72432;
 }
