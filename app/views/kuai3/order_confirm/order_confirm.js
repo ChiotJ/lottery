@@ -91,11 +91,26 @@ angular.module('kuai3')
                         scope.reduceMultiple();
                     },
                     enter: function (item) {
-
-
+                        scope.$emit('showNotice', {
+                            title: "提示",
+                            content: "投注中，请稍候",
+                            bottom: ""
+                        });
                         kuai3Service.betting(scope.betting)
                             .success(function (data) {
                                 $log.debug(data);
+                                scope.$emit('showNotice', {
+                                    title: "提示",
+                                    content: "投注成功",
+                                    bottom: "3秒后自动跳转,或按“确定”跳转",
+                                    time: 3000,
+                                    callback: function () {
+                                        history.back();
+                                    },
+                                    enter: function () {
+                                        history.back();
+                                    }
+                                });
                                 scope.currentUser.updateCurrentUser();
                             })
                             .error(function (err) {
