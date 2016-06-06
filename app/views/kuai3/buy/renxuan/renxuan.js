@@ -1,22 +1,79 @@
 'use strict';
 angular.module('kuai3')
-    .controller('kuai3BuyRenXuanCtrl', ['$scope', '$log', function ($scope, $log) {
+    .controller('kuai3BuyRenXuanCtrl', ['$scope', '$state', '$log', function ($scope, $state, $log) {
 
+        $scope.craps = new Array(3);
 
-        $scope.betting = function (idx) {
-            var craps, method = 1;
-
-            if (parseInt(idx) == 0) {
-                idx = parseInt(Math.random() * 14);
-                method = 2;
-            } else {
-                idx--;
-                method = 1;
+        $scope.random = function () {
+            $scope.method = 2;
+            var num = parseInt(Math.random() * 2) + 2, i = 0;
+            $scope.craps = [];
+            $('#renxuan').find('.choose').removeClass('choose');
+            while (i < num) {
+                var crap = parseInt(Math.random() * 6);
+                $scope.craps[i] = crap + 1;
+                $($('#renxuan_' + i).find("li")[crap]).find('div').addClass('choose');
+                i++;
             }
-            craps = [parseInt($scope.hezhi[idx].num)];
+
+            $log.debug($scope.craps);
+            $scope.craps.sort();
+        };
+
+        $scope.method = 1;
+
+
+        $scope.changeMethod = function (method) {
+            $scope.method = method;
+        }
+        $scope.betting = function (element) {
+            $log.debug($scope.method);
+            var craps = [], betType;
+            var i = 0;
+            while (i < 3) {
+                if ($scope.craps[i]) {
+                    craps.push($scope.craps[i]);
+                }
+                i++;
+            }
+
+
+            craps.sort();
+            if (craps.length < 2) {
+                $scope.$emit('showNotice', {
+                    title: "提示",
+                    content: "您尚未选择足够的号码",
+                    bottom: "3秒后自动消失,或按“确定”消失",
+                    time: 3000,
+                    callback: function () {
+                        element.focus();
+                    },
+                    enter: function () {
+                        element.focus();
+                    }
+                });
+                return;
+            }
+
+            if (craps.length == 2) {
+                if (craps[0] == craps[1]) {
+                    betType = 3;
+                } else {
+                    betType = 1;
+                }
+            } else if (craps.length == 3) {
+                if (craps[0] == craps[1] && craps[0] == craps[2]) {
+                    betType = 5;
+                } else if (craps[0] == craps[1] || craps[0] == craps[2] || craps[1] == craps[2]) {
+                    betType = 2;
+                } else {
+                    betType = 4;
+                }
+            }
+
             $state.go("order_confirm", {
-                method: method,
-                betType: 8,
+                method: $scope.method,
+                betType: betType,
                 craps: craps
             });
         };
@@ -24,7 +81,6 @@ angular.module('kuai3')
     .directive('kuai3RenXuanRandomKeyListener', ['$log', '$timeout', '$state', 'keyListener', 'userService', function ($log, $timeout, $state, keyListener, userService) {
         return {
             restrict: 'A',
-            scope: {},
             link: function (scope, element, attrs) {
                 keyListener.keyListener({
                     element: element,
@@ -36,6 +92,7 @@ angular.module('kuai3')
                         keyListener.focus('kuai3RenXuanEnter', 0);
                     },
                     enter: function (item) {
+                        scope.random();
                     },
                     back: function (item) {
                         scope.$emit('isShowIndexMenu', true);
@@ -90,9 +147,12 @@ angular.module('kuai3')
                             }
                         },
                         enter: function (item) {
+                            scope.$parent.changeMethod(1);
                             if ($(item).find('.choose').length > 0) {
+                                scope.$parent.craps[0] = null;
                                 element.parent().find('.choose').removeClass('choose');
                             } else {
+                                scope.$parent.craps[0] = $(item).index() + 1;
                                 element.parent().find('.choose').removeClass('choose');
                                 $(item).find('div').addClass('choose');
                             }
@@ -153,9 +213,12 @@ angular.module('kuai3')
                             }
                         },
                         enter: function (item) {
+                            scope.$parent.changeMethod(1);
                             if ($(item).find('.choose').length > 0) {
+                                scope.$parent.craps[1] = null;
                                 element.parent().find('.choose').removeClass('choose');
                             } else {
+                                scope.$parent.craps[1] = $(item).index() + 1;
                                 element.parent().find('.choose').removeClass('choose');
                                 $(item).find('div').addClass('choose');
                             }
@@ -210,9 +273,12 @@ angular.module('kuai3')
                             }
                         },
                         enter: function (item) {
+                            scope.$parent.changeMethod(1);
                             if ($(item).find('.choose').length > 0) {
+                                scope.$parent.craps[2] = null;
                                 element.parent().find('.choose').removeClass('choose');
                             } else {
+                                scope.$parent.craps[2] = $(item).index() + 1;
                                 element.parent().find('.choose').removeClass('choose');
                                 $(item).find('div').addClass('choose');
                             }
@@ -237,6 +303,7 @@ angular.module('kuai3')
                         keyListener.focus('kuai3RenXuanRandom', 0);
                     },
                     enter: function (item) {
+                        scope.$parent.betting(element);
                     },
                     back: function (item) {
                         scope.$emit('isShowIndexMenu', true);
