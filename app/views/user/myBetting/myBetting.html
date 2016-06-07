@@ -1,10 +1,48 @@
 <div class="main">
     <div class="top">
         <ul>
-            <li>
-
+            <li ng-repeat="ll in lotteryList" name="ll.id" tabindex="-1">
+                {{ll.name}}
             </li>
         </ul>
     </div>
-
+    <table>
+        <thead>
+        <tr>
+            <td>类型</td>
+            <td>期号</td>
+            <td>投注方式</td>
+            <td>中奖金额</td>
+            <td>状态</td>
+            <td style="width:174px">投注时间</td>
+            <td>详细</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="one in detailList">
+            <td>
+                <img src="imgs/fucai/Kuai3_logo.png" class="logo">
+            </td>
+            <td>
+                {{one.period}}
+            </td>
+            <td>
+                {{one.details[0].method | bettingMethod}}
+            </td>
+            <td>
+                {{one.amount?one.amount:0}}
+            </td>
+            <td>
+                {{one.nos?"开奖":"未开奖"}}
+            </td>
+            <td>
+                {{one.bettingTime | bettingTime}}
+            </td>
+            <td>
+                <div class="detail">查看</div>
+            </td>
+        </tr>
+        <tr></tr>
+        </tbody>
+    </table>
 </div>

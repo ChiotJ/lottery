@@ -361,13 +361,13 @@ serviceApp.factory("dataRequest", ['$log', '$http', 'apiUrl', 'cardId', function
                 }
             });
         },
-        getMyBetting: function (token, pageNum, pagzSize) {
+        getMyBetting: function (token, name, pageNum, pagzSize) {
             return $http.get(apiUrl.api_lottery + "myOrder", {
                 headers: {
                     'x-auth-token': token
                 },
                 params: {
-                    'name': 'Qck3',
+                    'name': name,
                     'pageNumber': pageNum,
                     'pagzSize': pagzSize
                 }
@@ -446,9 +446,6 @@ serviceApp.factory("userService", ['$q', '$log', 'cardId', 'dataRequest', functi
                     //$log.error('getAccountInfo-error', error)
                     deferred.reject(error);
                 });
-                self.getMyOrder().success(function (data) {
-                    $log.debug(data);
-                })
             }).error(function (error) {
                 //$log.error('login-error', error)
                 deferred.reject(error);
@@ -471,8 +468,8 @@ serviceApp.factory("userService", ['$q', '$log', 'cardId', 'dataRequest', functi
                 //$log.error('getAccountInfo-error', error)
             });
         },
-        getMyBetting: function () {
-            return dataRequest.getMyBetting(this.token, 0, 10);
+        getMyBetting: function (name, pageNum, pagzSize) {
+            return dataRequest.getMyBetting(this.token, name, pageNum, pagzSize);
         }
     }
 }]);

@@ -109,6 +109,9 @@ routerApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvid
                             'views/user/myBetting/myBetting.js',
                             'views/user/myBetting/myBetting.css']
                     }]);
+                }],
+                getMyBetting: ['userService', function (userService) {
+                    return userService.getMyBetting('Qck3', 0, 10);
                 }]
             }
         })

@@ -1,7 +1,83 @@
 .pageMyBetting .main {
     width: 1200px;
     height: 500px;
-    border: 1px solid #DFDFDF;
     background: #FFFFFF;
     margin: 30px auto 0;
+    border: 1px solid #DFDFDF;
+    overflow: hidden;
+}
+
+.pageMyBetting .main .top {
+    width: 1180px;
+    height: 55px;
+    background: #F1f1f1;
+    padding: 0 10px;
+}
+
+.pageMyBetting .main .top li {
+    padding: 0 15px;
+    height: 35px;
+    line-height: 35px;
+    letter-spacing: 1px;
+    text-align: center;
+    margin: 10px;
+    font-size: 21px;
+    float: left;
+}
+
+.pageMyBetting .main .top li:focus {
+    background-color: #E72432;
+    color: #FFFFFF;
+}
+
+.pageMyBetting .main table {
+    width: 1202px;
+    position: relative;
+    left: -1px;
+    border-collapse: collapse;
+}
+
+.pageMyBetting .main table thead {
+    background: #F1f1f1;
+    width: 100%;
+}
+
+.pageMyBetting .main table thead tr {
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+    color: #828282;
+    font-size: 18px;
+    letter-spacing: 1px;
+
+}
+
+.pageMyBetting .main table thead tr td {
+    border: 1px solid #DFDFDF;
+    width: 170px;
+}
+
+.pageMyBetting .main table tbody tr {
+    border: 1px solid #DFDFDF;
+    font-size: 18px;
+    height: 80px;
+}
+
+.pageMyBetting .main table tbody tr td {
+    text-align: center;
+}
+
+.pageMyBetting .main table tbody tr td .logo {
+    width: 76px;
+    height: 50px;
+
+}
+
+.pageMyBetting .main table tbody tr td .detail {
+    width: 80px;
+    height: 30px;
+    line-height: 30px;
+    margin: 0 auto;
+    background: #E72432;
+    color: #FFFFFF;
 }

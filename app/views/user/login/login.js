@@ -48,8 +48,8 @@ angular.module('app')
                         if (index == 2) {
                             //$log.debug(scope.credentials);
                             scope.credentials = {
-                                username: "chiot",
-                                password: "123"
+                                username: "root",
+                                password: "root"
                             };
                             userService.login(scope.credentials).then(function success() {
                                 scope.currentUser.setCurrentUser();
