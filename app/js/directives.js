@@ -25,6 +25,8 @@ app.directive('indexMenuKeyListener', ['$log', 'keyListener', function ($log, ke
                             keyListener.focus('fuCaiIndex');
                         } else if ($(".pageKuai3Index").length > 0) {
                             keyListener.focus('kuai3Index');
+                        }else if($(".pageMyBetting").length > 0){
+                            keyListener.focus('myBetting');
                         }
 
                         return false;

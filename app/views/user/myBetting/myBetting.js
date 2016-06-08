@@ -23,5 +23,54 @@ angular.module('app')
         }
 
         NProgress.done();
+    }])
+    .directive('myBettingKeyListener', ['$log', '$timeout', '$state', 'keyListener', 'userService', function ($log, $timeout, $state, keyListener, userService) {
+        return {
+            restrict: 'A',
+            scope: {},
+            link: function (scope, element, attrs) {
+                if (scope.$parent.$last) {
+                    keyListener.listKeyListener({
+                        element: element.parent(),
+                        id: "myBetting",
+                        label: "li",
+                        columnNum: element.parent().length,
+                        focus: function (item) {
+                            element.find(".choose").removeClass(".choose");
+                            $(item).addClass(".choose");
+                        },
+                        up: function () {
+                            keyListener.focus('indexMenu');
+                            return false;
+                        },
+                        down: function () {
+                            keyListener.focus('myBettingList');
+                            return false;
+                        }
+                    });
+                    $timeout(function () {
+                        $(element.parent().children().first()).focus();
+                    }, 700);
+                }
+            }
+        };
+    }])
+    .directive('myBettingListKeyListener', ['$log', '$timeout', '$state', 'keyListener', 'userService', function ($log, $timeout, $state, keyListener, userService) {
+        return {
+            restrict: 'A',
+            scope: {},
+            link: function (scope, element, attrs) {
+                if (scope.$parent.$last) {
+                    keyListener.listKeyListener({
+                        element: element.parent().parent(),
+                        id: "myBettingList",
+                        label: ".detail",
+                        columnNum: 1,
+                        focus: function (item) {
+                        }
+                    });
+                }
+            }
+        };
     }]);
     

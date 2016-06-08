@@ -1,7 +1,7 @@
 <div class="main">
     <div class="top">
         <ul>
-            <li ng-repeat="ll in lotteryList" name="ll.id" tabindex="-1">
+            <li my-betting-key-listener ng-repeat="ll in lotteryList" name="ll.id" tabindex="-1">
                 {{ll.name}}
             </li>
         </ul>
@@ -39,7 +39,7 @@
                 {{one.bettingTime | bettingTime}}
             </td>
             <td>
-                <div class="detail">查看</div>
+                <div tabindex="-1" my-betting-list-key-listener class="detail">查看</div>
             </td>
         </tr>
         <tr></tr>

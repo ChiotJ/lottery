@@ -25,8 +25,12 @@
     float: left;
 }
 
-.pageMyBetting .main .top li:focus {
+.pageMyBetting .main .top li.choose {
     background-color: #E72432;
+}
+
+.pageMyBetting .main .top li:focus {
+    background-color: #890a14;
     color: #FFFFFF;
 }
 
@@ -80,4 +84,8 @@
     margin: 0 auto;
     background: #E72432;
     color: #FFFFFF;
+}
+
+.pageMyBetting .main table tbody tr td .detail:focus {
+    background-color: #890a14;
 }
