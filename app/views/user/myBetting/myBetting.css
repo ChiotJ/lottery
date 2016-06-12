@@ -1,20 +1,22 @@
 .pageMyBetting .main {
-    width: 1200px;
+    width: 1201px;
     height: 500px;
     background: #FFFFFF;
     margin: 30px auto 0;
-    border: 1px solid #DFDFDF;
+    border-right: 1px solid #DFDFDF;
     overflow: hidden;
 }
 
-.pageMyBetting .main .top {
+.pageMyBetting .main > .top {
     width: 1180px;
     height: 55px;
     background: #F1f1f1;
     padding: 0 10px;
+    border: 1px solid #DFDFDF;
+    border-right-width: 0;
 }
 
-.pageMyBetting .main .top li {
+.pageMyBetting .main > .top li {
     padding: 0 15px;
     height: 35px;
     line-height: 35px;
@@ -25,67 +27,145 @@
     float: left;
 }
 
-.pageMyBetting .main .top li.choose {
+.pageMyBetting .main > .top .choose {
+    color: #FFFFFF;
     background-color: #E72432;
 }
 
-.pageMyBetting .main .top li:focus {
+.pageMyBetting .main > .top li:focus {
     background-color: #890a14;
     color: #FFFFFF;
 }
 
-.pageMyBetting .main table {
-    width: 1202px;
+.pageMyBetting .main .table {
+    width: 1201px;
     position: relative;
-    left: -1px;
-    border-collapse: collapse;
 }
 
-.pageMyBetting .main table thead {
-    background: #F1f1f1;
-    width: 100%;
-}
-
-.pageMyBetting .main table thead tr {
-    height: 45px;
-    line-height: 45px;
+.pageMyBetting .main .table .thead {
+    height: 46px;
+    line-height: 46px;
     text-align: center;
     color: #828282;
     font-size: 18px;
     letter-spacing: 1px;
-
+    background: #F1f1f1;
+    width: 100%;
+    overflow: hidden;
 }
 
-.pageMyBetting .main table thead tr td {
-    border: 1px solid #DFDFDF;
+.pageMyBetting .main .table .thead div {
+    float: left;
+    border-width: 0 0 1px 1px;
+    border-style: solid;
+    border-color: #DFDFDF;
     width: 170px;
 }
 
-.pageMyBetting .main table tbody tr {
-    border: 1px solid #DFDFDF;
+.pageMyBetting .main .table .tbody {
+    width: 1201px;
+    height: 396px;
+    position: relative;
+    overflow: hidden;
+}
+
+.pageMyBetting .main .table .tbody li {
+    width: 1201px;
+    height: 66px;
+    overflow: hidden;
+}
+
+.pageMyBetting .main .table .tbody li > div {
+    float: left;
+    border-width: 0 0 1px 1px;
+    border-style: solid;
+    border-color: #DFDFDF;
     font-size: 18px;
-    height: 80px;
-}
-
-.pageMyBetting .main table tbody tr td {
+    height: 65px;
+    line-height: 65px;;
+    width: 170px;
     text-align: center;
+    overflow: hidden;
 }
 
-.pageMyBetting .main table tbody tr td .logo {
+.pageMyBetting .main .table .tbody li .red {
+    color: #E72432;
+}
+
+.pageMyBetting .main .table .tbody li .green {
+    color: #89DC5C;
+}
+
+.pageMyBetting .main .table .tbody li .logo {
+    margin-top: 7px;
     width: 76px;
     height: 50px;
-
 }
 
-.pageMyBetting .main table tbody tr td .detail {
+.pageMyBetting .main .table .tbody li .detail {
     width: 80px;
     height: 30px;
     line-height: 30px;
-    margin: 0 auto;
+    margin: 17px auto;
     background: #E72432;
     color: #FFFFFF;
 }
 
-.pageMyBetting .main table tbody tr td .detail:focus {
+.pageMyBetting .main .table .tbody li .detail:focus {
     background-color: #890a14;
+}
+
+.pageMyBetting .detailTable {
+    width: 508px;
+    height: 430px;
+    background-color: #FFFFFF;
+    position: absolute;
+    top: 50px;
+    left: 386px;
+    z-index: 999999;
+    border-radius: 10px;
+    color: #1f1f1f;
+}
+
+.pageMyBetting .detailTable .top {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    background-color: #F1F1F1;
+    font-size: 20px;
+    border-radius: 10px 10px 0 0;
+}
+
+.pageMyBetting .detailTable .middle div {
+    width: 440px;
+    height: 35px;
+    line-height: 35px;
+    font-size: 20px;
+    color: #828282;
+    margin: 0 auto;
+}
+
+.pageMyBetting .detailTable .middle .title {
+    height: 80px;
+    line-height: 80px;
+    font-size: 30px;
+    color: #1f1f1f;
+}
+
+.pageMyBetting .detailTable .bottom {
+    width: 100%;
+    margin-top: 20px;
+
+}
+
+.pageMyBetting .detailTable .bottom div {
+    width: 440px;
+    height: 60px;
+    line-height: 60px;
+    font-size: 20px;
+    color: #828282;
+    margin: 0 auto;
+    border-top: 1px solid #E6E6E6;
+
 }

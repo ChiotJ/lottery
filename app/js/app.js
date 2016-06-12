@@ -4,6 +4,7 @@
 'use strict';
 var app = angular.module('app', [
     'ngAnimate',
+    'ngSanitize',
     'routerApp',
     'lotteryApp',
     'serviceApp'

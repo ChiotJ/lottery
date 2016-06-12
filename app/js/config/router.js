@@ -77,7 +77,8 @@ routerApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvid
                     return $ocLazyLoad.load([{
                         files: [
                             'views/home/home.js',
-                            'views/home/home.css']
+                            'views/home/home.css'
+                        ]
                     }]);
                 }]
             }
@@ -92,7 +93,8 @@ routerApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvid
                     return $ocLazyLoad.load([{
                         files: [
                             'views/user/login/login.js',
-                            'views/user/login/login.css']
+                            'views/user/login/login.css'
+                        ]
                     }]);
                 }]
             }
@@ -107,11 +109,9 @@ routerApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvid
                     return $ocLazyLoad.load([{
                         files: [
                             'views/user/myBetting/myBetting.js',
-                            'views/user/myBetting/myBetting.css']
+                            'views/user/myBetting/myBetting.css'
+                        ]
                     }]);
-                }],
-                getMyBetting: ['userService', function (userService) {
-                    return userService.getMyBetting('Qck3', 0, 10);
                 }]
             }
         })
@@ -125,7 +125,8 @@ routerApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvid
                     return $ocLazyLoad.load([{
                         files: [
                             'views/fucai/index/index.js',
-                            'views/fucai/index/index.css']
+                            'views/fucai/index/index.css'
+                        ]
                     }]);
                 }]
             },

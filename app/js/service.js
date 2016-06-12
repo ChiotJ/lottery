@@ -34,6 +34,7 @@ serviceApp.factory("keyListener", ['$log', function ($log) {
                 if (element.length > 1) {
                     if (typeof index === "number") {
                         $(element[index]).focus();
+                        this.index[id] = index;
                     } else {
                         $(element[this.index[id]]).focus();
                     }
@@ -164,11 +165,15 @@ serviceApp.factory("keyListener", ['$log', function ($log) {
 
             var leftCtrl = function (item) {
                 var idx = $(item).index();
+                if (id) {
+                    idx = self.index[id]
+                }
                 if (idx > 0) {
                     idx--;
                 } else {
                     idx = length - 1;
                 }
+                self.index[id] = idx;
                 $(children[idx]).attr('tabindex', -1).focus();
             };
 
@@ -184,6 +189,9 @@ serviceApp.factory("keyListener", ['$log', function ($log) {
 
             var upCtrl = function (item) {
                 var idx = $(item).index();
+                if (id) {
+                    idx = self.index[id]
+                }
                 if (idx > columnNum - 1) {
                     idx -= columnNum;
                 } else {
@@ -197,6 +205,7 @@ serviceApp.factory("keyListener", ['$log', function ($log) {
                         }
                     }
                 }
+                self.index[id] = idx;
                 $(children[idx]).attr('tabindex', -1).focus();
             };
 
@@ -212,11 +221,15 @@ serviceApp.factory("keyListener", ['$log', function ($log) {
 
             var rightCtrl = function (item) {
                 var idx = $(item).index();
+                if (id) {
+                    idx = self.index[id]
+                }
                 if (idx < length - 1) {
                     idx++;
                 } else {
                     idx = 0;
                 }
+                self.index[id] = idx;
                 $(children[idx]).attr('tabindex', -1).focus();
             };
 
@@ -233,6 +246,9 @@ serviceApp.factory("keyListener", ['$log', function ($log) {
 
             var downCtrl = function (item) {
                 var idx = $(item).index();
+                if (id) {
+                    idx = self.index[id]
+                }
                 if (idx < length - columnNum) {
                     idx += columnNum;
                 } else {
@@ -242,6 +258,7 @@ serviceApp.factory("keyListener", ['$log', function ($log) {
                         idx = idx % columnNum;
                     }
                 }
+                self.index[id] = idx;
                 $(children[idx]).attr('tabindex', -1).focus();
             };
 
@@ -258,12 +275,17 @@ serviceApp.factory("keyListener", ['$log', function ($log) {
             if (typeof options.focus === "function") {
                 var a = options.focus;
                 options.focus = function (item) {
-                    self.index[id] = $(item).index();
+                    if (!id) {
+                        self.index[id] = $(item).index();
+                    }
                     a(item);
                 }
             } else {
                 options.focus = function (item) {
-                    self.index[id] = $(item).index();
+                    if (!id) {
+                        self.index[id] = $(item).index();
+                    }
+
                 }
             }
 
@@ -416,7 +438,7 @@ serviceApp.factory("userService", ['$q', '$log', 'cardId', 'dataRequest', functi
         },
         rechargeBalance: 0,
         winnerPaid: 0,
-        token: "",
+        token: "0d662887-ba6c-43c6-962c-9567f59b3ab8",
         login: function (credentials) {
             //$log.debug(credentials);
 
@@ -429,9 +451,9 @@ serviceApp.factory("userService", ['$q', '$log', 'cardId', 'dataRequest', functi
                 username: credentials.username,
                 password: credentials.password
             }).success(function (data, status, headers) {
-                //$log.debug("login-success", data, status, headers("x-auth-token"))
+                $log.debug("login-success", data, status, headers("x-auth-token"))
                 self.userId = data.id;
-                self.name = data.name;
+                self.name = data.username;
                 self.token = headers("x-auth-token");
 
                 dataRequest.getAccountInfo(self.token).success(function (data) {

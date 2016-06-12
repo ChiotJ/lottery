@@ -32,6 +32,10 @@ app.controller("ApplicationController", ['$scope', '$timeout', '$state', '$log',
 
     $scope.isBlackBlindsShow = false;
 
+    $scope.$on('isBlackBlindsShow', function (event, flag) {
+        $scope.isBlackBlindsShow = flag;
+    });
+
     $scope.appNotice = {
         isAppNoticsShow: false,
         title: "提示",
