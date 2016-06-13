@@ -196,3 +196,54 @@
     color: #E72432;
     font-size: 24px;
 }
+
+.pageKuai3OrderConfirm .bettingPassword {
+    width: 500px;
+    height: 330px;
+    background-color: #FFFFFF;
+    position: absolute;
+    top: 100px;
+    left: 386px;
+    z-index: 999999;
+    border-radius: 10px;
+    color: #1f1f1f;
+}
+
+.pageKuai3OrderConfirm .bettingPassword .title {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    background-color: #F1F1F1;
+    font-size: 20px;
+    border-radius: 10px 10px 0 0;
+}
+
+.pageKuai3OrderConfirm .bettingPassword .inputPassword {
+    width: 370px;
+    height: 90px;
+    border-radius: 50px;
+    background-color: #F1F1F1;
+    border: 1px solid #CECECE;
+    margin: 50px auto;
+
+}
+
+.pageKuai3OrderConfirm .bettingPassword .inputPassword .input {
+    border: none;
+    background-color: #F1F1F1;
+    display: block;
+    width: 230px;
+    height: 90px;
+    line-height: 90px;
+    margin: 0 70px;
+    font-size: 78px;
+}
+
+.pageKuai3OrderConfirm .bettingPassword .notice {
+    width: 100%;
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+    font-size: 22px;
+}

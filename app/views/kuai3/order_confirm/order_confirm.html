@@ -60,3 +60,21 @@
 <div class="bottom">
     提示：按“上下”增减倍数，按“确定”投注
 </div>
+
+
+<div tabindex="-1" class="bettingPassword" ng-show="bettingPassword.isShow" id="bettingPassword"
+     kuai3-order-confirm-betting-password-key-listener>
+    <div class="title">
+        请输入投注密码
+    </div>
+
+    <div class="inputPassword">
+        <div class="input">
+            {{bettingPassword.inputPassword}}
+        </div>
+    </div>
+
+    <div class="notice">
+        请输入6位投注密码
+    </div>
+</div>
