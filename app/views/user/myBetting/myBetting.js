@@ -17,7 +17,7 @@ angular.module('app')
 
         var detailListIscroll = null;
 
-        userService.getMyBetting('Qck3', 0, 42)
+        userService.getMyBetting('Qck3', 0, 200)
             .success(function (data) {
                 if (data.success) {
                     $scope.detailList = data.result.orderResults;
@@ -64,7 +64,6 @@ angular.module('app')
 
         $scope.showDetailTable = function (idx) {
             var obj = $scope.detailList[idx];
-            $log.debug(obj);
             $scope.detailTable.name = '快3';
             $scope.detailTable.period = obj.period;
             $scope.detailTable.time = obj.bettingTime;

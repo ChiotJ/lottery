@@ -1,0 +1,110 @@
+.pageMyAccount .main {
+    width: 1180px;
+    height: 530px;
+    margin: 25px auto;
+    background-color: #FFFFFF;
+    color: #1f1f1f;
+    overflow: hidden;
+}
+
+.pageMyAccount .main .top {
+    width: 200px;
+    height: 70px;
+    line-height: 70px;
+    font-size: 30px;
+    margin-left: 25px;
+}
+
+.pageMyAccount .main .middle {
+    width: 100%;
+    height: 427px;
+}
+
+.pageMyAccount .main .middle > div {
+    float: left;
+
+}
+
+.pageMyAccount .main .middle .left {
+    width: 672px;
+    height: 427px;
+    margin: 0 15px 0 25px;
+    overflow: hidden;
+}
+
+.pageMyAccount .main .middle .left > .title {
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 24px;
+}
+
+.pageMyAccount .main .middle .left .userInfo {
+    margin: 20px 0;
+    width: 630px;
+    float: left;
+    border: 1px solid #C4C4C4;
+    padding: 20px;
+    font-size: 19px;
+}
+
+.pageMyAccount .main .middle .left .userInfo .info {
+    float: left;
+    height: 44px;
+    line-height: 44px;
+    border-bottom: 1px solid #E5E5E5;
+    overflow: hidden;
+}
+
+.pageMyAccount .main .middle .left .userInfo .info div {
+    float: left;
+}
+
+.pageMyAccount .main .middle .left .userInfo .info .title {
+    width: 130px;
+}
+
+.pageMyAccount .main .middle .left .userInfo .info .value {
+    color: #898586;
+}
+
+.pageMyAccount .main .middle .left .userInfo .info .value.even {
+    width: 130px;
+}
+
+.pageMyAccount .main .middle .left .userInfo .info .value.odd {
+    width: 240px;
+}
+
+.pageMyAccount .main .middle .right {
+    width: 464px;
+    height: 358px;
+    overflow: hidden;
+    margin-top: 50px;
+}
+
+.pageMyAccount .main .middle .right .button {
+    width: 200px;
+    height: 54px;
+    line-height: 54px;
+    text-align: center;
+    border: 1px solid #C4C4C4;
+    overflow: hidden;
+    font-size: 22px;
+    float: left;
+    margin: 0 15px 20px;
+}
+
+.pageMyAccount .main .middle .right .button:focus {
+    color: #FFFFFF;
+    background: #e72432;
+    border: 1px solid transparent;
+    box-shadow: 5px 7px 20px 5px rgba(0, 0, 0, 0.1);
+}
+
+.pageMyAccount .main .bottom {
+    width: 1000px;
+    height: 30px;
+    line-height: 30px;
+    margin-left: 25px;
+}

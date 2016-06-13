@@ -1,5 +1,5 @@
 angular.module('app')
-    .controller('homeCtrl', ['$scope', '$log', '$state', function ($scope, $log, $state) {
+    .controller('homeCtrl', ['$scope', '$log', '$state', 'userService', function ($scope, $log, $state, userService) {
         $scope.pageClass = "pageHome";
         $scope.menus = [
             {
@@ -16,7 +16,7 @@ angular.module('app')
                 "enter": function () {
                     $log.debug("开奖信息");
                 },
-                "hasGif": false
+                "hasGif": true
             },
             {
                 "id": "4",
@@ -36,6 +36,12 @@ angular.module('app')
                 "id": "6",
                 "enter": function () {
                     $log.debug("我的账户");
+                    if (userService.userId) {
+                        $state.go("myAccount");
+                    } else {
+                        $scope.$emit('notLogin');
+                    }
+
                 },
                 "hasGif": true
             },

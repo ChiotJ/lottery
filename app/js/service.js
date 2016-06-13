@@ -432,13 +432,21 @@ serviceApp.factory("userService", ['$q', '$log', 'cardId', 'dataRequest', functi
     return {
         cardId: cardId,
         userId: "",
-        name: "",
+        nickName: "",
+        realName: "",
+        certificateNum: '',
+        phone: '',
+        bankType: '',
+        bankCardNo: '',
+        wagerCard: '',
+        bounds: 0,
+        userLevel: '',
         balance: function () {
             return (this.rechargeBalance * 100 + this.winnerPaid * 100) / 100 + "元";
         },
         rechargeBalance: 0,
         winnerPaid: 0,
-        token: "0d662887-ba6c-43c6-962c-9567f59b3ab8",
+        token: "",
         login: function (credentials) {
             //$log.debug(credentials);
 
@@ -452,17 +460,29 @@ serviceApp.factory("userService", ['$q', '$log', 'cardId', 'dataRequest', functi
                 password: credentials.password
             }).success(function (data, status, headers) {
                 $log.debug("login-success", data, status, headers("x-auth-token"))
-                self.userId = data.id;
-                self.name = data.username;
                 self.token = headers("x-auth-token");
 
                 dataRequest.getAccountInfo(self.token).success(function (data) {
                     //$log.debug("getAccountInfo-success", data)
                     if (data && data.success) {
-                        self.rechargeBalance = data.result.rechargeBalance;
-                        self.winnerPaid = data.result.winnerPaid;
-                    }
+                        data = data.result;
 
+                        self.userId = data.id;
+                        self.nickName = data.lotteryPlayer.nickName;
+                        self.rechargeBalance = data.rechargeBalance;
+                        self.winnerPaid = data.winnerPaid;
+
+                        self.realName = data.realName;
+                        self.certificateNum = data.lotteryPlayer.certificateNum;
+                        self.phone = data.lotteryPlayer.phone;
+                        self.bankType = data.bankType;
+                        self.bankCardNo = data.bankCardNo;
+                        self.bounds = data.bonus;
+                        self.wagerCard = data.wagerCard;
+                        self.userLever = data.userLever;
+
+                    }
+                    $log.debug("getAccountInfo-success", data);
                     deferred.resolve();
                 }).error(function (error) {
                     //$log.error('getAccountInfo-error', error)
@@ -480,10 +500,19 @@ serviceApp.factory("userService", ['$q', '$log', 'cardId', 'dataRequest', functi
             return dataRequest.getAccountInfo(self.token).success(function (data) {
                 //$log.debug("getAccountInfo-success", data)
                 if (data && data.success) {
-                    self.rechargeBalance = data.result.rechargeBalance;
-                    self.winnerPaid = data.result.winnerPaid;
+                    self.userId = data.id;
+                    self.nickName = data.lotteryPlayer.nickName;
+                    self.rechargeBalance = data.rechargeBalance;
+                    self.winnerPaid = data.winnerPaid;
 
-                    self.name = data.result.lotteryPlayer.name;
+                    self.realName = data.realName;
+                    self.certificateNum = data.lotteryPlayer.certificateNum;
+                    self.phone = data.lotteryPlayer.phone;
+                    self.bankType = data.bankType;
+                    self.bankCardNo = data.bankCardNo;
+                    self.bounds = data.bonus;
+                    self.wagerCard = data.wagerCard;
+                    self.userLever = data.userLever;
                 }
 
             }).error(function (error) {

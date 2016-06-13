@@ -19,7 +19,7 @@ app.controller("ApplicationController", ['$scope', '$timeout', '$state', '$log',
         balance: 0,
         isShowUserInfo: false,
         setCurrentUser: function () {
-            userService.name != null && (this.username = userService.name, this.isShowUserInfo = true);
+            userService.nickName != null && (this.username = userService.nickName, this.isShowUserInfo = true);
             this.balance = userService.balance() || 0;
         },
         updateCurrentUser: function () {

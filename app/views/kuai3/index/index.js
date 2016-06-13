@@ -78,23 +78,29 @@ angular.module('kuai3')
                                 if (index < 5) {
                                     keyListener.focus('indexMenu');
                                     return false;
-                                }
+                                }   
                             }
                         },
                         focus: function (item) {
                             var hasGif = menus[$(item).index()].hasGif;
+                            var img = $(item).find("img"), src = '';
                             if (hasGif) {
-                                var img = $(item).find("img");
-                                var src = img.attr("src").replace("png", "gif");
+                                src = img.attr("src").replace("png", "gif");
+                                img.attr("src", src);
+                            } else {
+                                src = img.attr("src").replace(".png", "2.png");
                                 img.attr("src", src);
                             }
 
                         },
                         blur: function (item) {
                             var hasGif = menus[$(item).index()].hasGif;
+                            var img = $(item).find("img"), src = '';
                             if (hasGif) {
-                                var img = $(item).find("img");
-                                var src = img.attr("src").replace("gif", "png");
+                                src = img.attr("src").replace("gif", "png");
+                                img.attr("src", src);
+                            } else {
+                                src = img.attr("src").replace("2.png", ".png");
                                 img.attr("src", src);
                             }
                         },

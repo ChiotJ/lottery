@@ -115,6 +115,22 @@ routerApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvid
                 }]
             }
         })
+        .state('myAccount', {
+            url: '/myAccount',
+            templateUrl: 'views/user/myAccount/myAccount.html',
+            controller: 'myAccountCtrl',
+            controllerAs: 'myAccount',
+            resolve: {
+                deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([{
+                        files: [
+                            'views/user/myAccount/myAccount.js',
+                            'views/user/myAccount/myAccount.css'
+                        ]
+                    }]);
+                }]
+            }
+        })
         .state('fuCai', {
             url: '/fuCai',
             templateUrl: 'views/fucai/index/index.html',

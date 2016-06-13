@@ -1,0 +1,32 @@
+<div class="main">
+    <div class="top">
+        我的账户
+    </div>
+    <div class="middle">
+        <div class="left">
+            <div class="title">
+                账户信息
+            </div>
+            <div class="userInfo">
+                <div class="info" ng-repeat="one in userInfo">
+                    <div class="title">
+                        {{one.title}}：
+                    </div>
+                    <div class="value" ng-class-odd="'odd'" ng-class-even="'even'">
+                        {{one.value}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <ul>
+                <li class="button" ng-repeat="one in menus" tabindex="-1" my-account-menus-key-listener>
+                    {{one.title}}
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="bottom">
+        投注账号文字说明投注账号文字说明投注
+    </div>
+</div>

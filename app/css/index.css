@@ -73,12 +73,16 @@ body {
     line-height: 50px;
     width: 330px;
     font-size: 18px;
+    overflow: hidden;
 }
 
 .index.user .userInfo div {
     margin-right: 20px;
     float: left;
-    max-width: 165px;
+    width: 145px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .index.user .winInfos {
