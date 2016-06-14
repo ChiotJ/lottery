@@ -1,6 +1,6 @@
 'use strict';
 angular.module('kuai3')
-    .controller('kuai3OrderConfirmCtrl', ['$scope', '$stateParams', '$timeout', '$log', 'kuai3Service', function ($scope, $stateParams, $timeout, $log, kuai3Service) {
+    .controller('kuai3OrderConfirmCtrl', ['$scope', '$stateParams', '$timeout', '$sce', '$log', 'kuai3Service', 'userService', function ($scope, $stateParams, $timeout, $sce, $log, kuai3Service, userService) {
         $scope.pageClass = "pageKuai3OrderConfirm";
         $scope.info = {
             notice: "和值：" + kuai3Service.last.sum,
@@ -82,6 +82,7 @@ angular.module('kuai3')
             password: '',
             inputPassword: '',
             canInput: true,
+            notice: "请输入6位投注密码",
             showBettingPassword: function () {
                 $scope.$emit('isBlackBlindsShow', true);
                 this.isShow = true;
@@ -90,50 +91,127 @@ angular.module('kuai3')
                 }, 100);
                 $scope.$apply();
             },
-            input: function (num) {
-                this.password += num;
-                this.inputPassword += '•';
-                var length = this.password.length;
-                if (length == 6) {
-                    this.canInput = false;
-                    this.confirm();
+            hide: function (flag) {
+                if (flag) {
+                    $scope.$emit('isBlackBlindsShow', false);
                 }
-                $scope.$apply();
+                this.isShow = false;
+            },
+            clear: function () {
+                this.password = '';
+                this.inputPassword = '';
+                this.notice = "请输入6位投注密码";
+                this.canInput = true;
+                this.hide(true);
+            },
+            input: function (num) {
+                var length = this.password.length;
+                if (length < 6) {
+                    this.password += num;
+                    this.inputPassword += '•';
+                    length++;
+                    this.notice = '请输入6位投注密码';
+                    if (length == 6) {
+                        this.notice = $sce.trustAsHtml('<span class="yellow">验证投注密码中，请稍候</span>');
+                        this.canInput = false;
+                        this.confirm();
+                    }
+                    $scope.$apply();
+                }
             },
             delete: function () {
                 var length = this.password.length;
                 if (length > 0) {
+                    this.notice = '请输入6位投注密码';
                     this.password = this.password.substr(0, length - 1);
                     this.inputPassword = this.inputPassword.substr(0, length - 1);
+                } else {
+                    this.clear();
+                    $timeout(function () {
+                        $("#submit").focus();
+                    }, 300);
                 }
                 $scope.$apply();
             },
             confirm: function () {
-                /* scope.$emit('showNotice', {
-                 title: "提示",
-                 content: "投注中，请稍候",
-                 bottom: ""
-                 });
-                 kuai3Service.betting(scope.betting)
-                 .success(function (data) {
-                 $log.debug(data);
-                 scope.$emit('showNotice', {
-                 title: "提示",
-                 content: "投注成功",
-                 bottom: "3秒后自动跳转,或按“确定”跳转",
-                 time: 3000,
-                 callback: function () {
-                 history.back();
-                 },
-                 enter: function () {
-                 history.back();
-                 }
-                 });
-                 scope.currentUser.updateCurrentUser();
-                 })
-                 .error(function (err) {
+                var self = this;
+                userService.validateBettingPassword(this.password).success(function (data) {
+                    self.hide();
+                    $scope.$emit('showNotice', {
+                        title: "提示",
+                        content: "投注中，请稍候",
+                        bottom: ""
+                    });
+                    kuai3Service.betting($scope.betting)
+                        .success(function (data) {
+                            if (data && data.success) {
+                                $scope.$emit('showNotice', {
+                                    title: "提示",
+                                    content: "投注成功",
+                                    bottom: "3秒后自动跳转,或按“确定”跳转",
+                                    time: 3000,
+                                    callback: function () {
+                                        self.clear();
+                                        history.back();
+                                    },
+                                    enter: function () {
+                                        self.clear();
+                                        history.back();
+                                    }
+                                });
+                                $scope.currentUser.updateCurrentUser();
+                            } else {
+                                var content = "投注失败";
+                                if (data && data.result && data.result.errorName) {
+                                    content = content + ',' + data.result.errorName
+                                }
 
-                 });*/
+                                $scope.$emit('showNotice', {
+                                    title: "提示",
+                                    content: content,
+                                    bottom: "3秒后自动隐藏,或按“确定”隐藏",
+                                    time: 3000,
+                                    callback: function () {
+                                        $timeout(function () {
+                                            $("#submit").focus();
+                                        }, 300);
+                                        self.clear();
+                                    },
+                                    enter: function () {
+                                        $timeout(function () {
+                                            $("#submit").focus();
+                                        }, 300);
+                                        self.clear();
+                                    }
+                                });
+                            }
+
+                        })
+                        .error(function (err) {
+                            $scope.$emit('showNotice', {
+                                title: "提示",
+                                content: "投注失败，系统错误",
+                                bottom: "3秒后自动隐藏,或按“确定”隐藏",
+                                time: 3000,
+                                callback: function () {
+                                    $timeout(function () {
+                                        $("#submit").focus();
+                                    }, 300);
+                                    self.clear();
+                                },
+                                enter: function () {
+                                    $timeout(function () {
+                                        $("#submit").focus();
+                                    }, 300);
+                                    self.clear();
+                                }
+                            });
+                        });
+
+                }).error(function (err) {
+                    self.notice = $sce.trustAsHtml('<span class="red">投注密码错误，请重新输入</span>');
+                    self.canInput = true;
+                });
             }
         };
 
@@ -169,6 +247,7 @@ angular.module('kuai3')
                 keyListener.keyListener({
                     element: element,
                     enter: function (item) {
+                        return false;
                     },
                     back: function () {
                         if (scope.bettingPassword.canInput) {

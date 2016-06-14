@@ -52,7 +52,7 @@
         {{betting.multiple*2}}元
     </div>
 
-    <div kuai3-order-confirm-key-listener tabindex="-1" class="submit">
+    <div kuai3-order-confirm-key-listener tabindex="-1" class="submit" id="submit">
         投注
     </div>
 </div>
@@ -62,7 +62,8 @@
 </div>
 
 
-<div tabindex="-1" class="bettingPassword" ng-show="bettingPassword.isShow" id="bettingPassword"
+<div tabindex="-1" class="bettingPassword" ng-class="{opacityShow:bettingPassword.isShow}"
+     ng-show="bettingPassword.isShow" id="bettingPassword"
      kuai3-order-confirm-betting-password-key-listener>
     <div class="title">
         请输入投注密码
@@ -74,7 +75,6 @@
         </div>
     </div>
 
-    <div class="notice">
-        请输入6位投注密码
+    <div class="notice" ng-bind-html="bettingPassword.notice">
     </div>
 </div>

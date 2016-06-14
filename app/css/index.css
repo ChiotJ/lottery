@@ -19,6 +19,10 @@ body {
     font-family: "黑体";
 }
 
+.opacityShow {
+    opacity: 1 !important;
+}
+
 .index.header {
     width: 1280px;
     height: 70px;
@@ -157,6 +161,8 @@ body {
     top: 0;
     left: 0;
     z-index: 99999;
+    opacity: 0;
+    transition: opacity .3s;
 }
 
 .index.appNotice {
@@ -169,6 +175,8 @@ body {
     z-index: 999999;
     border-radius: 10px;
     color: #1f1f1f;
+    opacity: 0;
+    transition: opacity .3s;
 }
 
 .index.appNotice > div {

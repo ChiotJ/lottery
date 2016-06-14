@@ -32,8 +32,12 @@ app.controller("ApplicationController", ['$scope', '$timeout', '$state', '$log',
 
     $scope.isBlackBlindsShow = false;
 
-    $scope.$on('isBlackBlindsShow', function (event, flag) {
+    var isBlackBlindsShowFun = function (flag) {
         $scope.isBlackBlindsShow = flag;
+    };
+
+    $scope.$on('isBlackBlindsShow', function (event, flag) {
+        isBlackBlindsShowFun(flag)
     });
 
     $scope.appNotice = {
@@ -45,12 +49,20 @@ app.controller("ApplicationController", ['$scope', '$timeout', '$state', '$log',
         bottomClass: "button",
         enter: null,
         timeOut: null,
+        showAndHide: function (flag) {
+            if (flag) {
+                isBlackBlindsShowFun(true);
+                this.isAppNoticsShow = true;
+            } else {
+                isBlackBlindsShowFun(false);
+                this.isAppNoticsShow = false;
+            }
+        },
         showNotice: function (config) {
             //$log.debug("showNotice", config);
-            $scope.isBlackBlindsShow = true;
 
+            this.showAndHide(true);
             var self = this;
-            this.isAppNoticsShow = true;
             this.title = config.title;
             this.content = config.content;
             this.bottom = config.bottom;
@@ -59,8 +71,8 @@ app.controller("ApplicationController", ['$scope', '$timeout', '$state', '$log',
 
             if (config.time) {
                 this.timeOut = $timeout(function () {
-                    $scope.isBlackBlindsShow = false;
-                    self.isAppNoticsShow = false;
+                    self.showAndHide(false);
+
                     if (config.callback) {
                         config.callback();
                     }
@@ -69,8 +81,7 @@ app.controller("ApplicationController", ['$scope', '$timeout', '$state', '$log',
             this.enter = function () {
 
                 if (typeof config.enter === 'function') {
-                    $scope.isBlackBlindsShow = false;
-                    self.isAppNoticsShow = false;
+                    self.showAndHide(false);
                     if (self.timeOut)
                         $timeout.cancel(self.timeOut);
 
@@ -83,8 +94,7 @@ app.controller("ApplicationController", ['$scope', '$timeout', '$state', '$log',
 
             this.back = function () {
                 if (typeof config.back === 'function') {
-                    $scope.isBlackBlindsShow = false;
-                    self.isAppNoticsShow = false;
+                    self.showAndHide(false);
                     if (self.timeOut)
                         $timeout.cancel(self.timeOut);
 
@@ -97,11 +107,10 @@ app.controller("ApplicationController", ['$scope', '$timeout', '$state', '$log',
 
             $timeout(function () {
                 $("#app-notice").focus();
-            })
+            }, 100);
         },
         hideNotice: function (callback) {
-            $scope.isBlackBlindsShow = false;
-            this.isAppNoticsShow = false;
+            this.showAndHide(false);
             if (this.timeOut)
                 $timeout.cancel(this.timeOut);
 
@@ -134,7 +143,12 @@ app.controller("ApplicationController", ['$scope', '$timeout', '$state', '$log',
             bottom: "去登陆",
             bottomClass: "button",
             enter: function () {
-                $state.go("login");
+                if ($(".pageLogin").length < 1) {
+                    $state.go("login");
+                } else {
+                    $($('#loginInfo').find(".keyListener")[0]).focus();
+                }
+
             },
             back: back
         };

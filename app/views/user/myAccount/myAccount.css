@@ -2,7 +2,6 @@
     width: 1180px;
     height: 530px;
     margin: 25px auto;
-    background-color: #FFFFFF;
     color: #1f1f1f;
     overflow: hidden;
 }
@@ -46,6 +45,7 @@
     border: 1px solid #C4C4C4;
     padding: 20px;
     font-size: 19px;
+    background-color: #FFFFFF;
 }
 
 .pageMyAccount .main .middle .left .userInfo .info {
@@ -93,6 +93,7 @@
     font-size: 22px;
     float: left;
     margin: 0 15px 20px;
+    background-color: #FFFFFF;
 }
 
 .pageMyAccount .main .middle .right .button:focus {

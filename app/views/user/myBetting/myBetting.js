@@ -117,11 +117,12 @@ angular.module('app')
 
             $scope.detailTable.isShow = true;
             $scope.$emit('isBlackBlindsShow', true);
+            $scope.$apply();
         };
 
         $scope.hideDetailTable = function () {
-            $scope.$emit('isBlackBlindsShow', false);
             $scope.detailTable.isShow = false;
+            $scope.$emit('isBlackBlindsShow', false);
             $scope.$apply();
         };
 

@@ -97,6 +97,12 @@ angular.module('app')
                 }
             },
             {
+                "title": "提现记录",
+                "enter": function () {
+                    $log.debug("提现记录");
+                }
+            },
+            {
                 "title": "修改投注密码",
                 "enter": function () {
                     $log.debug("修改投注密码");

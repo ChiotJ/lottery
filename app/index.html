@@ -35,6 +35,7 @@
 
 </head>
 <body ng-controller="ApplicationController" ng-keydown="keydown($event)">
+
 <div class="index header">
     <div class="left">
         <img src="imgs/index/header_left.png" alt="">
@@ -79,8 +80,11 @@
 
 <div ui-view class="page {{ pageClass }}"></div>
 
-<div class="index blackBlinds" ng-show="isBlackBlindsShow"></div>
-<div id="app-notice" app-notice tabindex="-1" class="index appNotice" ng-show="appNotice.isAppNoticsShow">
+
+<div class="index blackBlinds" ng-class="{opacityShow:isBlackBlindsShow}"
+     ng-show="isBlackBlindsShow"></div>
+<div id="app-notice" app-notice tabindex="-1" class="index appNotice"
+     ng-class="{opacityShow:appNotice.isAppNoticsShow}" ng-show="appNotice.isAppNoticsShow">
     <div class="top">
         {{appNotice.title}}
     </div>

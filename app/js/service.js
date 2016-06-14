@@ -409,6 +409,16 @@ serviceApp.factory("dataRequest", ['$log', '$http', 'apiUrl', 'cardId', function
                 }
             });
         },
+        validateBettingPassword: function (token, password) {
+            return $http.post(apiUrl.api_lottery + "validateBettingPassword", null, {
+                params: {
+                    "password": password
+                },
+                headers: {
+                    'x-auth-token': token
+                }
+            });
+        },
         modifyBettingPassword: function (parameter, config) {
 
             var parameter = JSON.stringify({
@@ -463,7 +473,7 @@ serviceApp.factory("userService", ['$q', '$log', 'cardId', 'dataRequest', functi
                 self.token = headers("x-auth-token");
 
                 dataRequest.getAccountInfo(self.token).success(function (data) {
-                    //$log.debug("getAccountInfo-success", data)
+                    $log.debug("getAccountInfo-success", data)
                     if (data && data.success) {
                         data = data.result;
 
@@ -498,8 +508,9 @@ serviceApp.factory("userService", ['$q', '$log', 'cardId', 'dataRequest', functi
         updateUser: function () {
             var self = this;
             return dataRequest.getAccountInfo(self.token).success(function (data) {
-                //$log.debug("getAccountInfo-success", data)
+                $log.debug("updateAccountInfo-success", data)
                 if (data && data.success) {
+                    data = data.result;
                     self.userId = data.id;
                     self.nickName = data.lotteryPlayer.nickName;
                     self.rechargeBalance = data.rechargeBalance;
@@ -521,6 +532,9 @@ serviceApp.factory("userService", ['$q', '$log', 'cardId', 'dataRequest', functi
         },
         getMyBetting: function (name, pageNum, pagzSize) {
             return dataRequest.getMyBetting(this.token, name, pageNum, pagzSize);
+        },
+        validateBettingPassword: function (password) {
+            return dataRequest.validateBettingPassword(this.token, password)
         }
     }
 }]);

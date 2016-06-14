@@ -43,28 +43,27 @@
         </div>
     </div>
 
+</div>
 
-    <div tabindex="-1" detail-table class="detailTable" ng-show="detailTable.isShow">
-        <div class="top">
-            投注记录详情
+<div tabindex="-1" detail-table class="detailTable" ng-class="{opacityShow:detailTable.isShow}"
+     ng-show="detailTable.isShow">
+    <div class="top">
+        投注记录详情
+    </div>
+    <div class="middle">
+        <div class="title">
+            {{detailTable.name}} - {{detailTable.period}}期
         </div>
-        <div class="middle">
-            <div class="title">
-                {{detailTable.name}} - {{detailTable.period}}期
-            </div>
-            <div>投注金额：{{detailTable.money}}元</div>
-            <div>投注方式：{{detailTable.bettingTypeStr}}</div>
-            <div>投注号码：{{detailTable.craps}}</div>
-            <div>投注倍数：{{detailTable.multiple}}</div>
-            <div>投注时间：{{detailTable.time}}</div>
-            <div>投注状态：成功</div>
-        </div>
-        <div class="bottom">
-            <div>
-                开奖号码：{{detailTable.nos}}
-            </div>
-
+        <div>投注金额：{{detailTable.money}}元</div>
+        <div>投注方式：{{detailTable.bettingTypeStr}}</div>
+        <div>投注号码：{{detailTable.craps}}</div>
+        <div>投注倍数：{{detailTable.multiple}}</div>
+        <div>投注时间：{{detailTable.time}}</div>
+        <div>投注状态：成功</div>
+    </div>
+    <div class="bottom">
+        <div>
+            开奖号码：{{detailTable.nos}}
         </div>
     </div>
-
 </div>
