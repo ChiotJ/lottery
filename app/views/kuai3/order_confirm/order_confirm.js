@@ -3,9 +3,8 @@ angular.module('kuai3')
     .controller('kuai3OrderConfirmCtrl', ['$scope', '$stateParams', '$timeout', '$sce', '$log', 'kuai3Service', 'userService', function ($scope, $stateParams, $timeout, $sce, $log, kuai3Service, userService) {
         $scope.pageClass = "pageKuai3OrderConfirm";
         $scope.info = {
-            notice: "和值：" + kuai3Service.last.sum,
-            craps: kuai3Service.last.craps,
-            time: kuai3Service.current.remainingTime
+            last: kuai3Service.last,
+            current: kuai3Service.current
         };
 
         $scope.betting = {
@@ -107,6 +106,7 @@ angular.module('kuai3')
             input: function (num) {
                 var length = this.password.length;
                 if (length < 6) {
+                    var self = this;
                     this.password += num;
                     this.inputPassword += '•';
                     length++;
@@ -114,7 +114,9 @@ angular.module('kuai3')
                     if (length == 6) {
                         this.notice = $sce.trustAsHtml('<span class="yellow">验证投注密码中，请稍候</span>');
                         this.canInput = false;
-                        this.confirm();
+                        $timeout(function () {
+                            self.confirm();
+                        }, 1000);
                     }
                     $scope.$apply();
                 }
@@ -136,39 +138,62 @@ angular.module('kuai3')
             confirm: function () {
                 var self = this;
                 userService.validateBettingPassword(this.password).success(function (data) {
-                    self.hide();
-                    $scope.$emit('showNotice', {
-                        title: "提示",
-                        content: "投注中，请稍候",
-                        bottom: ""
-                    });
-                    kuai3Service.betting($scope.betting)
-                        .success(function (data) {
-                            if (data && data.success) {
-                                $scope.$emit('showNotice', {
-                                    title: "提示",
-                                    content: "投注成功",
-                                    bottom: "3秒后自动跳转,或按“确定”跳转",
-                                    time: 3000,
-                                    callback: function () {
-                                        self.clear();
-                                        history.back();
-                                    },
-                                    enter: function () {
-                                        self.clear();
-                                        history.back();
+                    if (data && data.success) {
+                        self.hide();
+                        $scope.$emit('showNotice', {
+                            title: "提示",
+                            content: "投注中，请稍候",
+                            bottom: ""
+                        });
+                        kuai3Service.betting($scope.betting)
+                            .success(function (data) {
+                                if (data && data.success) {
+                                    $scope.$emit('showNotice', {
+                                        title: "提示",
+                                        content: "投注成功",
+                                        bottom: "3秒后自动跳转,或按“确定”跳转",
+                                        time: 3000,
+                                        callback: function () {
+                                            self.clear();
+                                            history.back();
+                                        },
+                                        enter: function () {
+                                            self.clear();
+                                            history.back();
+                                        }
+                                    });
+                                    $scope.currentUser.updateCurrentUser();
+                                } else {
+                                    var content = "投注失败";
+                                    if (data && data.result && data.result.errorName) {
+                                        content = content + ',' + data.result.errorName
                                     }
-                                });
-                                $scope.currentUser.updateCurrentUser();
-                            } else {
-                                var content = "投注失败";
-                                if (data && data.result && data.result.errorName) {
-                                    content = content + ',' + data.result.errorName
+
+                                    $scope.$emit('showNotice', {
+                                        title: "提示",
+                                        content: content,
+                                        bottom: "3秒后自动隐藏,或按“确定”隐藏",
+                                        time: 3000,
+                                        callback: function () {
+                                            $timeout(function () {
+                                                $("#submit").focus();
+                                            }, 300);
+                                            self.clear();
+                                        },
+                                        enter: function () {
+                                            $timeout(function () {
+                                                $("#submit").focus();
+                                            }, 300);
+                                            self.clear();
+                                        }
+                                    });
                                 }
 
+                            })
+                            .error(function (err) {
                                 $scope.$emit('showNotice', {
                                     title: "提示",
-                                    content: content,
+                                    content: "投注失败，系统错误",
                                     bottom: "3秒后自动隐藏,或按“确定”隐藏",
                                     time: 3000,
                                     callback: function () {
@@ -184,30 +209,15 @@ angular.module('kuai3')
                                         self.clear();
                                     }
                                 });
-                            }
-
-                        })
-                        .error(function (err) {
-                            $scope.$emit('showNotice', {
-                                title: "提示",
-                                content: "投注失败，系统错误",
-                                bottom: "3秒后自动隐藏,或按“确定”隐藏",
-                                time: 3000,
-                                callback: function () {
-                                    $timeout(function () {
-                                        $("#submit").focus();
-                                    }, 300);
-                                    self.clear();
-                                },
-                                enter: function () {
-                                    $timeout(function () {
-                                        $("#submit").focus();
-                                    }, 300);
-                                    self.clear();
-                                }
                             });
-                        });
-
+                    } else {
+                        var content = '投注密码错误，请重新输入';
+                        if (data && data.message) {
+                            content = data.message + "，请重新输入";
+                        }
+                        self.notice = $sce.trustAsHtml('<span class="red">' + content + '</span>');
+                        self.canInput = true;
+                    }
                 }).error(function (err) {
                     self.notice = $sce.trustAsHtml('<span class="red">投注密码错误，请重新输入</span>');
                     self.canInput = true;
@@ -231,7 +241,23 @@ angular.module('kuai3')
                         scope.reduceMultiple();
                     },
                     enter: function (item) {
-                        scope.bettingPassword.showBettingPassword();
+                        if (scope.info.current.canBetting) {
+                            scope.bettingPassword.showBettingPassword();
+                        } else {
+                            scope.$emit('showNotice', {
+                                title: "提示",
+                                content: "本期投注已截止",
+                                bottom: "3秒后自动消失,或按“确定”消失",
+                                time: 3000,
+                                callback: function () {
+                                    element.focus();
+                                },
+                                enter: function () {
+                                    element.focus();
+                                }
+                            });
+                        }
+
                     }
                 });
                 $timeout(function () {

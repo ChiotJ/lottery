@@ -2,7 +2,7 @@
 var fuCaiService = angular.module("fuCaiService", []);
 
 
-fuCaiService.factory('kuai3Service', ['$log', '$http', 'dataRequest', 'apiUrl', 'userService', function ($log, $http, dataRequest, apiUrl, userService) {
+fuCaiService.factory('kuai3Service', ['$interval', '$timeout', '$log', '$http', 'dataRequest', 'apiUrl', 'userService', function ($interval, $timeout, $log, $http, dataRequest, apiUrl, userService) {
     return {
         name: 'Qck3',
         notice: '每10分钟开一次奖最高奖金',
@@ -13,13 +13,16 @@ fuCaiService.factory('kuai3Service', ['$log', '$http', 'dataRequest', 'apiUrl', 
                 h: '00',
                 m: '00',
                 s: '00'
-            }
+            },
+            canBetting: true
         },
         last: {
             period: '',
             craps: [],
             sum: 0
         },
+        waitTime: 20000,
+        loadInterval: null,
         init: function () {
             this.loadCurrent();
             this.loadLast();
@@ -36,10 +39,57 @@ fuCaiService.factory('kuai3Service', ['$log', '$http', 'dataRequest', 'apiUrl', 
                         if (time) {
                             time = time.split(":");
                             self.current.remainingTime = {
-                                h: time[0],
-                                m: time[1],
+                                h: '00',
+                                m: '00',
                                 s: time[2]
-                            }
+                            };
+
+                            self.loadInterval && $interval.cancel(self.loadInterval);
+                            self.loadInterval = $interval(function () {
+                                var s = parseInt(self.current.remainingTime.s), m = parseInt(self.current.remainingTime.m), h = parseInt(self.current.remainingTime.h);
+                                if (--s < 0) {
+                                    if (m > 0 || h > 0) {
+                                        s = 59;
+                                        if (--m < 0) {
+                                            m = 59;
+                                            if (h > 0) {
+                                                h--;
+                                            }
+                                        }
+                                    } else {
+                                        s = 0;
+                                    }
+                                }
+
+                                if (h == 0 && m == 0 && s == 0) {
+                                    $interval.cancel(self.loadInterval);
+                                    self.current.canBetting = false;
+                                    $timeout(function () {
+                                        self.loadCurrent();
+                                        self.loadLast();
+                                    }, self.waitTime);
+                                } else {
+                                    self.current.canBetting = true;
+                                }
+
+                                if (h < 10) {
+                                    h = "0" + h;
+                                }
+                                if (m < 10) {
+                                    m = "0" + m;
+                                }
+                                if (s < 10) {
+                                    s = "0" + s;
+                                }
+
+                                self.current.remainingTime = {
+                                    h: h,
+                                    m: m,
+                                    s: s
+                                };
+
+
+                            }, 1000);
                         }
                     }
                 })

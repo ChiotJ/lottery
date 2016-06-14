@@ -291,7 +291,7 @@ angular.module('kuai3')
             }
         };
     }])
-    .directive('kuai3RenXuanEnterKeyListener', ['$log', '$timeout', '$state', 'keyListener', 'userService', function ($log, $timeout, $state, keyListener, userService) {
+    .directive('kuai3RenXuanEnterKeyListener', ['$log', '$timeout', '$state', 'keyListener', 'userService', 'kuai3Service', function ($log, $timeout, $state, keyListener, userService, kuai3Service) {
         return {
             restrict: 'A',
             scope: {},
@@ -303,7 +303,27 @@ angular.module('kuai3')
                         keyListener.focus('kuai3RenXuanRandom', 0);
                     },
                     enter: function (item) {
-                        scope.$parent.betting(element);
+                        if (kuai3Service.current.canBetting) {
+                            if (userService.userId) {
+                                scope.$parent.betting(element);
+                            } else {
+                                scope.$emit('notLogin');
+                            }
+                        } else {
+                            scope.$emit('showNotice', {
+                                title: "提示",
+                                content: "本期投注已截止",
+                                bottom: "3秒后自动消失,或按“确定”消失",
+                                time: 3000,
+                                callback: function () {
+                                    keyListener.focus("kuai3RenXuanEnter");
+                                },
+                                enter: function () {
+                                    keyListener.focus("kuai3RenXuanEnter");
+                                }
+                            });
+                        }
+
                     },
                     back: function (item) {
                         scope.$emit('isShowIndexMenu', true);

@@ -297,7 +297,7 @@ serviceApp.factory("keyListener", ['$log', function ($log) {
 
 serviceApp.provider('timekeeper', function () {
     var timeCal = function (element, callback) {
-        var h = parseInt(element.find(".h").html()), m = parseInt(element.find(".m").html()), s = parseInt(element.find(".s").html());
+        var h = parseInt(element.find(".h").attr('h')), m = parseInt(element.find(".m").attr('m')), s = parseInt(element.find(".s").attr('s'));
         if (--s < 0) {
             if (m > 0 || h > 0) {
                 s = 59;

@@ -4,10 +4,10 @@
             上期
         </div>
         <div class="craps">
-            <img ng-repeat="c in info.craps" src="imgs/kuai3/craps_{{c}}.png" alt="">
+            <img ng-repeat="c in info.last.craps  track by $index" src="imgs/kuai3/craps_{{c}}.png" alt="">
         </div>
         <div class="notice">
-            {{info.notice}}
+            和值：{{info.last.sum}}
         </div>
     </div>
     <div class="middle"></div>
@@ -15,16 +15,19 @@
         <div class="text">
             本期
         </div>
-        <div class="time" kuai3-timekeeper>
-            <div class="h num">
-                {{info.time.m}}
+        <div class="time" ng-class="{opacityShow:info.current.canBetting}">
+            <div class="m num">
+                {{info.current.remainingTime.m}}
             </div>
             <div>
                 :
             </div>
             <div class="s num">
-                {{info.time.s}}
+                {{info.current.remainingTime.s}}
             </div>
+        </div>
+        <div class="timeEnd" ng-class="{opacityShow:!info.current.canBetting}">
+            截止
         </div>
         <div class="notice">
             倒计时

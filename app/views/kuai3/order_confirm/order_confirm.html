@@ -7,16 +7,19 @@
         <div class="text">
             本期
         </div>
-        <div class="time" kuai3-timekeeper>
-            <div class="h num">
-                {{info.time.m}}
+        <div class="time" ng-class="{opacityShow:info.current.canBetting}">
+            <div class="m num">
+                {{info.current.remainingTime.m}}
             </div>
             <div>
                 :
             </div>
             <div class="s num">
-                {{info.time.s}}
+                {{info.current.remainingTime.s}}
             </div>
+        </div>
+        <div class="timeEnd" ng-class="{opacityShow:!info.current.canBetting}">
+            截止
         </div>
         <div class="notice">
             倒计时

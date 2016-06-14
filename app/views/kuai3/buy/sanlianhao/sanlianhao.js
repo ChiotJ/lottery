@@ -14,7 +14,7 @@ angular.module('kuai3')
             });
         };
     }])
-    .directive('kuai3SanLianHaoChoiceKeyListener', ['$log', '$timeout', '$state', 'keyListener', 'userService', function ($log, $timeout, $state, keyListener, userService) {
+    .directive('kuai3SanLianHaoChoiceKeyListener', ['$log', '$timeout', '$state', 'keyListener', 'userService', 'kuai3Service', function ($log, $timeout, $state, keyListener, userService, kuai3Service) {
         return {
             restrict: 'A',
             scope: {},
@@ -22,10 +22,25 @@ angular.module('kuai3')
                 keyListener.keyListener({
                     element: element.parent(),
                     enter: function (item) {
-                        if (userService.userId) {
-                            scope.$parent.betting();
+                        if (kuai3Service.current.canBetting) {
+                            if (userService.userId) {
+                                scope.$parent.betting();
+                            } else {
+                                scope.$emit('notLogin');
+                            }
                         } else {
-                            scope.$emit('notLogin');
+                            scope.$emit('showNotice', {
+                                title: "提示",
+                                content: "本期投注已截止",
+                                bottom: "3秒后自动消失,或按“确定”消失",
+                                time: 3000,
+                                callback: function () {
+                                    element.focus();
+                                },
+                                enter: function () {
+                                    element.focus();
+                                }
+                            });
                         }
                     },
                     back: function (item) {

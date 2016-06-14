@@ -1,45 +1,50 @@
 'use strict';
 angular.module('kuai3')
-    .controller('kuai3IndexCtrl', ['$scope', '$log', '$state', 'kuai3Service', function ($scope, $log, $state, kuai3Service) {
+    .controller('kuai3IndexCtrl', ['$scope', '$timeout', '$log', '$state', 'kuai3Service', function ($scope, $timeout, $log, $state, kuai3Service) {
         $scope.pageClass = "pageKuai3Index";
 
         $scope.info = {
-            notice: "和值：" + kuai3Service.last.sum,
-            craps: kuai3Service.last.craps,
-            time: kuai3Service.current.remainingTime
+            last: kuai3Service.last,
+            current: kuai3Service.current
         };
+
 
         $scope.menus = [
             {
                 "id": "hezhi",
                 "name": "和值",
                 "hasGif": true,
-                "state": "kuai3Buy.hezhi"
+                "state": "kuai3Buy.hezhi",
+                "timeLimit": true
 
             },
             {
                 "id": "santonghao",
                 "name": "三同号",
                 "hasGif": true,
-                "state": "kuai3Buy.santonghao"
+                "state": "kuai3Buy.santonghao",
+                "timeLimit": true
             },
             {
                 "id": "sanlianhao",
                 "name": "三连号",
                 "hasGif": true,
-                "state": "kuai3Buy.sanlianhao"
+                "state": "kuai3Buy.sanlianhao",
+                "timeLimit": true
             },
             {
                 "id": "renxuan",
                 "name": "任选",
                 "hasGif": true,
-                "state": "kuai3Buy.renxuan"
+                "state": "kuai3Buy.renxuan",
+                "timeLimit": true
             },
             {
                 "id": "jixuan",
                 "name": "机选",
                 "hasGif": true,
-                "state": "kuai3Buy.jixuan"
+                "state": "kuai3Buy.jixuan",
+                "timeLimit": true
             },
             {
                 "id": "fenxibiaoge",
@@ -66,6 +71,9 @@ angular.module('kuai3')
             scope: {},
             link: function (scope, element, attrs) {
                 if (scope.$parent.$last) {
+                    var defaultFocus = 0;
+                    if (keyListener.index["kuai3Index"])
+                        defaultFocus = keyListener.index["kuai3Index"];
                     var menus = scope.$parent.menus;
                     keyListener.listKeyListener({
                         element: element.parent(),
@@ -78,7 +86,7 @@ angular.module('kuai3')
                                 if (index < 5) {
                                     keyListener.focus('indexMenu');
                                     return false;
-                                }   
+                                }
                             }
                         },
                         focus: function (item) {
@@ -91,7 +99,6 @@ angular.module('kuai3')
                                 src = img.attr("src").replace(".png", "2.png");
                                 img.attr("src", src);
                             }
-
                         },
                         blur: function (item) {
                             var hasGif = menus[$(item).index()].hasGif;
@@ -106,27 +113,32 @@ angular.module('kuai3')
                         },
                         enter: function (item) {
                             var mode = menus[$(item).index()];
-
                             if (mode.state) {
-                                $state.go(mode.state, {mode: mode});
+                                if (!mode.timeLimit || scope.$parent.info.current.canBetting) {
+                                    $state.go(mode.state, {mode: mode});
+                                } else {
+                                    scope.$emit('showNotice', {
+                                        title: "提示",
+                                        content: "本期投注已截止",
+                                        bottom: "3秒后自动消失,或按“确定”消失",
+                                        time: 3000,
+                                        callback: function () {
+                                            keyListener.focus("kuai3Index");
+                                        },
+                                        enter: function () {
+                                            keyListener.focus("kuai3Index");
+                                        }
+                                    });
+                                }
+
                             }
 
                         }
                     });
                     $timeout(function () {
-                        $(element.parent().children().first()).focus();
+                        keyListener.focus("kuai3Index", defaultFocus);
                     }, 700);
                 }
-            }
-
-        };
-    }])
-    .directive('kuai3Timekeeper', ['$log', '$timeout', 'timekeeper', function ($log, $timeout, timekeeper) {
-        return {
-            restrict: 'A',
-            scope: {},
-            link: function (scope, element, attrs) {
-                timekeeper.timekeeper("kuai3", element);
             }
 
         };

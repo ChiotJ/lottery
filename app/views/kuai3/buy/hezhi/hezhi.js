@@ -80,7 +80,7 @@ angular.module('kuai3')
         };
 
     }])
-    .directive('kuai3HeZhiChoiceKeyListener', ['$log', '$timeout', '$state', 'keyListener', 'userService', function ($log, $timeout, $state, keyListener, userService) {
+    .directive('kuai3HeZhiChoiceKeyListener', ['$log', '$timeout', '$state', 'keyListener', 'userService', 'kuai3Service', function ($log, $timeout, $state, keyListener, userService, kuai3Service) {
         return {
             restrict: 'A',
             scope: {},
@@ -92,12 +92,28 @@ angular.module('kuai3')
                         label: "li",
                         columnNum: 15,
                         enter: function (item) {
-                            var index = $(item).index();
-                            if (userService.userId) {
-                                scope.$parent.betting(index);
+                            if (kuai3Service.current.canBetting) {
+                                var index = $(item).index();
+                                if (userService.userId) {
+                                    scope.$parent.betting(index);
+                                } else {
+                                    scope.$emit('notLogin');
+                                }
                             } else {
-                                scope.$emit('notLogin');
+                                scope.$emit('showNotice', {
+                                    title: "提示",
+                                    content: "本期投注已截止",
+                                    bottom: "3秒后自动消失,或按“确定”消失",
+                                    time: 3000,
+                                    callback: function () {
+                                        keyListener.focus("kuai3HeZhiChoice");
+                                    },
+                                    enter: function () {
+                                        keyListener.focus("kuai3HeZhiChoice");
+                                    }
+                                });
                             }
+
 
                         },
                         back: function (item) {

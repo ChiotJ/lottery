@@ -55,30 +55,48 @@ angular.module('kuai3')
         };
 
     }])
-    .directive('kuai3JiXuanChoiceKeyListener', ['$log', '$timeout', '$state', 'keyListener', 'userService', function ($log, $timeout, $state, keyListener, userService) {
+    .directive('kuai3JiXuanChoiceKeyListener', ['$log', '$timeout', '$state', 'keyListener', 'userService', 'kuai3Service', function ($log, $timeout, $state, keyListener, userService, kuai3Service) {
         return {
             restrict: 'A',
             scope: {},
             link: function (scope, element, attrs) {
+                var idx = 0;
                 keyListener.keyListener({
                     element: element,
                     id: "kuai3JiXuan",
                     left: function () {
+                        idx = 0;
                         $(element.children()[0]).focus();
                         scope.$parent.isRenXuanResult = true;
                         scope.$parent.renxuanRandom();
                     },
                     right: function () {
+                        idx = 1;
                         $(element.children()[1]).focus();
                         scope.$parent.isRenXuanResult = false;
                         scope.$parent.hezhiRandom();
                     },
                     enter: function (item) {
-                        var index = $(item).index();
-                        if (userService.userId) {
-                            scope.$parent.betting(index);
+                        if (kuai3Service.current.canBetting) {
+                            var index = $(item).index();
+                            if (userService.userId) {
+                                scope.$parent.betting(index);
+                            } else {
+                                scope.$emit('notLogin');
+                            }
                         } else {
-                            scope.$emit('notLogin');
+                            scope.$emit('showNotice', {
+                                title: "提示",
+                                content: "本期投注已截止",
+                                bottom: "3秒后自动消失,或按“确定”消失",
+                                time: 3000,
+                                callback: function () {
+                                    $(element.children()[idx]).focus();
+                                },
+                                enter: function () {
+                                    $(element.children()[idx]).focus();
+                                }
+                            });
                         }
                     },
                     back: function (item) {

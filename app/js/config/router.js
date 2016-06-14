@@ -145,12 +145,7 @@ routerApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvid
                         ]
                     }]);
                 }]
-            },
-            onEnter: function () {
-            },
-            onExit: ['timekeeper', function (timekeeper) {
-                timekeeper.deleteItem("fuCaiIndexList");
-            }]
+            }
         })
         .state('kuai3', {
             url: '/kuai3',
@@ -166,12 +161,7 @@ routerApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvid
                         ]
                     }]);
                 }]
-            },
-            onEnter: function () {
-            },
-            onExit: ['timekeeper', function (timekeeper) {
-                timekeeper.deleteItem("kuai3");
-            }]
+            }
         })
         .state('kuai3Buy', {
             url: '/kuai3/buy',
@@ -193,10 +183,7 @@ routerApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvid
                         ]
                     }]);
                 }]
-            },
-            onExit: ['timekeeper', function (timekeeper) {
-                timekeeper.deleteItem("kuai3");
-            }]
+            }
         })
         .state('kuai3Buy.hezhi', {
             url: '/kuai3/buy/hezhi',

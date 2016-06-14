@@ -12,12 +12,15 @@
                 </div>
                 <div class="bottom">
                     <div class="notice">距{{one.current.period}}期投注截止</div>
-                    <div class="time">
-                        <div class="h num">{{one.current.remainingTime.h}}</div>
+                    <div class="time" ng-class="{opacityShow:one.current.canBetting}">
+                        <div class="h num" ng-class="{red:one.isRed}">{{one.current.remainingTime.h}}</div>
                         <div>:</div>
-                        <div class="m num">{{one.current.remainingTime.m}}</div>
+                        <div class="m num" ng-class="{red:one.isRed}">{{one.current.remainingTime.m}}</div>
                         <div>:</div>
-                        <div class="s num">{{one.current.remainingTime.s}}</div>
+                        <div class="s num" ng-class="{red:one.isRed}">{{one.current.remainingTime.s}}</div>
+                    </div>
+                    <div class="timeEnd" ng-class="{opacityShow:!one.current.canBetting}">
+                        截止
                     </div>
                 </div>
             </li>

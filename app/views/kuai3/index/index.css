@@ -51,10 +51,16 @@
     float: left;
 }
 
+.pageKuai3Index .top .right {
+    position: relative;
+}
+
 .pageKuai3Index .top .right .time {
     width: 120px;;
     height: 80px;
     margin: 0 auto;
+    opacity: 0;
+    transition: opacity .3s;
 }
 
 .pageKuai3Index .top .right .time div {
@@ -74,6 +80,22 @@
     width: 50px;
     background-color: #000000;
 
+}
+
+.pageKuai3Index .top .right .timeEnd {
+    width: 120px;
+    background-color: #000000;
+    color: #FFFFFF;
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity .3s;
+    position: absolute;
+    left: 140px;
+    top: 75px;
+    font-size: 24px;
 }
 
 .pageKuai3Index .bottom {
