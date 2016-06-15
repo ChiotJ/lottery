@@ -25,7 +25,7 @@
     <script src="js/filter.js"></script>
     <script src="js/config/router.js"></script>
     <script src="js/config/development.js"></script>
-    <script src="js/config/lottery.js"></script>
+    <script src="js/services/lottery.js"></script>
 
     <script src="js/services/fuCai.js"></script>
 
@@ -48,11 +48,11 @@
 
 <div class="index user" ng-controller="userCtrl">
     <div class="userInfo">
-        <div class="userName" ng-show="currentUser.isShowUserInfo">
-            用户名：{{currentUser.username}}
+        <div class="userName" ng-show="currentUser.userInfo.nickName">
+            用户名：{{currentUser.userInfo.nickName}}
         </div>
-        <div class="balance" ng-show="currentUser.isShowUserInfo">
-            余额：{{currentUser.balance}}
+        <div class="balance" ng-show="currentUser.userInfo.nickName">
+            余额：{{currentUser.userInfo.balance}}元
         </div>
     </div>
 

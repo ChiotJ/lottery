@@ -39,8 +39,8 @@ fuCaiService.factory('kuai3Service', ['$interval', '$timeout', '$log', '$http', 
                         if (time) {
                             time = time.split(":");
                             self.current.remainingTime = {
-                                h: '00',
-                                m: '00',
+                                h: time[0],
+                                m: time[1],
                                 s: time[2]
                             };
 

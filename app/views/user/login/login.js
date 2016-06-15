@@ -52,7 +52,6 @@ angular.module('app')
                                 password: "123456"
                             };
                             userService.login(scope.credentials).then(function success() {
-                                scope.currentUser.setCurrentUser();
                                 scope.$emit('showNotice', {
                                     title: "提示",
                                     content: "登录成功",
@@ -72,6 +71,32 @@ angular.module('app')
                                     scope.$emit('showNotice', {
                                         title: "提示",
                                         content: "用户名或密码错误",
+                                        bottom: "3秒后自动消失,或按“确定”重新输入",
+                                        time: 3000,
+                                        callback: function () {
+                                            $(element.find(".keyListener")[0]).focus();
+                                        },
+                                        enter: function () {
+                                            $(element.find(".keyListener")[0]).focus();
+                                        }
+                                    });
+                                } else if (error.status == 403) {
+                                    scope.$emit('showNotice', {
+                                        title: "提示",
+                                        content: "账户授权错误",
+                                        bottom: "3秒后自动消失,或按“确定”重新输入",
+                                        time: 3000,
+                                        callback: function () {
+                                            $(element.find(".keyListener")[0]).focus();
+                                        },
+                                        enter: function () {
+                                            $(element.find(".keyListener")[0]).focus();
+                                        }
+                                    });
+                                } else {
+                                    scope.$emit('showNotice', {
+                                        title: "提示",
+                                        content: "系统错误",
                                         bottom: "3秒后自动消失,或按“确定”重新输入",
                                         time: 3000,
                                         callback: function () {

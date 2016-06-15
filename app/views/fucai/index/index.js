@@ -34,7 +34,7 @@ angular.module('fucai')
 
         NProgress.done();
     }])
-    .directive('fuCaiIndexListKeyListener', ['$log', '$timeout', '$interval', '$state', 'keyListener', 'timekeeper', function ($log, $timeout, $interval, $state, keyListener, timekeeper) {
+    .directive('fuCaiIndexListKeyListener', ['$log', '$timeout', '$interval', '$state', 'keyListener', function ($log, $timeout, $interval, $state, keyListener) {
         return {
             restrict: 'A',
             scope: {},

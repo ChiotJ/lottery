@@ -15,19 +15,7 @@ app.controller("ApplicationController", ['$scope', '$timeout', '$state', '$log',
     };
 
     $scope.currentUser = {
-        username: null,
-        balance: 0,
-        isShowUserInfo: false,
-        setCurrentUser: function () {
-            userService.nickName != null && (this.username = userService.nickName, this.isShowUserInfo = true);
-            this.balance = userService.balance() || 0;
-        },
-        updateCurrentUser: function () {
-            var self = this;
-            userService.updateUser().then(function () {
-                self.setCurrentUser();
-            })
-        }
+        userInfo: userService.userInfo
     };
 
     $scope.isBlackBlindsShow = false;

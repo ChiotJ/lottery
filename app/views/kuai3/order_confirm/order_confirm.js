@@ -162,7 +162,7 @@ angular.module('kuai3')
                                             history.back();
                                         }
                                     });
-                                    $scope.currentUser.updateCurrentUser();
+                                    userService.getAccountInfo();
                                 } else {
                                     var content = "投注失败";
                                     if (data && data.result && data.result.errorName) {

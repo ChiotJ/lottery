@@ -295,79 +295,6 @@ serviceApp.factory("keyListener", ['$log', function ($log) {
     };
 }]);
 
-serviceApp.provider('timekeeper', function () {
-    var timeCal = function (element, callback) {
-        var h = parseInt(element.find(".h").attr('h')), m = parseInt(element.find(".m").attr('m')), s = parseInt(element.find(".s").attr('s'));
-        if (--s < 0) {
-            if (m > 0 || h > 0) {
-                s = 59;
-                if (--m < 0) {
-                    m = 59;
-                    if (h > 0) {
-                        h--;
-                    }
-                }
-            } else {
-                s = 0;
-            }
-        }
-
-        if (h < 10) {
-            h = "0" + h;
-        }
-        if (m < 10) {
-            m = "0" + m;
-        }
-        if (s < 10) {
-            s = "0" + s;
-        }
-
-        element.find(".h").html(h);
-        element.find(".m").html(m);
-        element.find(".s").html(s);
-
-        if (angular.isFunction(callback)) {
-            callback(s, m, h, element, element.index());
-        }
-
-    };
-
-    var items = {};
-    this.$get = ['$log', '$interval', function ($log, $interval) {
-        return {
-            items: items,
-            deleteItem: function (id) {
-                // $log.debug("移除定时器：", id);
-                $interval.cancel(items[id].interval);
-                delete items[id];
-            },
-            timekeeper: function (id, element, callback) {
-                // $log.debug("加入定时器：", id);
-                if (items[id]) {
-                    $interval.cancel(items[id].interval);
-                }
-                items[id] = {
-                    element: element,
-                    callback: callback
-                };
-                var interval = $interval(function () {
-                    if (items[id]) {
-                        element = items[id].element;
-                        var i = 0;
-                        while (i < element.length) {
-                            timeCal($(element[i]), items[id].callback);
-                            i++;
-                        }
-                    } else {
-                        $interval.cancel(interval);
-                    }
-                }, 1000);
-                items[id].interval = interval;
-
-            }
-        }
-    }];
-});
 
 serviceApp.factory("dataRequest", ['$log', '$http', 'apiUrl', 'cardId', function ($log, $http, apiUrl, cardId) {
     return {
@@ -441,21 +368,21 @@ serviceApp.factory("dataRequest", ['$log', '$http', 'apiUrl', 'cardId', function
 serviceApp.factory("userService", ['$q', '$log', 'cardId', 'dataRequest', function ($q, $log, cardId, dataRequest) {
     return {
         cardId: cardId,
-        userId: "",
-        nickName: "",
-        realName: "",
-        certificateNum: '',
-        phone: '',
-        bankType: '',
-        bankCardNo: '',
-        wagerCard: '',
-        bounds: 0,
-        userLevel: '',
-        balance: function () {
-            return (this.rechargeBalance * 100 + this.winnerPaid * 100) / 100 + "元";
+        userInfo: {
+            userId: "",
+            nickName: "",
+            realName: "",
+            certificateNum: '',
+            phone: '',
+            bankType: '',
+            bankCardNo: '',
+            wagerCard: '',
+            bounds: 0,
+            userLevel: '',
+            rechargeBalance: 0,
+            winnerPaid: 0,
+            balance: 0
         },
-        rechargeBalance: 0,
-        winnerPaid: 0,
         token: "",
         login: function (credentials) {
             //$log.debug(credentials);
@@ -472,30 +399,9 @@ serviceApp.factory("userService", ['$q', '$log', 'cardId', 'dataRequest', functi
                 $log.debug("login-success", data, status, headers("x-auth-token"))
                 self.token = headers("x-auth-token");
 
-                dataRequest.getAccountInfo(self.token).success(function (data) {
-                    $log.debug("getAccountInfo-success", data)
-                    if (data && data.success) {
-                        data = data.result;
-
-                        self.userId = data.id;
-                        self.nickName = data.lotteryPlayer.nickName;
-                        self.rechargeBalance = data.rechargeBalance;
-                        self.winnerPaid = data.winnerPaid;
-
-                        self.realName = data.realName;
-                        self.certificateNum = data.lotteryPlayer.certificateNum;
-                        self.phone = data.lotteryPlayer.phone;
-                        self.bankType = data.bankType;
-                        self.bankCardNo = data.bankCardNo;
-                        self.bounds = data.bonus;
-                        self.wagerCard = data.wagerCard;
-                        self.userLever = data.userLever;
-
-                    }
-                    $log.debug("getAccountInfo-success", data);
+                self.getAccountInfo().then(function success() {
                     deferred.resolve();
-                }).error(function (error) {
-                    //$log.error('getAccountInfo-error', error)
+                }, function error(error) {
                     deferred.reject(error);
                 });
             }).error(function (error) {
@@ -505,27 +411,28 @@ serviceApp.factory("userService", ['$q', '$log', 'cardId', 'dataRequest', functi
 
             return promise;
         },
-        updateUser: function () {
+        getAccountInfo: function () {
             var self = this;
             return dataRequest.getAccountInfo(self.token).success(function (data) {
-                $log.debug("updateAccountInfo-success", data)
+                $log.debug("updateAccountInfo-success", data);
                 if (data && data.success) {
                     data = data.result;
-                    self.userId = data.id;
-                    self.nickName = data.lotteryPlayer.nickName;
-                    self.rechargeBalance = data.rechargeBalance;
-                    self.winnerPaid = data.winnerPaid;
+                    self.userInfo.userId = data.id;
 
-                    self.realName = data.realName;
-                    self.certificateNum = data.lotteryPlayer.certificateNum;
-                    self.phone = data.lotteryPlayer.phone;
-                    self.bankType = data.bankType;
-                    self.bankCardNo = data.bankCardNo;
-                    self.bounds = data.bonus;
-                    self.wagerCard = data.wagerCard;
-                    self.userLever = data.userLever;
+                    self.userInfo.nickName = data.lotteryPlayer.nickName;
+                    self.userInfo.certificateNum = data.lotteryPlayer.certificateNum;
+                    self.userInfo.phone = data.lotteryPlayer.phone;
+                    self.userInfo.realName = data.realName;
+                    self.userInfo.bankType = data.bankType;
+                    self.userInfo.bankCardNo = data.bankCardNo;
+                    self.userInfo.bounds = data.bonus;
+                    self.userInfo.wagerCard = data.wagerCard;
+                    self.userInfo.userLever = data.userLever;
+
+                    self.userInfo.rechargeBalance = data.rechargeBalance;
+                    self.userInfo.winnerPaid = data.winnerPaid;
+                    self.userInfo.balance = (data.rechargeBalance * 100 + data.winnerPaid * 100) / 100;
                 }
-
             }).error(function (error) {
                 //$log.error('getAccountInfo-error', error)
             });
