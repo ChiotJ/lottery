@@ -93,9 +93,6 @@ angular.module('kuai3')
                     },
                     enter: function (item) {
                         scope.random();
-                    },
-                    back: function (item) {
-                        scope.$emit('isShowIndexMenu', true);
                     }
                 });
                 $timeout(function () {
@@ -157,9 +154,6 @@ angular.module('kuai3')
                                 $(item).find('div').addClass('choose');
                             }
                         },
-                        back: function (item) {
-                            scope.$emit('isShowIndexMenu', true);
-                        }
                     });
                 }
             }
@@ -222,9 +216,6 @@ angular.module('kuai3')
                                 element.parent().find('.choose').removeClass('choose');
                                 $(item).find('div').addClass('choose');
                             }
-                        },
-                        back: function (item) {
-                            scope.$emit('isShowIndexMenu', true);
                         }
                     });
                 }
@@ -282,9 +273,6 @@ angular.module('kuai3')
                                 element.parent().find('.choose').removeClass('choose');
                                 $(item).find('div').addClass('choose');
                             }
-                        },
-                        back: function (item) {
-                            scope.$emit('isShowIndexMenu', true);
                         }
                     });
                 }
@@ -324,9 +312,6 @@ angular.module('kuai3')
                             });
                         }
 
-                    },
-                    back: function (item) {
-                        scope.$emit('isShowIndexMenu', true);
                     }
                 });
             }

@@ -183,7 +183,13 @@ routerApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvid
                         ]
                     }]);
                 }]
-            }
+            },
+            onEnter: ['$rootScope', function ($rootScope) {
+                $rootScope.$broadcast('isShowIndexMenu', false);
+            }],
+            onExit: ['$rootScope', function ($rootScope) {
+                $rootScope.$broadcast('isShowIndexMenu', true);
+            }]
         })
         .state('kuai3Buy.hezhi', {
             url: '/kuai3/buy/hezhi',
@@ -284,7 +290,13 @@ routerApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvid
                         ]
                     }]);
                 }]
-            }
+            },
+            onEnter: ['$rootScope', function ($rootScope) {
+                $rootScope.$broadcast('isShowIndexMenu', false);
+            }],
+            onExit: ['$rootScope', function ($rootScope) {
+                $rootScope.$broadcast('isShowIndexMenu', true);
+            }]
         })
 
 }]);

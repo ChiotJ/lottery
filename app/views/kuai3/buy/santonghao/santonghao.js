@@ -80,9 +80,6 @@ angular.module('kuai3')
                                     }
                                 });
                             }
-                        },
-                        back: function (item) {
-                            scope.$emit('isShowIndexMenu', true);
                         }
                     });
                     $timeout(function () {

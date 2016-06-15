@@ -10,7 +10,6 @@ angular.module('kuai3')
             current: kuai3Service.current
         };
 
-        $scope.$emit('isShowIndexMenu', false);
 
         NProgress.done();
     }]);
