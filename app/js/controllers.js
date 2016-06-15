@@ -160,7 +160,7 @@ app.controller('userCtrl', ["$scope", '$state', '$log', 'userService', function 
             "text": "我的投注",
             "enter": function () {
                 $log.debug("我的投注");
-                if (userService.userId) {
+                if (userService.userInfo.userId) {
                     if ($(".pageMyBetting").length < 1)
                         $state.go("myBetting");
                 } else {
