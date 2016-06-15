@@ -24,55 +24,55 @@ angular.module('app')
         $scope.userInfo = [
             {
                 'title': "用户名",
-                'value': userService.nickName
+                'value': userService.userInfo.nickName
             },
             {
                 'title': "账户余额",
-                'value': userService.balance()
+                'value': userService.userInfo.balance
             },
             {
                 'title': "真实姓名",
-                'value': encrypt(userService.realName, 1)
+                'value': encrypt(userService.userInfo.realName, 1)
             },
             {
                 'title': "充值余额",
-                'value': userService.rechargeBalance + "元"
+                'value': userService.userInfo.rechargeBalance + "元"
             },
             {
                 'title': "身份证号码",
-                'value': encrypt(userService.certificateNum, 1, 1)
+                'value': encrypt(userService.userInfo.certificateNum, 1, 1)
             },
             {
                 'title': "奖金余额",
-                'value': userService.winnerPaid + "元"
+                'value': userService.userInfo.winnerPaid + "元"
             },
             {
                 'title': "手机号码",
-                'value': encrypt(userService.phone, 3, 4)
+                'value': encrypt(userService.userInfo.phone, 3, 4)
             },
             {
                 'title': "可提现金额",
-                'value': userService.winnerPaid + "元"
+                'value': userService.userInfo.winnerPaid + "元"
             },
             {
                 'title': "开户银行",
-                'value': userService.bankType
+                'value': userService.userInfo.bankType
             },
             {
                 'title': "级别",
-                'value': userService.userLever
+                'value': userService.userInfo.userLever
             },
             {
                 'title': "银行卡号",
-                'value': encrypt(userService.bankCardNo, 0, 4)
+                'value': encrypt(userService.userInfo.bankCardNo, 0, 4)
             },
             {
                 'title': "积分",
-                'value': userService.bounds
+                'value': userService.userInfo.bounds
             },
             {
                 'title': "投注账号",
-                'value': userService.wagerCard
+                'value': userService.userInfo.wagerCard
             }
         ];
 

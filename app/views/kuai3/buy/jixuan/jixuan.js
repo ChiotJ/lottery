@@ -79,7 +79,7 @@ angular.module('kuai3')
                     enter: function (item) {
                         if (kuai3Service.current.canBetting) {
                             var index = $(item).index();
-                            if (userService.userId) {
+                            if (userService.userInfo.userId) {
                                 scope.$parent.betting(index);
                             } else {
                                 scope.$emit('notLogin');

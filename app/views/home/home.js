@@ -36,7 +36,7 @@ angular.module('app')
                 "id": "6",
                 "enter": function () {
                     $log.debug("我的账户");
-                    if (userService.userId) {
+                    if (userService.userInfo.userId) {
                         $state.go("myAccount");
                     } else {
                         $scope.$emit('notLogin');

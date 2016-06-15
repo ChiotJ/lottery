@@ -23,7 +23,7 @@ angular.module('kuai3')
                     element: element.parent(),
                     enter: function (item) {
                         if (kuai3Service.current.canBetting) {
-                            if (userService.userId) {
+                            if (userService.userInfo.userId) {
                                 scope.$parent.betting();
                             } else {
                                 scope.$emit('notLogin');
