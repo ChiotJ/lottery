@@ -28,6 +28,13 @@
 .pageLogin .left .qrcode {
     width: 140px;
     height: 140px;
+    display: block;
+    margin:0 auto;
+}
+
+.pageLogin .left .qrcode img {
+    width: 140px;
+    height: 140px;
 }
 
 .pageLogin .left .notice {

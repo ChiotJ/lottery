@@ -1,6 +1,8 @@
 angular.module('app')
-    .controller('loginCtrl', ['$scope', '$log', '$state', function ($scope, $log, $state) {
+    .controller('loginCtrl', ['$scope', '$log', '$state', 'cardId', function ($scope, $log, $state, cardId) {
         $scope.pageClass = "pageLogin";
+
+        $scope.qrCode = 'http://172.16.188.13/api/common/Image/qrCode.png?text=http://t.cn/RG8jxjR?deviceNo=' + cardId + '&size=140';
 
         $scope.credentials = {
             username: "",
