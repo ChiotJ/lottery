@@ -258,7 +258,8 @@
     height: 90px;
     line-height: 90px;
     margin: 0 70px;
-    font-size: 78px;
+    font-size: 60px;
+    letter-spacing: 10px;
 }
 
 .pageKuai3OrderConfirm .bettingPassword .notice {

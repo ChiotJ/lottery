@@ -39,9 +39,9 @@ fuCaiService.factory('kuai3Service', ['$interval', '$timeout', '$log', '$http', 
                         if (time) {
                             time = time.split(":");
                             self.current.remainingTime = {
-                                h: time[0],
-                                m: time[1],
-                                s: time[2]
+                                h: "00",
+                                m: "10",
+                                s: "00"
                             };
 
                             self.loadInterval && $interval.cancel(self.loadInterval);

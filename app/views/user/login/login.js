@@ -51,6 +51,11 @@ angular.module('app')
                                 username: "18810607299",
                                 password: "123456"
                             };
+                            scope.$emit('showNotice', {
+                                title: "提示",
+                                content: "登录中",
+                                bottom: "如长时间未响应，请稍后再试"
+                            });
                             userService.login(scope.credentials).then(function success() {
                                 scope.$emit('showNotice', {
                                     title: "提示",

@@ -21,12 +21,14 @@ angular.module('app')
                 if (this.current < 2) {
                     return;
                 }
+                keyListener.focus('myBetting');
                 getMyBetting((this.current - 2), this.size);
             },
             next: function () {
                 if (this.current > (this.total - 1)) {
                     return;
                 }
+                keyListener.focus('myBetting');
                 getMyBetting((this.current), this.size);
             },
             calTotal: function (current, total) {
@@ -203,54 +205,55 @@ angular.module('app')
             scope: {},
             link: function (scope, element, attrs) {
                 if (scope.$parent.$last) {
-                    keyListener.listKeyListener({
-                        element: element.parent().parent().parent(),
-                        id: "myBettingList",
-                        label: ".detail",
-                        columnNum: 1,
-                        up: {
-                            before: function (item) {
-                                var idx = keyListener.index['myBettingList'];
-                                if (idx == 0) {
-                                    keyListener.focus('myBetting');
-                                    return false;
-                                } else {
-                                    if (idx % 5 == 0) {
-                                        scope.$emit('prevPage');
+                    $timeout(function () {
+                        keyListener.listKeyListener({
+                            element: element.parent().parent().parent(),
+                            id: "myBettingList",
+                            label: ".detail",
+                            columnNum: 1,
+                            up: {
+                                before: function (item) {
+                                    var idx = keyListener.index['myBettingList'];
+                                    if (idx == 0) {
+                                        keyListener.focus('myBetting');
+                                        return false;
+                                    } else {
+                                        if (idx % 5 == 0) {
+                                            scope.$emit('prevPage');
+                                        }
                                     }
                                 }
-                            }
-                        },
-                        pageUp: function () {
-                            keyListener.focus('myBetting');
-                            scope.$parent.pageInfo.prev();
-                        },
-                        pageDown: function () {
-                            keyListener.focus('myBetting');
-                            scope.$parent.pageInfo.next();
-                        },
-                        down: {
-                            before: function (item) {
-                                var idx = keyListener.index['myBettingList'];
-                                if ((idx + 1) == keyListener.size['myBettingList']) {
-                                    return false;
-                                } else {
-                                    if ((idx + 1) % 5 == 0) {
-                                        scope.$emit('nextPage');
+                            },
+                            pageUp: function () {
+                                scope.$parent.pageInfo.prev();
+                            },
+                            pageDown: function () {
+                                scope.$parent.pageInfo.next();
+                            },
+                            down: {
+                                before: function (item) {
+                                    var idx = keyListener.index['myBettingList'];
+                                    if ((idx + 1) == keyListener.size['myBettingList']) {
+                                        return false;
+                                    } else {
+                                        if ((idx + 1) % 5 == 0) {
+                                            scope.$emit('nextPage');
+                                        }
                                     }
+
                                 }
+                            },
+                            enter: function (item) {
+                                var idx = keyListener.index['myBettingList'];
+                                scope.$parent.showDetailTable(idx);
+                                $timeout(function () {
+                                    keyListener.focus('detailTable');
+                                }, 100);
 
                             }
-                        },
-                        enter: function (item) {
-                            var idx = keyListener.index['myBettingList'];
-                            scope.$parent.showDetailTable(idx);
-                            $timeout(function () {
-                                keyListener.focus('detailTable');
-                            }, 100);
-
-                        }
+                        });
                     });
+
                 }
             }
         };

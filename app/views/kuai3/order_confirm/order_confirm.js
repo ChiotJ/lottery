@@ -108,7 +108,7 @@ angular.module('kuai3')
                 if (length < 6) {
                     var self = this;
                     this.password += num;
-                    this.inputPassword += '•';
+                    this.inputPassword += '*';
                     length++;
                     this.notice = '请输入6位投注密码';
                     if (length == 6) {
