@@ -1,5 +1,5 @@
 angular.module('app')
-    .controller('myBettingCtrl', ['$scope', '$log', '$state', '$timeout', 'userService', function ($scope, $log, $state, $timeout, userService) {
+    .controller('myBettingCtrl', ['$scope', '$log', '$state', '$timeout', 'userService', 'keyListener', function ($scope, $log, $state, $timeout, userService, keyListener) {
         $scope.pageClass = "pageMyBetting";
 
         $scope.lotteryList = [
@@ -13,32 +13,63 @@ angular.module('app')
             }
         ];
 
+        $scope.pageInfo = {
+            current: 0,
+            total: 0,
+            size: 5,
+            prev: function () {
+                if (this.current < 2) {
+                    return;
+                }
+                getMyBetting((this.current - 2), this.size);
+            },
+            next: function () {
+                if (this.current > (this.total - 1)) {
+                    return;
+                }
+                getMyBetting((this.current), this.size);
+            },
+            calTotal: function (current, total) {
+                this.current = current + 1;
+                if (total % this.size == 0) {
+                    this.total = total / this.size;
+                } else {
+                    this.total = parseInt(total / this.size) + 1;
+                }
+            }
+        };
+
         $scope.detailList = [];
 
         var detailListIscroll = null;
 
-        userService.getMyBetting('Qck3', 0, 200)
-            .success(function (data) {
-                if (data.success) {
-                    $scope.detailList = data.result.orderResults;
-                    $timeout(function () {
-                        if (detailListIscroll) {
-                            detailListIscroll.refresh();
-                        } else {
-                            detailListIscroll = new IScroll('#detailList', {
-                                mouseWheel: true,
-                                bounce: false,
-                                scrollbars: true,
-                                snap: true
-                            });
-                        }
-                    }, 100);
-                }
-            })
-            .error(function (error) {
-                //$log.error(error);
-            });
+        function getMyBetting(current, size) {
+            userService.getMyBetting('Qck3', current, size)
+                .success(function (data) {
+                    if (data.success) {
+                        $scope.detailList = data.result.orderResults;
+                        $scope.pageInfo.calTotal(current, data.result.totals);
+                        $timeout(function () {
+                            if (detailListIscroll) {
+                                detailListIscroll.refresh();
+                            } else {
+                                detailListIscroll = new IScroll('#detailList', {
+                                    mouseWheel: true,
+                                    bounce: false,
+                                    scrollbars: true,
+                                    snap: true
+                                });
+                            }
 
+                        }, 100);
+                    }
+                })
+                .error(function (error) {
+                    //$log.error(error);
+                });
+        }
+
+        getMyBetting(0, 5);
 
         $scope.$on('prevPage', function (e) {
             detailListIscroll.prev(0);
@@ -144,6 +175,12 @@ angular.module('app')
                             $(".choose").removeClass("choose");
                             $(item).addClass("choose");
                         },
+                        pageUp: function () {
+                            scope.$parent.pageInfo.prev();
+                        },
+                        pageDown: function () {
+                            scope.$parent.pageInfo.next();
+                        },
                         up: function () {
                             keyListener.focus('indexMenu');
                             return false;
@@ -178,11 +215,19 @@ angular.module('app')
                                     keyListener.focus('myBetting');
                                     return false;
                                 } else {
-                                    if (idx % 6 == 0) {
+                                    if (idx % 5 == 0) {
                                         scope.$emit('prevPage');
                                     }
                                 }
                             }
+                        },
+                        pageUp: function () {
+                            keyListener.focus('myBetting');
+                            scope.$parent.pageInfo.prev();
+                        },
+                        pageDown: function () {
+                            keyListener.focus('myBetting');
+                            scope.$parent.pageInfo.next();
                         },
                         down: {
                             before: function (item) {
@@ -190,7 +235,7 @@ angular.module('app')
                                 if ((idx + 1) == keyListener.size['myBettingList']) {
                                     return false;
                                 } else {
-                                    if ((idx + 1) % 6 == 0) {
+                                    if ((idx + 1) % 5 == 0) {
                                         scope.$emit('nextPage');
                                     }
                                 }

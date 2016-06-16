@@ -1,3 +1,6 @@
+<div class="pageTitle">
+    我的投注
+</div>
 <div class="main">
     <div class="top">
         <ul>
@@ -43,7 +46,13 @@
         </div>
     </div>
 
+    <div class="pageCtrl">
+        <img src="imgs/common/pageUp.png" alt="" class="pageUp">
+        <div class="pageDetail">{{pageInfo.current}}/{{pageInfo.total}}</div>
+        <img src="imgs/common/pageDown.png" alt="" class="pageDown">
+    </div>
 </div>
+
 
 <div tabindex="-1" detail-table class="detailTable" ng-class="{opacityShow:detailTable.isShow}"
      ng-show="detailTable.isShow">

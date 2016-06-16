@@ -28,6 +28,7 @@ serviceApp.factory("keyListener", ['$log', function ($log) {
         index: {},
         size: {},
         element: {},
+        options: {},
         focus: function (id, index) {
             if (typeof id === "string" && this.element[id]) {
                 var element = this.element[id];
@@ -157,9 +158,13 @@ serviceApp.factory("keyListener", ['$log', function ($log) {
                 children = label ? element.find(label) : element.children(),
                 length = children.length;
             if (id) {
+                if (this.options[id]) {
+                    element.unbind('keydown');
+                }
                 this.index[id] = 0;
                 this.size[id] = length;
                 this.element[id] = children;
+                this.options[id] = options;
             }
 
 
@@ -171,7 +176,7 @@ serviceApp.factory("keyListener", ['$log', function ($log) {
                 if (idx > 0) {
                     idx--;
                 } else {
-                    idx = length - 1;
+                    idx = self.size[id] - 1;
                 }
                 self.index[id] = idx;
                 $(children[idx]).attr('tabindex', -1).focus();
@@ -195,13 +200,13 @@ serviceApp.factory("keyListener", ['$log', function ($log) {
                 if (idx > columnNum - 1) {
                     idx -= columnNum;
                 } else {
-                    if (idx > ((length - 1) % columnNum)) {
-                        idx = length - 1;
+                    if (idx > ((self.size[id] - 1) % columnNum)) {
+                        idx = self.size[id] - 1;
                     } else {
-                        if (length % columnNum == 0) {
-                            idx = length - (columnNum - idx);
+                        if (self.size[id] % columnNum == 0) {
+                            idx = self.size[id] - (columnNum - idx);
                         } else {
-                            idx = parseInt(length / columnNum) * columnNum + idx;
+                            idx = parseInt(self.size[id] / columnNum) * columnNum + idx;
                         }
                     }
                 }
@@ -224,7 +229,7 @@ serviceApp.factory("keyListener", ['$log', function ($log) {
                 if (id) {
                     idx = self.index[id]
                 }
-                if (idx < length - 1) {
+                if (idx < self.size[id] - 1) {
                     idx++;
                 } else {
                     idx = 0;
@@ -249,11 +254,11 @@ serviceApp.factory("keyListener", ['$log', function ($log) {
                 if (id) {
                     idx = self.index[id]
                 }
-                if (idx < length - columnNum) {
+                if (idx < self.size[id] - columnNum) {
                     idx += columnNum;
                 } else {
-                    if (parseInt((length - 1) / columnNum) > parseInt(idx / columnNum)) {
-                        idx = length - 1;
+                    if (parseInt((self.size[id] - 1) / columnNum) > parseInt(idx / columnNum)) {
+                        idx = self.size[id] - 1;
                     } else {
                         idx = idx % columnNum;
                     }
