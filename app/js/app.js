@@ -13,3 +13,7 @@ var app = angular.module('app', [
 app.config(['$logProvider', function ($logProvider) {
     $logProvider.debugEnabled(true);
 }]);
+
+app.run(['wsService', function (wsService) {
+    wsService.init();
+}]);

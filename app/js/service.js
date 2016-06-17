@@ -446,7 +446,91 @@ angular.module("serviceApp", [])
             }
         }
     }])
-    .factory("wsService", ['$q', '$log', 'cardId', 'dataRequest', function ($q, $log, cardId, dataRequest) {
-        return {}
+    .factory("wsService", ['$timeout', '$interval', '$log', 'cardId', 'apiUrl', 'userService', function ($timeout, $interval, $log, cardId, apiUrl, userService) {
+        var commonWS = {
+            isOpen: false,
+            sock: null,
+            client: null,
+            connect: function () {
+                var sock = new SockJS(apiUrl.api_lottery + "tv/api/ws?authToken=" + cardId);
+                var client = Stomp.over(sock);
+
+                client.debug = function (msg) {
+                    //console.debug(msg)
+                };
+
+                client.connect({}, function () {
+                    client.subscribe('/user/queue/actions', function (data) {
+                        data = JSON.parse(data.body);
+                        $log.debug(data);
+                    });
+
+                });
+                this.sock = sock;
+                this.client = client;
+            },
+            disconnect: function () {
+                this.client.disconnect(function () {
+                });
+            }
+        };
+
+        var userWS = {
+            isOpen: false,
+            sock: null,
+            client: null,
+            token: "",
+            connect: function (token) {
+                var sock = new SockJS(apiUrl.api_lottery + "tv/api/ws?authToken=" + token),
+                    client = Stomp.over(sock), self = this;
+
+                self.token = token;
+
+                client.debug = function (msg) {
+                    $log.debug("userWS", msg);
+                    //console.debug(msg)
+                };
+
+                client.connect({}, function () {
+                    self.isOpen = true;
+                    client.subscribe('/user/queue/actions', function (data) {
+                        data = JSON.parse(data.body);
+                        $log.debug(data);
+                        userService.getAccountInfo();
+                    });
+
+                }, function (err) {
+                    self.isOpen = false;
+                    $timeout(function () {
+                        self.connect(token);
+                    }, 5000);
+                    $log.debug("userWSError", err);
+                });
+
+
+                this.sock = sock;
+                this.client = client;
+            },
+            disconnect: function () {
+                this.client.disconnect(function () {
+                });
+            }
+        };
+
+
+        function init() {
+            $interval(function () {
+                if (commonWS.isOpen) {
+                    //commonWS.connect();
+                }
+                if (!angular.equals(userWS.token, userService.token)) {
+                    userWS.connect(userService.token);
+                }
+            }, 5000);
+        }
+
+        return {
+            init: init
+        }
     }]);
 
