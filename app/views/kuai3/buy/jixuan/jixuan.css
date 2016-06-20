@@ -19,7 +19,7 @@
 .pageKuai3Buy > .middle .jixuan .random_renxuan .craps {
     width: 84px;
     height: 20px;
-    background: url("../imgs/kuai3/craps_random_renxuan2.png") no-repeat;
+    background: url("../../../../imgs/kuai3/craps_random_renxuan2.png") no-repeat;
     margin: 25px auto 15px;
 }
 
@@ -38,7 +38,7 @@
 }
 
 .pageKuai3Buy > .middle .jixuan .random_renxuan:focus .craps {
-    background: url("../imgs/kuai3/craps_random_renxuan2_focus.png") no-repeat;
+    background: url("../../../../imgs/kuai3/craps_random_renxuan2_focus.png") no-repeat;
 }
 
 .pageKuai3Buy > .middle .jixuan .random_renxuan:focus .title {
@@ -52,7 +52,7 @@
 .pageKuai3Buy > .middle .jixuan .random_hezhi .craps {
     width: 84px;
     height: 20px;
-    background: url("../imgs/kuai3/craps_random_hezhi.png") no-repeat;
+    background: url("../../../../imgs/kuai3/craps_random_hezhi.png") no-repeat;
     margin: 25px auto 15px;
 }
 
@@ -71,7 +71,7 @@
 }
 
 .pageKuai3Buy > .middle .jixuan .random_hezhi:focus .craps {
-    background: url("../imgs/kuai3/craps_random_hezhi_focus.png") no-repeat;
+    background: url("../../../../imgs/kuai3/craps_random_hezhi_focus.png") no-repeat;
 }
 
 .pageKuai3Buy > .middle .jixuan .random_hezhi:focus .title {

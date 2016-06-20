@@ -4,7 +4,7 @@
             上期
         </div>
         <div class="craps">
-            <img ng-repeat="c in info.last.craps  track by $index" src="imgs/kuai3/craps_{{c}}.png" alt="">
+            <img ng-repeat="c in info.last.craps  track by $index" ng-src="imgs/kuai3/craps_{{c}}.png" alt="">
         </div>
         <div class="notice">
             和值：{{info.last.sum}}
@@ -37,7 +37,7 @@
 <div class="bottom">
     <ul>
         <li kuai3-index-menu-key-listener ng-repeat="menu in menus" tabindex="-1">
-            <img src="imgs/kuai3/{{menu.id}}.png" alt="">
+            <img ng-src="imgs/kuai3/{{menu.id}}.png" alt="">
         </li>
     </ul>
 </div>
