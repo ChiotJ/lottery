@@ -148,6 +148,10 @@
     overflow: hidden;
 }
 
+.pageMyBetting .main .pageCtrl div .red {
+    color: #E72432;
+}
+
 .pageMyBetting .detailTable {
     width: 508px;
     height: 430px;

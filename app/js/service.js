@@ -325,6 +325,18 @@ angular.module("serviceApp", [])
                     }
                 });
             },
+            getMyBill: function (token, billType, pageNum, pagzSize) {
+                return $http.get(apiUrl.api_lottery + "myBill", {
+                    headers: {
+                        'x-auth-token': token
+                    },
+                    params: {
+                        'billType': billType,
+                        'pageNumber': pageNum,
+                        'pagzSize': pagzSize
+                    }
+                });
+            },
             getPrePeriodWins: function (name) {
                 return $http.get(apiUrl.api_lottery + "getPrePeriodWins", {
                     params: {
@@ -441,6 +453,12 @@ angular.module("serviceApp", [])
             getMyBetting: function (name, pageNum, pagzSize) {
                 return dataRequest.getMyBetting(this.token, name, pageNum, pagzSize);
             },
+            getMyRechargeRecord: function (pageNum, pagzSize) {
+                return dataRequest.getMyBill(this.token, 1, pageNum, pagzSize);
+            },
+            getMyWithdrawMoneyRecord:function (pageNum, pagzSize) {
+                return dataRequest.getMyBill(this.token, 2, pageNum, pagzSize);
+            },
             validateBettingPassword: function (password) {
                 return dataRequest.validateBettingPassword(this.token, password)
             }
@@ -452,19 +470,28 @@ angular.module("serviceApp", [])
             sock: null,
             client: null,
             connect: function () {
-                var sock = new SockJS(apiUrl.api_lottery + "tv/api/ws?authToken=" + cardId);
-                var client = Stomp.over(sock);
+                var sock = new SockJS(apiUrl.api_lottery + "tv/api/ws?tvCard=" + cardId),
+                    client = Stomp.over(sock), self = this;
 
                 client.debug = function (msg) {
-                    //console.debug(msg)
+                    //$log.debug("commonWS", msg);
                 };
 
                 client.connect({}, function () {
+                    self.isOpen = true;
                     client.subscribe('/user/queue/actions', function (data) {
-                        data = JSON.parse(data.body);
                         $log.debug(data);
+                        data = JSON.parse(data.body);
+                        if (angular.equals(data.action, 'logined')) {
+                            userService.token = data.props.token;
+                            userService.getAccountInfo();
+                            history.back();
+                        }
+
                     });
 
+                }, function () {
+                    self.isOpen = false;
                 });
                 this.sock = sock;
                 this.client = client;
@@ -487,8 +514,7 @@ angular.module("serviceApp", [])
                 self.token = token;
 
                 client.debug = function (msg) {
-                    $log.debug("userWS", msg);
-                    //console.debug(msg)
+                    //$log.debug("userWS", msg);
                 };
 
                 client.connect({}, function () {
@@ -519,12 +545,21 @@ angular.module("serviceApp", [])
 
 
         function init() {
+            commonWS.connect();
             $interval(function () {
-                if (commonWS.isOpen) {
-                    //commonWS.connect();
+                if (!commonWS.isOpen) {
+                    commonWS.connect();
                 }
                 if (!angular.equals(userWS.token, userService.token)) {
-                    userWS.connect(userService.token);
+                    if (userWS.isOpen) {
+                        userWS.disconnect();
+                        $timeout(function () {
+                            userWS.connect(userService.token);
+                        }, 500);
+                    } else {
+                        userWS.connect(userService.token);
+                    }
+
                 }
             }, 5000);
         }

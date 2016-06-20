@@ -115,6 +115,38 @@ routerApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvid
                 }]
             }
         })
+        .state('myRechargeRecord', {
+            url: '/myRechargeRecord',
+            templateUrl: 'views/user/myRechargeRecord/myRechargeRecord.html',
+            controller: 'myRechargeRecordCtrl',
+            controllerAs: 'myRechargeRecord',
+            resolve: {
+                deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([{
+                        files: [
+                            'views/user/myRechargeRecord/myRechargeRecord.js',
+                            'views/user/myRechargeRecord/myRechargeRecord.css'
+                        ]
+                    }]);
+                }]
+            }
+        })
+        .state('myWithdrawMoneyRecord', {
+            url: '/myWithdrawMoneyRecord',
+            templateUrl: 'views/user/myWithdrawMoneyRecord/myWithdrawMoneyRecord.html',
+            controller: 'myWithdrawMoneyRecordCtrl',
+            controllerAs: 'myWithdrawMoneyRecord',
+            resolve: {
+                deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([{
+                        files: [
+                            'views/user/myWithdrawMoneyRecord/myWithdrawMoneyRecord.js',
+                            'views/user/myWithdrawMoneyRecord/myWithdrawMoneyRecord.css'
+                        ]
+                    }]);
+                }]
+            }
+        })
         .state('myAccount', {
             url: '/myAccount',
             templateUrl: 'views/user/myAccount/myAccount.html',

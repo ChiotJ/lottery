@@ -14,33 +14,34 @@
     width: 306px;
     height: 288px;
     color: #1f1f1f;
+    overflow: hidden;
 }
 
 .pageLogin .left .title {
-    height: 50px;
-    line-height: 50px;
+    height: 40px;
+    line-height: 40px;
     font-size: 22px;
     width: 266px;
-    margin: 10px 20px;
+    margin: 10px 20px 0;
     text-align: center;
 }
 
 .pageLogin .left .qrcode {
-    width: 140px;
-    height: 140px;
+    width: 180px;
+    height: 180px;
     display: block;
     margin:0 auto;
 }
 
 .pageLogin .left .qrcode img {
-    width: 140px;
-    height: 140px;
+    width: 180px;
+    height: 180px;
 }
 
 .pageLogin .left .notice {
     width: 306px;
-    height: 50px;
-    line-height: 50px;
+    height: 40px;
+    line-height: 40px;
     text-align: center;
 }
 

@@ -1,0 +1,130 @@
+.pageMyRechargeRecord .pageTitle {
+    width: 1202px;
+    height: 70px;
+    line-height: 70px;
+    font-size: 30px;
+    margin: 0 auto;
+}
+
+.pageMyRechargeRecord .main {
+    width: 1202px;
+    height: 500px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.pageMyRechargeRecord .main .table {
+    width: 1201px;
+    height: 442px;
+    border: 1px solid #DFDFDF;
+    border-left: none;
+    overflow: hidden;
+    position: relative;
+}
+
+.pageMyRechargeRecord .main .table .thead {
+    height: 46px;
+    line-height: 46px;
+    text-align: center;
+    color: #828282;
+    font-size: 18px;
+    letter-spacing: 1px;
+    background: #F1f1f1;
+    width: 100%;
+    overflow: hidden;
+}
+
+.pageMyRechargeRecord .main .table .thead div {
+    float: left;
+    border-width: 0 0 1px 1px;
+    border-style: solid;
+    border-color: #DFDFDF;
+    width: 170px;
+}
+
+.pageMyRechargeRecord .main .table .tbody {
+    width: 1200px;
+    height: 396px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #DFDFDF;
+    background: #FFFFFF;
+}
+
+.pageMyRechargeRecord .main .table .tbody li {
+    width: 1201px;
+    height: 66px;
+    overflow: hidden;
+}
+
+.pageMyRechargeRecord .main .table .tbody li > div {
+    float: left;
+    border-right: 1px solid transparent;
+    border-bottom: 1px solid #DFDFDF;
+    font-size: 18px;
+    height: 65px;
+    line-height: 65px;;
+    width: 170px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.pageMyRechargeRecord .main .table .tbody li .red {
+    color: #E72432;
+}
+
+.pageMyRechargeRecord .main .table .tbody li .green {
+    color: #89DC5C;
+}
+
+.pageMyRechargeRecord .main .table .tbody li .logo {
+    margin-top: 7px;
+    width: 76px;
+    height: 50px;
+}
+
+.pageMyRechargeRecord .main .table .tbody li .detail {
+    width: 80px;
+    height: 30px;
+    line-height: 30px;
+    margin: 17px auto;
+    background: #E72432;
+    color: #FFFFFF;
+}
+
+.pageMyRechargeRecord .main .table .tbody li .detail:focus {
+    background-color: #890a14;
+}
+
+.pageMyRechargeRecord .main .pageCtrl {
+    width: 338px;
+    height: 42px;
+    margin: 6px auto;
+}
+
+.pageMyRechargeRecord .main .pageCtrl img {
+    width: 104px;
+    height: 38px;
+    float: left;
+    padding: 1px 4px;
+    border: 1px solid transparent;
+}
+
+.pageMyRechargeRecord .main .pageCtrl img:focus {
+    border: 1px solid #E72432;
+}
+
+.pageMyRechargeRecord .main .pageCtrl div {
+    float: left;
+    margin: 2px 20px;
+    height: 38px;
+    line-height: 38px;
+    text-align: center;
+    width: 70px;
+    font-size: 20px;
+    overflow: hidden;
+}
+
+.pageMyRechargeRecord .main .pageCtrl div .red {
+    color: #E72432;
+}

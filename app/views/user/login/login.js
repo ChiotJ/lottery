@@ -1,8 +1,8 @@
 angular.module('app')
-    .controller('loginCtrl', ['$scope', '$log', '$state', 'cardId', function ($scope, $log, $state, cardId) {
+    .controller('loginCtrl', ['$scope', '$log', '$state', 'cardId', 'apiUrl', function ($scope, $log, $state, cardId, apiUrl) {
         $scope.pageClass = "pageLogin";
 
-        $scope.qrCode = 'http://172.16.188.13/api/common/Image/qrCode.png?text=http://t.cn/RG8jxjR?cardId=' + cardId + '&size=140';
+        $scope.qrCode = apiUrl.api_lottery + 'getLoginBarCode?tvCard=' + cardId;
 
         $scope.credentials = {
             username: "",

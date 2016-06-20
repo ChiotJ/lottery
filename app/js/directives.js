@@ -29,6 +29,10 @@ app.directive('indexMenuKeyListener', ['$log', 'keyListener', function ($log, ke
                             keyListener.focus('myBetting');
                         } else if ($(".pageMyAccount").length > 0) {
                             keyListener.focus('myAccountMenu');
+                        } else if ($(".pageMyRechargeRecord").length > 0) {
+                            $($("#pageCtrl").find('img')[0]).focus();
+                        } else if ($(".pageMyWithdrawMoneyRecord").length > 0) {
+                            $($("#pageCtrl").find('img')[0]).focus();
                         }
 
                         return false;

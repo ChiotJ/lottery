@@ -48,6 +48,7 @@ angular.module('app')
         function getMyBetting(current, size) {
             userService.getMyBetting('Qck3', current, size)
                 .success(function (data) {
+                    $log.debug(data);
                     if (data.success) {
                         $scope.detailList = data.result.orderResults;
                         $scope.pageInfo.calTotal(current, data.result.totals);
@@ -74,12 +75,12 @@ angular.module('app')
         getMyBetting(0, 5);
 
         $scope.$on('prevPage', function (e) {
-            detailListIscroll.prev(0);
+            detailListIscroll.prev();
         });
 
 
         $scope.$on('nextPage', function (e) {
-            detailListIscroll.next(0);
+            detailListIscroll.next();
         });
 
 

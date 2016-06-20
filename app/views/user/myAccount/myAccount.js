@@ -82,6 +82,7 @@ angular.module('app')
                 "title": "充值记录",
                 "enter": function () {
                     $log.debug("充值记录");
+                    $state.go('myRechargeRecord');
                 }
             },
             {
@@ -100,6 +101,7 @@ angular.module('app')
                 "title": "提现记录",
                 "enter": function () {
                     $log.debug("提现记录");
+                    $state.go('myWithdrawMoneyRecord');
                 }
             },
             {
