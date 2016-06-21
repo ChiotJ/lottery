@@ -456,7 +456,7 @@ angular.module("serviceApp", [])
             getMyRechargeRecord: function (pageNum, pagzSize) {
                 return dataRequest.getMyBill(this.token, 1, pageNum, pagzSize);
             },
-            getMyWithdrawMoneyRecord:function (pageNum, pagzSize) {
+            getMyWithdrawMoneyRecord: function (pageNum, pagzSize) {
                 return dataRequest.getMyBill(this.token, 2, pageNum, pagzSize);
             },
             validateBettingPassword: function (password) {

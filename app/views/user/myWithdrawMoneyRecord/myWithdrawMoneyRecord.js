@@ -76,22 +76,18 @@ angular.module('app')
 
         NProgress.done();
     }])
-    .directive('myWithdrawMoneyRecordKeyListener', ['$log', '$timeout', '$state', 'keyListener', 'userService', function ($log, $timeout, $state, keyListener, userService) {
+    .directive('pageCtrlKeyListener', ['$log', '$timeout', '$state', 'keyListener', 'userService', function ($log, $timeout, $state, keyListener, userService) {
         return {
             restrict: 'A',
             scope: {},
             link: function (scope, element, attrs) {
-                keyListener.keyListener({
-                    element: element,
-                    id: "myWithdrawMoneyRecord",
+                keyListener.listKeyListener({
+                    element: element.parent(),
+                    id: "pageCtrl",
+                    label: "img",
+                    columnNum: 2,
                     up: function () {
                         keyListener.focus('indexMenu');
-                    },
-                    left: function () {
-                        $(element.find('img')[0]).focus();
-                    },
-                    right: function () {
-                        $(element.find('img')[1]).focus();
                     },
                     pageUp: function () {
                         scope.$parent.pageInfo.prev();
@@ -110,7 +106,7 @@ angular.module('app')
                 });
 
                 $timeout(function () {
-                    $(element.find('img')[0]).focus();
+                    element.focus();
                 }, 700);
             }
         };

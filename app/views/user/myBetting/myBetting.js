@@ -17,18 +17,23 @@ angular.module('app')
             current: 0,
             total: 0,
             size: 5,
-            prev: function () {
+            prev: function (isSwitch) {
                 if (this.current < 2) {
                     return;
                 }
-                keyListener.focus('myBetting');
+                if (isSwitch) {
+                    keyListener.focus('myBetting');
+                }
+
                 getMyBetting((this.current - 2), this.size);
             },
-            next: function () {
+            next: function (isSwitch) {
                 if (this.current > (this.total - 1)) {
                     return;
                 }
-                keyListener.focus('myBetting');
+                if (isSwitch) {
+                    keyListener.focus('myBetting');
+                }
                 getMyBetting((this.current), this.size);
             },
             calTotal: function (current, total) {
@@ -226,15 +231,16 @@ angular.module('app')
                                 }
                             },
                             pageUp: function () {
-                                scope.$parent.pageInfo.prev();
+                                scope.$parent.pageInfo.prev(true);
                             },
                             pageDown: function () {
-                                scope.$parent.pageInfo.next();
+                                scope.$parent.pageInfo.next(true);
                             },
                             down: {
                                 before: function (item) {
                                     var idx = keyListener.index['myBettingList'];
                                     if ((idx + 1) == keyListener.size['myBettingList']) {
+                                        keyListener.focus('pageCtrl');
                                         return false;
                                     } else {
                                         if ((idx + 1) % 5 == 0) {
@@ -256,6 +262,37 @@ angular.module('app')
                     });
 
                 }
+            }
+        };
+    }])
+    .directive('pageCtrlKeyListener', ['$log', '$timeout', '$state', 'keyListener', 'userService', function ($log, $timeout, $state, keyListener, userService) {
+        return {
+            restrict: 'A',
+            scope: {},
+            link: function (scope, element, attrs) {
+                keyListener.listKeyListener({
+                    element: element.parent(),
+                    id: "pageCtrl",
+                    label: "img",
+                    columnNum: 2,
+                    up: function () {
+                        keyListener.focus('myBettingList');
+                    },
+                    pageUp: function () {
+                        scope.$parent.pageInfo.prev();
+                    },
+                    pageDown: function () {
+                        scope.$parent.pageInfo.next();
+                    },
+                    enter: function (item) {
+                        var idx = $(item).attr('idx');
+                        if (idx == 0) {
+                            scope.$parent.pageInfo.prev();
+                        } else {
+                            scope.$parent.pageInfo.next();
+                        }
+                    }
+                });
             }
         };
     }])

@@ -126,20 +126,26 @@
 }
 
 .pageMyBetting .main .pageCtrl {
-    width: 318px;
-    height: 38px;
-    margin: 10px auto;
+    width: 338px;
+    height: 42px;
+    margin: 6px auto;
 }
 
 .pageMyBetting .main .pageCtrl img {
     width: 104px;
     height: 38px;
     float: left;
+    padding: 1px 4px;
+    border: 1px solid transparent;
+}
+
+.pageMyBetting .main .pageCtrl img:focus {
+    border: 1px solid #E72432;
 }
 
 .pageMyBetting .main .pageCtrl div {
     float: left;
-    margin: 0 20px;
+    margin: 2px 20px;
     height: 38px;
     line-height: 38px;
     text-align: center;

@@ -30,9 +30,9 @@ app.directive('indexMenuKeyListener', ['$log', 'keyListener', function ($log, ke
                         } else if ($(".pageMyAccount").length > 0) {
                             keyListener.focus('myAccountMenu');
                         } else if ($(".pageMyRechargeRecord").length > 0) {
-                            $($("#pageCtrl").find('img')[0]).focus();
+                            keyListener.focus('pageCtrl');
                         } else if ($(".pageMyWithdrawMoneyRecord").length > 0) {
-                            $($("#pageCtrl").find('img')[0]).focus();
+                            keyListener.focus('pageCtrl');
                         }
 
                         return false;
