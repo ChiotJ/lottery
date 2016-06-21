@@ -147,6 +147,22 @@ routerApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvid
                 }]
             }
         })
+        .state('myWinRecord', {
+            url: '/myWinRecord',
+            templateUrl: 'views/user/myWinRecord/myWinRecord.html',
+            controller: 'myWinRecordCtrl',
+            controllerAs: 'myWinRecord',
+            resolve: {
+                deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([{
+                        files: [
+                            'views/user/myWinRecord/myWinRecord.js',
+                            'views/user/myWinRecord/myWinRecord.css'
+                        ]
+                    }]);
+                }]
+            }
+        })
         .state('myAccount', {
             url: '/myAccount',
             templateUrl: 'views/user/myAccount/myAccount.html',

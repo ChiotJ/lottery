@@ -325,6 +325,18 @@ angular.module("serviceApp", [])
                     }
                 });
             },
+            getMyWinRecord: function (token, name, pageNum, pagzSize) {
+                return $http.get(apiUrl.api_lottery + "myWinning", {
+                    headers: {
+                        'x-auth-token': token
+                    },
+                    params: {
+                        'name': name,
+                        'pageNumber': pageNum,
+                        'pagzSize': pagzSize
+                    }
+                });
+            },
             getMyBill: function (token, billType, pageNum, pagzSize) {
                 return $http.get(apiUrl.api_lottery + "myBill", {
                     headers: {
@@ -396,7 +408,7 @@ angular.module("serviceApp", [])
                 winnerPaid: 0,
                 balance: 0
             },
-            token: "",
+            token: "cee27396-77fd-4acc-a81c-e254fa0d4579",
             login: function (credentials) {
                 //$log.debug(credentials);
 
@@ -452,6 +464,9 @@ angular.module("serviceApp", [])
             },
             getMyBetting: function (name, pageNum, pagzSize) {
                 return dataRequest.getMyBetting(this.token, name, pageNum, pagzSize);
+            },
+            getMyWinRecord: function (name, pageNum, pagzSize) {
+                return dataRequest.getMyWinRecord(this.token, name, pageNum, pagzSize);
             },
             getMyRechargeRecord: function (pageNum, pagzSize) {
                 return dataRequest.getMyBill(this.token, 1, pageNum, pagzSize);

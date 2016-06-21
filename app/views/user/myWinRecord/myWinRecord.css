@@ -1,0 +1,216 @@
+.pageMyWinRecord .pageTitle {
+    width: 1202px;
+    height: 70px;
+    line-height: 70px;
+    font-size: 30px;
+    margin: 0 auto;
+}
+
+.pageMyWinRecord .main {
+    width: 1202px;
+    height: 500px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.pageMyWinRecord .main > .top {
+    width: 1180px;
+    height: 55px;
+    background: #F1f1f1;
+    padding: 0 10px;
+    border: 1px solid #DFDFDF;
+}
+
+.pageMyWinRecord .main > .top li {
+    padding: 0 15px;
+    height: 35px;
+    line-height: 35px;
+    letter-spacing: 1px;
+    text-align: center;
+    margin: 10px;
+    font-size: 21px;
+    float: left;
+}
+
+.pageMyWinRecord .main > .top .choose {
+    color: #FFFFFF;
+    background-color: #E72432;
+}
+
+.pageMyWinRecord .main > .top li:focus {
+    background-color: #890a14;
+    color: #FFFFFF;
+}
+
+.pageMyWinRecord .main .table {
+    width: 1201px;
+    height: 376px;
+    border-right: 1px solid #DFDFDF;
+    border-bottom: 1px solid #DFDFDF;
+    overflow: hidden;
+    position: relative;
+}
+
+.pageMyWinRecord .main .table .thead {
+    height: 46px;
+    line-height: 46px;
+    text-align: center;
+    color: #828282;
+    font-size: 18px;
+    letter-spacing: 1px;
+    background: #F1f1f1;
+    width: 100%;
+    overflow: hidden;
+}
+
+.pageMyWinRecord .main .table .thead div {
+    float: left;
+    border-width: 0 0 1px 1px;
+    border-style: solid;
+    border-color: #DFDFDF;
+    width: 170px;
+}
+
+.pageMyWinRecord .main .table .tbody {
+    width: 1200px;
+    height: 330px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #DFDFDF;
+    background: #FFFFFF;
+}
+
+.pageMyWinRecord .main .table .tbody li {
+    width: 1201px;
+    height: 66px;
+    overflow: hidden;
+}
+
+.pageMyWinRecord .main .table .tbody li > div {
+    float: left;
+    border-right: 1px solid transparent;
+    border-bottom: 1px solid #DFDFDF;
+    font-size: 18px;
+    height: 65px;
+    line-height: 65px;;
+    width: 170px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.pageMyWinRecord .main .table .tbody li .red {
+    color: #E72432;
+}
+
+.pageMyWinRecord .main .table .tbody li .green {
+    color: #89DC5C;
+}
+
+.pageMyWinRecord .main .table .tbody li .logo {
+    margin-top: 7px;
+    width: 76px;
+    height: 50px;
+}
+
+.pageMyWinRecord .main .table .tbody li .detail {
+    width: 80px;
+    height: 30px;
+    line-height: 30px;
+    margin: 17px auto;
+    background: #E72432;
+    color: #FFFFFF;
+}
+
+.pageMyWinRecord .main .table .tbody li .detail:focus {
+    background-color: #890a14;
+}
+
+.pageMyWinRecord .main .pageCtrl {
+    width: 338px;
+    height: 42px;
+    margin: 6px auto;
+}
+
+.pageMyWinRecord .main .pageCtrl img {
+    width: 104px;
+    height: 38px;
+    float: left;
+    padding: 1px 4px;
+    border: 1px solid transparent;
+}
+
+.pageMyWinRecord .main .pageCtrl img:focus {
+    border: 1px solid #E72432;
+}
+
+.pageMyWinRecord .main .pageCtrl div {
+    float: left;
+    margin: 2px 20px;
+    height: 38px;
+    line-height: 38px;
+    text-align: center;
+    width: 70px;
+    font-size: 20px;
+    overflow: hidden;
+}
+
+.pageMyWinRecord .main .pageCtrl div .red {
+    color: #E72432;
+}
+
+.pageMyWinRecord .detailTable {
+    width: 508px;
+    height: 430px;
+    background-color: #FFFFFF;
+    position: absolute;
+    top: 50px;
+    left: 386px;
+    z-index: 999999;
+    border-radius: 10px;
+    color: #1f1f1f;
+    opacity: 0;
+    transition: opacity .3s;
+}
+
+.pageMyWinRecord .detailTable .top {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    background-color: #F1F1F1;
+    font-size: 20px;
+    border-radius: 10px 10px 0 0;
+}
+
+.pageMyWinRecord .detailTable .middle div {
+    width: 440px;
+    height: 35px;
+    line-height: 35px;
+    font-size: 20px;
+    color: #828282;
+    margin: 0 auto;
+}
+
+.pageMyWinRecord .detailTable .middle .title {
+    height: 80px;
+    line-height: 80px;
+    font-size: 30px;
+    color: #1f1f1f;
+}
+
+.pageMyWinRecord .detailTable .bottom {
+    width: 100%;
+    margin-top: 20px;
+
+}
+
+.pageMyWinRecord .detailTable .bottom div {
+    width: 440px;
+    height: 60px;
+    line-height: 60px;
+    font-size: 20px;
+    color: #828282;
+    margin: 0 auto;
+    border-top: 1px solid #E6E6E6;
+
+}

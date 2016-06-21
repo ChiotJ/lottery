@@ -114,6 +114,7 @@ angular.module('app')
                 "title": "中奖记录",
                 "enter": function () {
                     $log.debug("中奖记录");
+                    $state.go('myWinRecord');
                 }
             },
             {
