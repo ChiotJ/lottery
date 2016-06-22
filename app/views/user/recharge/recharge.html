@@ -1,6 +1,8 @@
 <div class="pageTitle">充值方式</div>
 <div class="rechargeWayList">
     <ul>
-        <li><img src="zhifubao" alt=""></li>
+        <li tabindex="-1" ng-repeat="one in rechargeWay" recharge-way-list-key-listener="">
+            <img ng-src="imgs/recharge/{{one.id}}.png" alt="">
+        </li>
     </ul>
 </div>

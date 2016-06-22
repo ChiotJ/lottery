@@ -21,6 +21,10 @@ app.directive('indexMenuKeyListener', ['$log', 'keyListener', function ($log, ke
                             keyListener.focus('homeMenu');
                         } else if ($(".pageLogin").length > 0) {
                             $($(".pageLogin").find('.keyListener')[0]).focus();
+                        } else if ($(".pageRecharge").length > 0) {
+                            keyListener.focus('rechargeWayList');
+                        } else if ($(".pageRechargePay").length > 0) {
+                            keyListener.focus('rechargePayList');
                         } else if ($(".pageFuCaiIndex").length > 0) {
                             keyListener.focus('fuCaiIndex');
                         } else if ($(".pageKuai3Index").length > 0) {

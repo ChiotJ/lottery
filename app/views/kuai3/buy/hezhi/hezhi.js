@@ -72,7 +72,7 @@ angular.module('kuai3')
                 method = 1;
             }
             craps = [parseInt($scope.hezhi[idx].num)];
-            $state.go("order_confirm", {
+            $state.go("kuai3OrderConfirm", {
                 method: method,
                 betType: 8,
                 craps: craps

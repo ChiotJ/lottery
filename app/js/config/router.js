@@ -99,6 +99,42 @@ routerApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvid
                 }]
             }
         })
+        .state('recharge', {
+            url: '/recharge',
+            templateUrl: 'views/user/recharge/recharge.html',
+            controller: 'rechargeCtrl',
+            controllerAs: 'recharge',
+            resolve: {
+                deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([{
+                        files: [
+                            'views/user/recharge/recharge.js',
+                            'views/user/recharge/recharge.css'
+                        ]
+                    }]);
+                }]
+            }
+        })
+        .state('rechargePay', {
+            url: '/recharge/pay',
+            templateUrl: 'views/user/recharge/pay/pay.html',
+            controller: 'rechargePayCtrl',
+            controllerAs: 'rechargePay',
+            params: {
+                way: 'zhifubao',
+                name: '支付宝'
+            },
+            resolve: {
+                deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([{
+                        files: [
+                            'views/user/recharge/pay/pay.js',
+                            'views/user/recharge/pay/pay.css'
+                        ]
+                    }]);
+                }]
+            }
+        })
         .state('myBetting', {
             url: '/myBetting',
             templateUrl: 'views/user/myBetting/myBetting.html',
@@ -319,8 +355,8 @@ routerApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvid
                 }]
             }
         })
-        .state('order_confirm', {
-            url: '/order/confirm',
+        .state('kuai3OrderConfirm', {
+            url: '/kuai3/order/confirm',
             params: {
                 method: 1,
                 betType: 1,

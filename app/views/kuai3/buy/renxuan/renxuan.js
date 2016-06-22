@@ -71,7 +71,7 @@ angular.module('kuai3')
                 }
             }
 
-            $state.go("order_confirm", {
+            $state.go("kuai3OrderConfirm", {
                 method: $scope.method,
                 betType: betType,
                 craps: craps

@@ -7,7 +7,7 @@ angular.module('kuai3')
             betType = 7;
             craps = [0, 0, 0];
 
-            $state.go("order_confirm", {
+            $state.go("kuai3OrderConfirm", {
                 method: method,
                 betType: betType,
                 craps: craps

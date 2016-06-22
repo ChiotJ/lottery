@@ -172,6 +172,8 @@ app.controller('userCtrl', ["$scope", '$state', '$log', 'userService', function 
             "text": "充值",
             "enter": function () {
                 $log.debug("充值");
+                if ($(".pageRecharge").length < 1)
+                    $state.go("recharge");
             }
         },
         {

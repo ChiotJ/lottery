@@ -1,0 +1,28 @@
+<div class="pageTitle">充值金额</div>
+
+<ul class="moneyList">
+    <li tabindex="-1" ng-repeat="one in [10,50,100]" recharge-pay-list-key-listener>
+        <div>{{one}}元</div>
+    </li>
+</ul>
+
+
+<div class="custom">
+    <div>
+        自定义
+    </div>
+    <div>
+        <input type="text" recharge-pay-custom-key-listener>
+    </div>
+    <div>元</div>
+</div>
+
+
+<div class="button" tabindex="-1" recharge-pay-button-key-listener>
+    确定
+</div>
+
+<div class="qrCode" ng-class="{opacityShow:qrCode.isShow}" recharge-qr-code-key-listener tabindex="-1">
+    <div class="title">{{rechargeWayName}}扫码支付</div>
+    <img id="qrCode" src="" alt="">
+</div>

@@ -40,7 +40,7 @@ angular.module('kuai3')
                 craps = $scope.santonghao[idx].craps;
             }
 
-            $state.go("order_confirm", {
+            $state.go("kuai3OrderConfirm", {
                 method: method,
                 betType: betType,
                 craps: craps
