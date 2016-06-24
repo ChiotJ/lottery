@@ -1,5 +1,5 @@
 angular.module('app')
-    .controller('rechargePayCtrl', ['$scope', '$stateParams', '$log', 'userService', function ($scope, $stateParams, $log, userService) {
+    .controller('rechargePayCtrl', ['$scope', '$stateParams', '$log', 'apiUrl', 'userService', function ($scope, $stateParams, $log, apiUrl, userService) {
         $scope.pageClass = "pageRechargePay";
         var rechargeWay = $stateParams.way;
         $scope.rechargeWayName = $stateParams.name;
@@ -7,29 +7,20 @@ angular.module('app')
 
         $scope.qrCode = {
             isQrShow: false,
+            src: "",
             show: function (money) {
-                userService.recharge(money).success(function (data) {
-                    $log.debug(data);
-                    var blob = new Blob([data], {
-                        type: 'image/png'
-                    });
-                    $log.debug(blob);
-                    var objectURL = URL.createObjectURL(blob);
-                    $("#qrCode").attr("src", objectURL);
-                }).error(function (err) {
-                    $log.debug(err);
-                });
-
+                this.src = apiUrl.api_lottery + "prefixInpour?amount=" + money + "&name=充值服务&id=" + userService.userInfo.userId;
                 this.isShow = true;
                 $scope.$emit('isBlackBlindsShow', true);
                 $scope.$apply();
             },
             hide: function () {
+                this.src = "";
                 this.isShow = false;
                 $scope.$emit('isBlackBlindsShow', false);
                 $scope.$apply();
             }
-        }
+        };
         NProgress.done();
     }])
     .directive('rechargePayListKeyListener', ['$log', '$timeout', 'keyListener', function ($log, $timeout, keyListener) {

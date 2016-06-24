@@ -313,17 +313,6 @@ angular.module("serviceApp", [])
                     }
                 });
             },
-            recharge: function (token, amount, name) {
-                return $http.get("http://localhost/ws/lottery/app/imgs/index/winInfo.png", {
-                    headers: {
-                        'x-auth-token': token
-                    },
-                    params: {
-                        'name': name,
-                        'amount': amount
-                    }
-                });
-            },
             getMyBetting: function (token, name, pageNum, pagzSize) {
                 return $http.get(apiUrl.api_lottery + "myOrder", {
                     headers: {
@@ -419,7 +408,7 @@ angular.module("serviceApp", [])
                 winnerPaid: 0,
                 balance: 0
             },
-            token: "f9a7e61e-d8dd-41e1-8da1-6866e48d7be0",
+            token: "",
             login: function (credentials) {
                 //$log.debug(credentials);
 
@@ -472,9 +461,6 @@ angular.module("serviceApp", [])
                 }).error(function (error) {
                     //$log.error('getAccountInfo-error', error)
                 });
-            },
-            recharge: function (money) {
-                return dataRequest.recharge(this.token, money, '充值服务');
             },
             getMyBetting: function (name, pageNum, pagzSize) {
                 return dataRequest.getMyBetting(this.token, name, pageNum, pagzSize);
